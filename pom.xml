@@ -6,7 +6,6 @@
 	<groupId>com.cloudST</groupId>
 	<artifactId>cloudST</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
 
 	<name>cloudST</name>
 	<description>Application for manage a Cloud Storage</description>
