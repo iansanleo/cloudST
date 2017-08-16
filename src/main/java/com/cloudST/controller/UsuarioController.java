@@ -1,19 +1,14 @@
 package com.cloudST.controller;
 
+import com.cloudST.model.Usuario;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.cloudST.model.Usuario;
-
-import java.util.Map;
-
 @Controller
 public class UsuarioController {
-
-	//private UsuarioMapper usuarioMapper;
 
 
 	@GetMapping("/user")
