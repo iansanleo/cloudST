@@ -40,7 +40,10 @@
 			<scope>test</scope>
 		</dependency>
 		<!--/SPRING DEPENDENCIES-->
-
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+		</dependency>
 		<!-- DATABASE -->
 		<dependency>
 			<groupId>mysql</groupId>
