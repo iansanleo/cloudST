@@ -7,8 +7,9 @@
 <title>Hola! ${usuario.name}</title>
 </head>
 <body>
-<a href="user.html">
+	<a href="user.html">
 		enter usuario >>
+	</a>
 
 </body>
 </html>
