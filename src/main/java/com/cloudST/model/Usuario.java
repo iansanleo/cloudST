@@ -3,10 +3,17 @@ package com.cloudST.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 public class Usuario implements Serializable {
 
 	//falta restricciones de anotaciones
 	private static final long serialVersionUID = 4864893484040058494L;
+	
+	@Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
 	private int idUsuario;
 	private String userName;
 	private String password;
@@ -14,6 +21,21 @@ public class Usuario implements Serializable {
 	private String email;
 	private Date fechaInicio;
 	private boolean status;
+	
+	//protected Usuario(){}
+	public Usuario(){}
+	
+	public Usuario(String userName, String password, String nombre, String email, 
+			Date fechaInicio, boolean status){
+		this.userName = userName;
+		this.password = password;
+		this.nombre = nombre;
+		this.email = email;
+		this.fechaInicio = fechaInicio;
+		this.status = status;
+		
+		
+	}
 	
 	//Getters
 	public int getIdUsusario(){return this.idUsuario;}
