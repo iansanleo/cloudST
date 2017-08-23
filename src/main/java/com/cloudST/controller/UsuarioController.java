@@ -1,23 +1,24 @@
 package com.cloudST.controller;
 
+import com.cloudST.model.Usuario;
+import com.cloudST.repository.UsuarioRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.cloudST.dao.UsuarioDaoImpl;
-import com.cloudST.model.Usuario;
-
 @Controller
 public class UsuarioController {
 
-	private UsuarioDaoImpl usuarioDaoImpl;
+	@Autowired
+	private UsuarioRepository usuarioRepository;
 
 	@GetMapping("/user")
 	public String usuario(Model model){
 		Usuario usuario = new Usuario();
 		
-		usuario = usuarioDaoImpl.findById(1);
+		usuario = usuarioRepository.findOne(1);
 		
 		//usuario.setNombre("Pepe");
 		
