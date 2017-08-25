@@ -2,9 +2,17 @@ package com.cloudST.model;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Raspberry {
 
 	//falta restricciones de anotaciones
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int idRaspberry;
 	private String ip;
 	private String mac;
@@ -14,7 +22,7 @@ public class Raspberry {
 	private double tamanyoUso;
 	private Date fechaConexion;
 	private boolean status;
-	
+
 	//Getters
 	public int getIdRaspberry(){return this.idRaspberry;}
 	public String getIp(){return this.ip;}
@@ -23,6 +31,6 @@ public class Raspberry {
 	public double getTamanyoUso(){return this.tamanyoUso;}
 	public Date getFechaConexion(){return this.fechaConexion;}
 	public boolean getStatus(){return this.status;}
-	
+
 	//Setters
 }

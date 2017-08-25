@@ -1,7 +1,15 @@
 package com.cloudST.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Archivos {
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int idArchivo;
 	private String nombreOri;
 	private String nombreSys;
@@ -10,7 +18,7 @@ public class Archivos {
 	private double tamanyo;
 	private String tipo;
 	private int idUsuario;
-	
+
 	//Getters
 	public int getIdArchivo(){return this.idArchivo;}
 	public String getNombreOri(){return this.nombreOri;}
@@ -19,7 +27,7 @@ public class Archivos {
 	public double getTamanyo(){return this.tamanyo;}
 	public String getTipo(){return this.tipo;}
 	public int getIdUsuario(){return this.idUsuario;}
-	
+
 	//Setters
 	public void setIdArchivo(int idArchivo){this.idArchivo = idArchivo;}
 	public void setNombreOri(String nombreOri){this.nombreOri = nombreOri;}
