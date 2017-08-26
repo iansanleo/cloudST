@@ -1,18 +1,15 @@
 package com.cloudST.controller;
  
-import com.cloudST.model.Usuario;
- 
-import com.cloudST.repository.UsuarioRepository;
- 
+import java.util.Calendar;
+
 import org.springframework.beans.factory.annotation.Autowired;
- 
 import org.springframework.stereotype.Controller;
- 
 import org.springframework.ui.Model;
- 
 import org.springframework.web.bind.annotation.GetMapping;
- 
 import org.springframework.web.bind.annotation.PostMapping;
+
+import com.cloudST.model.Usuario;
+import com.cloudST.repository.UsuarioRepository;
  
 
 @Controller
@@ -21,21 +18,36 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 
+	
 	@GetMapping("/user")
-	public String usuario(Model model){
+	public String usuarioProfile(Model model){
 		Usuario usuario = new Usuario();
-
-		if(usuarioRepository.findOne(1) == null){
-			model.addAttribute("name","Es puto nulo");
-			return "usuario";
-		}
+		
 		usuario = usuarioRepository.findOne(1);
-		//usuario.setNombre("Pepe");
 
 		model.addAttribute(usuario);
 		return "usuario";
 	}
 
+	@GetMapping("/userAdd")
+	public String usuarioAdd(Model model){
+		Usuario usuario = new Usuario();
+		
+		usuario.setNombre("Christian Sanchez Leon");
+		usuario.setPassword("123456");
+		usuario.setStatus(true);
+		usuario.setUserName("christian");
+		usuario.setEmail("christian@12.com");
+		Calendar fechaInicio = Calendar.getInstance();
+		usuario.setFechaInicio(fechaInicio);
+		
+		usuarioRepository.save(usuario);
+		
+		return "usuario";
+		
+		
+	}
+	
 
 	@PostMapping(value="/userPost")
 	//post solo formularios, get para todo
