@@ -1,6 +1,7 @@
 package com.cloudST.controller;
  
-import java.util.Calendar;
+import java.sql.Timestamp;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,9 +24,9 @@ public class UsuarioController {
 	public String usuarioProfile(Model model){
 		Usuario usuario = new Usuario();
 		
-		usuario = usuarioRepository.findOne(1);
+		usuario = usuarioRepository.findOne(2);
 
-		model.addAttribute(usuario);
+		model.addAttribute("usuario",usuario);
 		return "usuario";
 	}
 
@@ -36,9 +37,13 @@ public class UsuarioController {
 		usuario.setNombre("Christian Sanchez Leon");
 		usuario.setPassword("123456");
 		usuario.setStatus(true);
-		usuario.setUserName("christian");
+		usuario.setUsername("christian");
 		usuario.setEmail("christian@12.com");
-		Calendar fechaInicio = Calendar.getInstance();
+		
+		Date fechaInicio = new java.util.Date(); //fecha actual
+		Timestamp sqlTimestamp = new Timestamp(fechaInicio.getTime());//en milisegundos
+		fechaInicio = new Date(sqlTimestamp.getTime());
+		
 		usuario.setFechaInicio(fechaInicio);
 		
 		usuarioRepository.save(usuario);

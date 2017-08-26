@@ -1,6 +1,6 @@
 package com.cloudST.model;
 
-import java.util.Calendar;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,7 +20,7 @@ public class Raspberry {
 	private double tamanyoTotal;
 	//MB
 	private double tamanyoUso;
-	private Calendar fechaConexion;
+	private Date fechaConexion;
 	private boolean status;
 
 	//Getters
@@ -29,7 +29,7 @@ public class Raspberry {
 	public String getMac(){return this.mac;}
 	public double getTamanyoTotal(){return this.tamanyoTotal;}
 	public double getTamanyoUso(){return this.tamanyoUso;}
-	public Calendar getFechaConexion(){return this.fechaConexion;}
+	public Date getFechaConexion(){return this.fechaConexion;}
 	public boolean getStatus(){return this.status;}
 
 	//Setters
@@ -38,6 +38,6 @@ public class Raspberry {
 	public void setMac(String mac){this.mac = mac;}
 	public void setTamanyoTotal(double tamanyoTotal){this.tamanyoTotal = tamanyoTotal;}
 	public void setTamanyoUso (double tamanyoUso){this.tamanyoUso = tamanyoUso;}
-	public void setFechaConexion(Calendar fechaConexion){this.fechaConexion = fechaConexion;}
+	public void setFechaConexion(Date fechaConexion){this.fechaConexion = fechaConexion;}
 	public void sertStatus (boolean status){this.status = status;}
 }

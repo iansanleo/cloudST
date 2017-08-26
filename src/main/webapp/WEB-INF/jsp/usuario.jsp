@@ -31,8 +31,8 @@
 					<td> ${usuario.username} </td>
 					<td> ************* </td>
 					<td> ${usuario.nombre} </td>
-					<td> ${usuario.email} </td>
-					<td> ${usuario.date}</td>
+					<td> ${usuario.email}</td>
+					<td> ${usuario.fechaInicio}</td>
 
 					<td><a href = "#"><img src="src/main/webapp/WEB-INF/img/iconEditmaterial.png"/></a>
 					<a href = "#"><img src="src/main/webapp/WEB-INF/img/iconDeletematerial.png"/></a></td>
