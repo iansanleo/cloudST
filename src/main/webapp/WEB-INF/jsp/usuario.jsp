@@ -26,16 +26,16 @@
 			<TH>Complete Name</TH>
 			<TH>Email</TH>
 			<TH>Date </TH>
-			<TH></TH><TR>
+			<TR>
 					<tr>
 					<td> ${usuario.username} </td>
 					<td> ************* </td>
 					<td> ${usuario.nombre} </td>
 					<td> ${usuario.email}</td>
-					<td> ${usuario.fechaInicio}</td>
-
-					<td><a href = "#"><img src="src/main/webapp/WEB-INF/img/iconEditmaterial.png"/></a>
-					<a href = "#"><img src="src/main/webapp/WEB-INF/img/iconDeletematerial.png"/></a></td>
+					<td> ${usuario.fechaInicio}    </td>
+					<td>
+					<a href = "#"><img src="resources/img/iconEditmaterial.png"/></a>
+					<a href = "#"><img src="resources/img/iconDeletematerial.png"/></a></td>
 
  			</tr>
  		</table><BR>
