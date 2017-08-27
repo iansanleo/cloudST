@@ -5,12 +5,14 @@ import java.util.Date;
 import java.util.Iterator;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.cloudST.model.Usuario;
 import com.cloudST.repository.UsuarioRepository;
@@ -26,31 +28,40 @@ public class UsuarioController {
 	@PostMapping("/login")
 	public String login(Model model, HttpServletRequest request){
 		
-		String userName = "christian";
+		String userName = "juan";
         String password = "123456";
-		
+
+        HttpSession session = request.getSession();
+        
 		Iterable<Usuario> listUsuario = usuarioRepository.findAll(); 
 		
 		for (Iterator<Usuario> i = listUsuario.iterator(); i.hasNext();) {
 		    Usuario usuario = i.next();
-		    if(usuario.getUsername().equals(userName)){
-		    	if(usuario.getPassword().equals(password)){
-		    		return "welcome";
-		    	}
-		    	
+		    
+		    if(usuario.getUsername().equals(userName)&& usuario.getPassword().equals(password)){
+		    		
+		    	session.setAttribute("id", usuario.getIdUsusario());
+		    	return "welcome";
 		    }
 		}
-		
-		
 		return "redirect:index.html";
 	}
 	
+	@PostMapping ("/logout")
+	public String logOut(Model model, HttpServletRequest request){
+		
+		HttpSession session = request.getSession();
+		session.removeAttribute("id");
+		return "index";
+	}
+	
+	
 	@GetMapping("/user")
-	public String usuarioProfile(Model model){
+	public String usuarioProfile(Model model, HttpServletRequest request){
 		Usuario usuario = new Usuario();
 		
-		usuario = usuarioRepository.findOne(2);
-
+		HttpSession session = request.getSession();
+		usuario = usuarioRepository.findOne((Integer) session.getAttribute("id"));
 		model.addAttribute("usuario",usuario);
 		return "usuario";
 	}

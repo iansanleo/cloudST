@@ -16,7 +16,7 @@
 			<li><a href="#"><span class="iconic mail"></span> User</a>
 				<ul>
 					<li><a href="/user">Me</a></li>
-					<li><a href="#">Log out</a></li>
+					<li><a href="/logout">Log out</a></li>
 				</ul>
 			</li>
 		</ul>
