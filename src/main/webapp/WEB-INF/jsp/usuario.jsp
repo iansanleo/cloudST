@@ -19,8 +19,9 @@
 
 <div align="center">
 	<h2> User Profile</h2>
-		<table>
-			<TR style="color:black;background-color:#b8d1f3">
+		<table style="border: 1px solid #000;text-align:center ;border: 1px solid #000;border-collapse: separate;
+  border-spacing: 10px;">
+			<TR style="color:black;background-color:white;">
 			<TH>UserName</TH>
 			<TH>Password</TH>
 			<TH>Complete Name</TH>
@@ -31,7 +32,7 @@
 					<td> ${usuario.username} </td>
 					<td> ************* </td>
 					<td> ${usuario.nombre} </td>
-					<td> ${usuario.email}</td>
+					<td> ${usuario.email}  </td>
 					<td> ${usuario.fechaInicio}    </td>
 					<td>
 					<a href = "#"><img src="resources/img/iconEditmaterial.png"/></a>

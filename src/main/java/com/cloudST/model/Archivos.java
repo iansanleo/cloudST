@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+
 
 @Entity
 public class Archivos {
@@ -12,11 +14,13 @@ public class Archivos {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer idArchivo;
 	private String nombreOri;
+	@NotNull
 	private String nombreSys;
 	private boolean status;
 	//MB
 	private double tamanyo;
 	private String tipo;
+	@NotNull
 	private Integer idUsuario;
 
 	//Getters

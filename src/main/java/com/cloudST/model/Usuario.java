@@ -7,21 +7,34 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
 
 @Entity
 public class Usuario implements Serializable {
 
-	//falta restricciones de anotaciones
+	
 	private static final long serialVersionUID = 4864893484040058494L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
+	@NotNull
 	private Integer idUsuario;
+	@NotNull
+	@Size(min = 1, max = 20)
 	private String username;
+	@NotNull
+	@Size(min = 1, max = 20)
 	private String password;
+	@Size(min = 1, max = 50)
 	private String nombre;
+	@Email
 	private String email;
+	@NotNull
 	private Date fechaInicio;
+	@NotNull
 	private boolean status;
 
 	//protected Usuario(){}

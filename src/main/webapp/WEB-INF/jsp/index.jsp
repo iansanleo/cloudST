@@ -25,7 +25,7 @@
 
      	    Password : <input type="password" name="password" value="123"/><br/>
 
-     	   <input type="submit" value="login"/>
+     	   <input type="submit" value="/login"/>
      	 </form>
      	 <div id="url">
      	   <a href="#">I forgot my password </a>

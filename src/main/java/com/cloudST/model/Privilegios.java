@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Privilegios {
@@ -11,8 +12,10 @@ public class Privilegios {
 	//falta restricciones de anotaciones
 	@Id
 	private Date fecha;
+	@NotNull
 	private Integer tipo;
 	private boolean status;
+	@NotNull
 	private Integer idUsuario;
 
 	//Getters

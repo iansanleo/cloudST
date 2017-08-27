@@ -2,6 +2,9 @@ package com.cloudST.controller;
  
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.Iterator;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +22,28 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 
+
+	@PostMapping("/login")
+	public String login(Model model, HttpServletRequest request){
+		
+		String userName = "christian";
+        String password = "123456";
+		
+		Iterable<Usuario> listUsuario = usuarioRepository.findAll(); 
+		
+		for (Iterator<Usuario> i = listUsuario.iterator(); i.hasNext();) {
+		    Usuario usuario = i.next();
+		    if(usuario.getUsername().equals(userName)){
+		    	if(usuario.getPassword().equals(password)){
+		    		return "welcome";
+		    	}
+		    	
+		    }
+		}
+		
+		
+		return "redirect:index.html";
+	}
 	
 	@GetMapping("/user")
 	public String usuarioProfile(Model model){
@@ -29,7 +54,8 @@ public class UsuarioController {
 		model.addAttribute("usuario",usuario);
 		return "usuario";
 	}
-
+	
+	
 	@GetMapping("/userAdd")
 	public String usuarioAdd(Model model){
 		Usuario usuario = new Usuario();
@@ -53,20 +79,4 @@ public class UsuarioController {
 		
 	}
 	
-
-	@PostMapping(value="/userPost")
-	//post solo formularios, get para todo
-	public String displayUsuarioPage (Model model){
-		Usuario usuario = new Usuario();
-
-		//usuarioMapper.selectUsuario(0);
-		usuario.setNombre("Pepe");
-
-		model.addAttribute("name",usuario.getNombre());
-
-		return "usuario";
-
-	}
-
-
 }

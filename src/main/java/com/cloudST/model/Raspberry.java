@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Raspberry {
@@ -14,13 +15,18 @@ public class Raspberry {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer idRaspberry;
+	@NotNull
 	private String ip;
+	@NotNull
 	private String mac;
 	//MB
+	@NotNull
 	private double tamanyoTotal;
 	//MB
+	@NotNull
 	private double tamanyoUso;
 	private Date fechaConexion;
+	@NotNull
 	private boolean status;
 
 	//Getters
