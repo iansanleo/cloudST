@@ -21,10 +21,11 @@
 	<div id="login" align="center" style="margin: 0 auto; margin-top: 10%">
 		<form action="login" method="post">
 
-      	   Username: <input type="text" name="userName" value="christiansl"/><br/>
+      	   Username: <input type="text" name="userName" value="christian"/><br/>
 
-     	    Password : <input type="password" name="password" value="123"/><br/>
+     	    Password : <input type="password" name="password" value="123456"/><br/>
 
+			<div style="text-color:red">${Msg}</div>
      	   <input type="submit" value="Submit"/>
      	 </form>
      	 <div id="url">

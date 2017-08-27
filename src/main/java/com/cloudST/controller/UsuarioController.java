@@ -28,8 +28,8 @@ public class UsuarioController {
 	@PostMapping("/login")
 	public String login(Model model, HttpServletRequest request){
 		
-		String userName = "juan";
-        String password = "123456";
+		String userName = request.getParameter("userName");
+        String password = request.getParameter("password");
 
         HttpSession session = request.getSession();
         
@@ -44,10 +44,11 @@ public class UsuarioController {
 		    	return "welcome";
 		    }
 		}
-		return "redirect:index.html";
+		model.addAttribute("Msg", "Password or invalid entered user");
+		return "index";
 	}
 	
-	@PostMapping ("/logout")
+	@GetMapping ("/logout")
 	public String logOut(Model model, HttpServletRequest request){
 		
 		HttpSession session = request.getSession();
