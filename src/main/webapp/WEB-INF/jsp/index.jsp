@@ -25,7 +25,7 @@
 
      	    Password : <input type="password" name="password" value="123456"/><br/>
 
-			<div style="text-color:red">${Msg}</div>
+			<div style="color:red">${Msg}</div>
      	   <input type="submit" value="Submit"/>
      	 </form>
      	 <div id="url">

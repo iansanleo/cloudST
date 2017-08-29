@@ -27,7 +27,7 @@
 			<TH>Complete Name</TH>
 			<TH>Email</TH>
 			<TH>Date </TH>
-			<TH>Validated email</TH>
+			<TH>Email Validated</TH>
 			<TR>
 					<tr>
 					<td> ${usuario.username} </td>

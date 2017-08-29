@@ -26,15 +26,13 @@
 			<TH>Name</TH>
 			<TH>Size</TH>
 			<TH>Type</TH>
-			<TR>
+			<TR>				
 				
-				
-				
-    			<c:forEach items="${listArchivos}" var="archivo">
+    			<c:forEach items="${model.listArchivos}" var="archivo">
           			  <tr>
 					<td> <a href ="#" >prueba ${archivo.nombreOri}</a> </td>
-					<td> <c:out value="${archivo.tamanyo}"></c:out> MB</td>
-					<td> <c:out value="${archivo.tipo}" ></c:out></td>
+					<td> <c:out value="${archivo.tamanyo}"/> MB</td>
+					<td> <c:out value="${archivo.tipo}" /></td>
 					<td>
 					<a href = "#"><img src="resources/img/iconDeletematerial.png"/></a></td>
    			   </c:forEach>
