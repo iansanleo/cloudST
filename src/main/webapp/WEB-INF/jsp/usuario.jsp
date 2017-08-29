@@ -27,6 +27,7 @@
 			<TH>Complete Name</TH>
 			<TH>Email</TH>
 			<TH>Date </TH>
+			<TH>Validated email</TH>
 			<TR>
 					<tr>
 					<td> ${usuario.username} </td>
@@ -34,6 +35,7 @@
 					<td> ${usuario.nombre} </td>
 					<td> ${usuario.email}  </td>
 					<td> ${usuario.fechaInicio}    </td>
+					<td> ${usuario.valido}  </td>
 					<td>
 					<a href = "#"><img src="resources/img/iconEditmaterial.png"/></a>
 					<a href = "#"><img src="resources/img/iconDeletematerial.png"/></a></td>

@@ -36,6 +36,7 @@ public class Usuario implements Serializable {
 	private Date fechaInicio;
 	@NotNull
 	private boolean status;
+	private boolean valido;
 
 	//protected Usuario(){}
 	public Usuario(){}
@@ -48,6 +49,7 @@ public class Usuario implements Serializable {
 		this.email = email;
 		this.fechaInicio = fechaInicio;
 		this.status = status;
+		this.valido = false;
 	}
 
 	//Getters
@@ -58,6 +60,7 @@ public class Usuario implements Serializable {
 	public String getEmail(){return this.email;}
 	public Date getFechaInicio(){return this.fechaInicio;}
 	public boolean getStatus(){return this.status;}
+	public boolean getValido(){return this.valido;}
 
 	//Setters
 	public void setIdUsuario(Integer idUsuario){this.idUsuario = idUsuario;}
@@ -67,6 +70,7 @@ public class Usuario implements Serializable {
 	public void setEmail(String email){this.email = email;}
 	public void setFechaInicio(Date fechaInicio){this.fechaInicio = fechaInicio;}
 	public void setStatus(boolean status){this.status = status;}
+	public void setValido(boolean valido){this.valido = valido;}
 
 
 
