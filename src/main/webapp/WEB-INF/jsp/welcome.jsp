@@ -13,7 +13,8 @@
 <body>
 	<jsp:include page="menu.jsp"></jsp:include>
 	
-	<h1 style="color:black;align-text:center;"> WELCOME </h1>
+	<h1 style="color:black;align-text:center;"> WELCOME </h1><br>
+	<h2>${Msg}</h2>
 	
 </body>
 </html>

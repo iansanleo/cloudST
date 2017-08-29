@@ -20,7 +20,6 @@ public class Usuario implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@NotNull
 	private Integer idUsuario;
 	@NotNull
 	@Size(min = 1, max = 20)

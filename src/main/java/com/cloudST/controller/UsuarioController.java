@@ -43,7 +43,7 @@ public class UsuarioController {
 		    	return "welcome";
 		    }
 		}
-		model.addAttribute("Msg", "Password or invalid entered user");
+		model.addAttribute("Msg", "Password or invalid entered Username");
 		return "index";
 	}
 	
@@ -55,7 +55,6 @@ public class UsuarioController {
 		return "index";
 	}
 	
-	
 	@GetMapping("/user")
 	public String usuarioProfile(Model model, HttpServletRequest request){
 		Usuario usuario = new Usuario();
@@ -66,16 +65,34 @@ public class UsuarioController {
 		return "usuario";
 	}
 	
+	@GetMapping("/newUser")
+	public String newUsuario(Model model){
+		return "addUsuario";
+	}
 	
-	@GetMapping("/userAdd")
-	public String usuarioAdd(Model model){
+	@PostMapping("/userAdd")
+	public String usuarioAdd(Model model, HttpServletRequest request){
 		Usuario usuario = new Usuario();
 		
-		usuario.setNombre("Christian Sanchez Leon");
-		usuario.setPassword("123456");
+		HttpSession session = request.getSession();
+		
+		String password = request.getParameter("password");
+		String password2 = request.getParameter("password2");
+		
+		if(!password.equals(password2)){
+			
+			model.addAttribute("Msg", "Passwords doesn't mach");
+			return "addUsuario";
+		}
+		//comprobar distintos emails
+		
+		usuario.setNombre(request.getParameter("name"));
+		usuario.setPassword(password);
+		usuario.setUsername(request.getParameter("userName"));
+		usuario.setEmail(request.getParameter("email"));
+		
 		usuario.setStatus(true);
-		usuario.setUsername("christian");
-		usuario.setEmail("christian@12.com");
+		usuario.setValido(false);
 		
 		Date fechaInicio = new java.util.Date(); //fecha actual
 		Timestamp sqlTimestamp = new Timestamp(fechaInicio.getTime());//en milisegundos
@@ -85,9 +102,11 @@ public class UsuarioController {
 		
 		usuarioRepository.save(usuario);
 		
-		return "usuario";
+		model.addAttribute("Msg", "User successfully added");
 		
+		if(session.getAttribute("id")==null){return "index";}
 		
+		return "welcome";
 	}
 	
 }

@@ -29,7 +29,10 @@
      	   <input type="submit" value="Submit"/>
      	 </form>
      	 <div id="url">
-     	   <a href="#">I forgot my password </a>
+     	 	
+     	 	<a href="/newUser">Sing up </a><br>
+     	 	
+     	 	<a href="#">I forgot my password </a>
 		</div>
 	</div>
 </body>
