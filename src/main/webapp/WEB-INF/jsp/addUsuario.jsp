@@ -22,20 +22,25 @@
 			<jsp:include page="menu.jsp"/>    
 </c:if> 
 	
-	<div>
+	<div class="form">
 		<form action="userAdd" method="post">
 
 			<div style="color:red">${Msg}</div>
 			
-      	    Username: <input type="text" name="userName"/><br/>
-     	    Password: <input type="password" name="password"/><br/>
-     	    Repeat Password: <input type="password" name="password2"/><br/>
-     	    
-     	    Complete Name:<input type="text" name="name"/><br/>
-     	    Email:<input type="text" name="email"/><br/>
+      	    Username:        <input type="text" name="userName"/><br/>
+     	    Password:        <input type="password" name="password"/><br/>
+     	    Repeat Password: <input type="password" name="password2"/><br/>     	    
+     	    Complete Name:   <input type="text" name="name"/><br/>
+     	    Email:           <input type="text" name="email"/><br/>
      	   
      	   <input type="submit" value="Add User"/><br/>
      	 </form>
+     	 <c:if test="${not empty id }">  
+			<a href="/welcome"> Back </a>   
+		</c:if>
+		<c:if test="${empty id }">
+			<a href="/"> Back </a>
+		</c:if> 
 	</div>
 
 </body>

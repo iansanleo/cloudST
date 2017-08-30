@@ -146,4 +146,12 @@ nav {
 	box-shadow: inset 0px 0px 4px 2px rgba(0,0,0,0.3);
 }
 
+.form{
+	position: absolute;
+    top: 40%;
+    left: 40%; 
+	margin-left: auto;
+	margin-right:auto;
+	
+}
 

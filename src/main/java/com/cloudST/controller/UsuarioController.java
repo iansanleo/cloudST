@@ -99,7 +99,6 @@ public class UsuarioController {
 		fechaInicio = new Date(sqlTimestamp.getTime());
 		
 		usuario.setFechaInicio(fechaInicio);
-		
 		usuarioRepository.save(usuario);
 		
 		model.addAttribute("Msg", "User successfully added");
