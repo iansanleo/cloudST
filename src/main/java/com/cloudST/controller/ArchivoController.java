@@ -34,7 +34,7 @@ public class ArchivoController {
 			System.out.println("tamnayo:" + archivos.size());
 		}
 
-		model.addAttribute("listArchivos", archivos);
+		model.addAttribute("archivos", archivos);
 		return "archivo";
 	}
 
