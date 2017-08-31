@@ -26,9 +26,8 @@
 			<TH>Name</TH>
 			<TH>Size</TH>
 			<TH>Type</TH>
-			<TR>				
-				
-    			<c:forEach items="${model.listArchivos}" var="archivo">
+			<TR>
+    			<c:forEach items="${listArchivos}" var="archivo">
           			  <tr>
 					<td> <a href ="#" >prueba ${archivo.nombreOri}</a> </td>
 					<td> <c:out value="${archivo.tamanyo}"/> MB</td>

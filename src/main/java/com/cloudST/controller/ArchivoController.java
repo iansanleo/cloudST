@@ -20,21 +20,21 @@ public class ArchivoController {
 	private ArchivoRepository archivoRepository;
 	
 	@GetMapping("/resources")
-	public String listResources(Model model, HttpServletRequest request){
+	public String listResources(Model model, HttpServletRequest request) {
 		ArrayList<Archivos> archivos = new ArrayList<Archivos>();
 		HttpSession session = request.getSession();
-		
-		//Archivos =  (ArrayList<Archivos>) archivoRepository.findAll();
-		
-	    for (Archivos archivo : archivoRepository.findAll()) {
-	    	if(archivo.getIdUsuario()== session.getAttribute("id"))
-	    		archivos.add(archivo);
-	    	System.out.println("id :"+ session.getAttribute("id") );
-	    System.out.println(archivo.getIdUsuario());
-	    System.out.println("tamnayo:"+archivos.size());
-	    }
-		
-	    model.addAllAttributes(archivos);
+
+
+		for (Archivos archivo : archivoRepository.findAll()) {
+			if (archivo.getIdUsuario() == session.getAttribute("id")){
+				archivos.add(archivo);
+			}
+			System.out.println("id :" + session.getAttribute("id"));
+			System.out.println(archivo.getIdUsuario());
+			System.out.println("tamnayo:" + archivos.size());
+		}
+
+		model.addAttribute("listArchivos", archivos);
 		return "archivo";
 	}
 
