@@ -22,13 +22,18 @@
 	<h2> User Resources</h2>
 		<table style="border: 1px solid #000;text-align:center ;border: 1px solid #000;border-collapse: separate;
   border-spacing: 10px;">
+			
+				<c:if test="${empty model.archivos }">
+				<div style="color:blue">No resources stored</div>
+				</c:if>
+			
 			<TR style="color:black;background-color:white;">
 			<TH>Name</TH>
 			<TH>Size</TH>
 			<TH>Type</TH>
 			<TR>				
 				
-    			<c:forEach items="${model.listArchivos}" var="archivo">
+    			<c:forEach items="${model.archivos}" var="archivo">
           			  <tr>
 					<td> <a href ="#" >prueba ${archivo.nombreOri}</a> </td>
 					<td> <c:out value="${archivo.tamanyo}"/> MB</td>

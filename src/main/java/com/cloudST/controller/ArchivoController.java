@@ -29,12 +29,13 @@ public class ArchivoController {
 	    for (Archivos archivo : archivoRepository.findAll()) {
 	    	if(archivo.getIdUsuario()== session.getAttribute("id"))
 	    		archivos.add(archivo);
-	    	System.out.println("id :"+ session.getAttribute("id") );
+	    	
+	    System.out.println("id :"+ session.getAttribute("id") );
 	    System.out.println(archivo.getIdUsuario());
 	    System.out.println("tamnayo:"+archivos.size());
 	    }
 		
-	    model.addAllAttributes(archivos);
+	    model.addAttribute("archivos",archivos);
 		return "archivo";
 	}
 

@@ -40,6 +40,10 @@ public class UsuarioController {
 		    if(usuario.getUsername().equals(userName)&& usuario.getPassword().equals(password)){
 		    		
 		    	session.setAttribute("id", usuario.getIdUsusario());
+		    	
+		    	//privilegios
+		    	//model.addAttribute("perm",true);
+		    	
 		    	return "welcome";
 		    }
 		}
