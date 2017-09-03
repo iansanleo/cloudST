@@ -3,7 +3,7 @@
 	<nav>
 		<ul class="menu">
 			<li><a href="welcome"><span class="iconic home"></span> Home</a></li>
-			<li><a href="/upload"><span class="iconic plus-alt"></span> Upload File</a></li>
+			<li><a href="/uploadForm"><span class="iconic plus-alt"></span> Upload File</a></li>
 			<li><a href="#"><span class="iconic magnifying-glass"></span> Control Panel</a>
 				<ul>
 					<li><a href="/newUser">Add New User</a></li>

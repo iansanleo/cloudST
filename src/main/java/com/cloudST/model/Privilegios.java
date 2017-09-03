@@ -9,7 +9,6 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class Privilegios {
 
-	//falta restricciones de anotaciones
 	@Id
 	private Date fecha;
 	@NotNull

@@ -83,7 +83,6 @@ public class UploadFileController {
     				idArchivo = archivoElem.getIdArchivo();
     			}
     		}
-            System.out.println(idArchivo);
             
             //Preparacion transaccion
             Transaccion transaccion = new Transaccion();
@@ -95,20 +94,24 @@ public class UploadFileController {
             transaccion.setFecha(fechaInicio);
             transaccion.setIdArchivo(idArchivo);
             transaccion.setidUsuario((Integer)session.getAttribute("idUser"));
+            
             transaccion.setTipo("upload");
             
-            //null pointer aqui??!?!?!?!
+            //error aqui null pointer?
             transaccionRepository.save(transaccion);
+            
             
             
         } catch (IOException e) {
             e.printStackTrace();
+        }catch (Exception e){
+        	System.out.println(e);
         }
 
         return "upload";
     }
 
-    @GetMapping("/upload")
+    @GetMapping("/uploadForm")
     public String uploadJSP(){
     	return "upload";
     }

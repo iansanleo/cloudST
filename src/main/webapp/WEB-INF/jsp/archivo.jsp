@@ -36,11 +36,10 @@
 			<TR>
     			<c:forEach items="${archivos}" var="archivo">
           			  <tr>
-					<td> <a href ="#" >${archivo.nombreOri}</a> </td>
 					<td> <c:out value="${archivo.tamanyo}"/> MB</td>
 					<td> <c:out value="${archivo.tipo}" /></td>
 					<td>
-					<a href = "#"><img src="resources/img/iconDeletematerial.png"/></a></td>
+					<a href = "/deleteResource?idArchivo=${archivo.idArchivo}"><img src="resources/img/iconDeletematerial.png"/></a></td>
    			   </c:forEach>
 
  			</tr>

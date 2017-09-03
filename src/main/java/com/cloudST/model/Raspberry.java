@@ -11,7 +11,6 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class Raspberry {
 
-	//falta restricciones de anotaciones
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer idRaspberry;
