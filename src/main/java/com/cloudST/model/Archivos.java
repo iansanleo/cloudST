@@ -22,6 +22,20 @@ public class Archivos {
 	private String tipo;
 	@NotNull
 	private Integer idUsuario;
+	
+	//protected Archivos(){}
+	public Archivos(){}
+
+	public Archivos(String nombreOri, String nombreSys, boolean status, double tamanyo,
+			String tipo, Integer idUsuario){
+		
+		this.nombreOri = nombreOri;
+		this.nombreSys = nombreSys;
+		this.status = status;
+		this.tamanyo = tamanyo;
+		this.tipo = tipo;
+		this.idUsuario = idUsuario;
+	}
 
 	//Getters
 	public Integer getIdArchivo(){return this.idArchivo;}

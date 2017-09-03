@@ -18,6 +18,18 @@ public class Privilegios {
 	@NotNull
 	private Integer idUsuario;
 
+	//protected Privilegios(){}
+	public Privilegios(){}
+	
+	public Privilegios(Date fecha, Integer tipo, boolean status, Integer idUsuario){
+		this.fecha = fecha;
+		this.tipo =tipo;
+		this.status = status;
+		this.idUsuario = idUsuario;
+		
+	}
+	
+	
 	//Getters
 	public Integer getTipo(){return this.tipo;}
 	public Date getFecha(){return this.fecha;}

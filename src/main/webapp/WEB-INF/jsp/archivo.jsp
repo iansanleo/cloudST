@@ -24,8 +24,10 @@
   border-spacing: 10px;">
 			
 				<c:if test="${empty archivos }">
-				<div style="color:blue">No resources stored</div>
+					<div style="color:blue">No resources stored</div>
 				</c:if>
+				
+				<div style="color:blue">${Msg}</div>
 			
 			<TR style="color:black;background-color:white;">
 			<TH>Name</TH>
@@ -34,7 +36,7 @@
 			<TR>
     			<c:forEach items="${archivos}" var="archivo">
           			  <tr>
-					<td> <a href ="#" >prueba ${archivo.nombreOri}</a> </td>
+					<td> <a href ="#" >${archivo.nombreOri}</a> </td>
 					<td> <c:out value="${archivo.tamanyo}"/> MB</td>
 					<td> <c:out value="${archivo.tipo}" /></td>
 					<td>

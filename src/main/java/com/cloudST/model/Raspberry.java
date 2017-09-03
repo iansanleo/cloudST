@@ -29,6 +29,21 @@ public class Raspberry {
 	@NotNull
 	private boolean status;
 
+	//protected Raspberry(){}
+	public Raspberry(){}
+	
+	public Raspberry(String ip, String mac, double tamanyoTotal, double tamanyoUso,
+			Date fechaConexion, boolean status){
+		
+		this.ip = ip;
+		this.mac = mac;
+		this.tamanyoTotal = tamanyoTotal;
+		this.tamanyoUso = tamanyoUso;
+		this.fechaConexion = fechaConexion;
+		this.status = status;
+		
+	}
+	
 	//Getters
 	public Integer getIdRaspberry(){return this.idRaspberry;}
 	public String getIp(){return this.ip;}

@@ -23,6 +23,18 @@ public class Transaccion {
 	private Integer idArchivo;
 	@NotNull
 	private Integer idUsuario;
+	
+	//protected Transaccion(){}
+	public Transaccion(){}
+	
+	public Transaccion(Date fecha, String tipo, Integer idArchivo, Integer idUsuario){
+		
+		this.fecha = fecha;
+		this.tipo = tipo;
+		this.idArchivo = idArchivo;
+		this.idUsuario = idUsuario;
+	}
+	
 
 	//Getters
 	public Integer getIdTransaccion(){return this.idTransaccion;}

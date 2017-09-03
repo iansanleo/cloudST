@@ -16,8 +16,8 @@
 </head>
 
 <body>
-<%Integer id =(Integer)session.getAttribute("id"); %>
-<c:if test="${not empty id }">  
+<%Integer idUser =(Integer)session.getAttribute("idUser"); %>
+<c:if test="${not empty idUser }">  
 
 			<jsp:include page="menu.jsp"/>    
 </c:if> 
@@ -35,10 +35,10 @@
      	   
      	   <input type="submit" value="Add User"/><br/>
      	 </form>
-     	 <c:if test="${not empty id }">  
+     	 <c:if test="${not empty idUser }">  
 			<a href="/welcome"> Back </a>   
 		</c:if>
-		<c:if test="${empty id }">
+		<c:if test="${empty idUser }">
 			<a href="/"> Back </a>
 		</c:if> 
 	</div>

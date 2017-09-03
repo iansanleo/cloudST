@@ -26,12 +26,9 @@ public class ArchivoController {
 
 
 		for (Archivos archivo : archivoRepository.findAll()) {
-			if (archivo.getIdUsuario() == session.getAttribute("id")){
+			if (archivo.getIdUsuario() == session.getAttribute("idUser")){
 				archivos.add(archivo);
 			}
-			System.out.println("id :" + session.getAttribute("id"));
-			System.out.println(archivo.getIdUsuario());
-			System.out.println("tamnayo:" + archivos.size());
 		}
 
 		model.addAttribute("archivos", archivos);
