@@ -63,9 +63,7 @@ public class ArchivoController {
 		
 		transaccionRepository.save(transaccion);
 		
-		model.addAttribute("Msg","File Deleted");
-		
-		return "archivo";
+		return "redirect:/resources";
 	}
 	
 }

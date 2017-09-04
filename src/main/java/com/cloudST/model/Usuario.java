@@ -29,7 +29,7 @@ public class Usuario implements Serializable {
 	private String password;
 	@Size(min = 1, max = 50)
 	private String nombre;
-	@Email
+	@Email 
 	private String email;
 	@NotNull
 	private Date fechaInicio;

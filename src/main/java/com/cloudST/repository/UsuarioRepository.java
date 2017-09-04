@@ -1,11 +1,15 @@
 package com.cloudST.repository;
 
-import com.cloudST.model.Usuario;
+import java.util.List;
+
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
+
+import com.cloudST.model.Usuario;
 
 @Repository
 public interface UsuarioRepository extends CrudRepository<Usuario, Integer> {
 
-	    //List<Usuario> findByEmail(String email);
+	public List<Usuario> findByEmail(String email);
+	
 }

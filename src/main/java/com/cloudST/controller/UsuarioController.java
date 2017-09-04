@@ -3,6 +3,7 @@ package com.cloudST.controller;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.cloudST.model.Usuario;
+import com.cloudST.repository.PrivilegiosRepository;
 import com.cloudST.repository.UsuarioRepository;
  
 
@@ -22,6 +24,9 @@ public class UsuarioController {
 
 	@Autowired
 	private UsuarioRepository usuarioRepository;
+	
+	@Autowired
+	private PrivilegiosRepository privilegiosRepository;
 
 
 	@PostMapping("/login")
@@ -41,7 +46,8 @@ public class UsuarioController {
 		    		
 		    	session.setAttribute("idUser", usuario.getIdUsusario());
 		    	
-		    	//privilegios
+		    	//
+		    	//privilegiosRepository
 		    	//model.addAttribute("perm",true);
 		    	
 		    	return "welcome";
@@ -88,9 +94,17 @@ public class UsuarioController {
 			model.addAttribute("Msg", "Passwords doesn't mach");
 			return "addUsuario";
 		}
-		//comprobar distintos emails
+		//
+		String email = request.getParameter("email");
+		List<Usuario> listUsuario = usuarioRepository.findByEmail(email);
 		
-		usuario.setNombre(request.getParameter("name"));
+		if(!listUsuario.isEmpty()){
+			model.addAttribute("Msg", "The email you entered is currently in use");
+			return "addUsuario";
+			
+		}
+		
+		usuario.setNombre(request.getParameter("name").toLowerCase());
 		usuario.setPassword(password);
 		usuario.setUsername(request.getParameter("userName"));
 		usuario.setEmail(request.getParameter("email"));
