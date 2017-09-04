@@ -3,7 +3,6 @@ package com.cloudST.controller;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Iterator;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -14,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.cloudST.model.Privilegios;
 import com.cloudST.model.Usuario;
 import com.cloudST.repository.PrivilegiosRepository;
 import com.cloudST.repository.UsuarioRepository;
@@ -88,35 +88,28 @@ public class UsuarioController {
 		
 		String password = request.getParameter("password");
 		String password2 = request.getParameter("password2");
+		String username = request.getParameter("userName");
+		String email = request.getParameter("email");
 		
 		if(!password.equals(password2)){
-			
 			model.addAttribute("Msg", "Passwords doesn't mach");
 			return "addUsuario";
 		}
-		//
-		//String email = request.getParameter("email");
-		//List<Usuario> listUsuario = usuarioRepository.findByEmail(email);
 		
-		if(!usuarioRepository.findByEmail(request.getParameter("email")).isEmpty()){
+		if(usuarioRepository.findByEmail(email)!=null){
 			model.addAttribute("Msg", "The email you entered is currently in use");
 			return "addUsuario";
-			
 		}
 		
-		if(!usuarioRepository.findByUsername(request.getParameter("userName")).isEmpty()){
+		if(usuarioRepository.findByUsername(username)!=null){
 			model.addAttribute("Msg", "The username you entered is currently in use");
 			return "addUsuario";
-			
 		}
-		
-		
-		
 		
 		usuario.setNombre(request.getParameter("name").toLowerCase());
 		usuario.setPassword(password);
-		usuario.setUsername(request.getParameter("userName"));
-		usuario.setEmail(request.getParameter("email"));
+		usuario.setUsername(username);
+		usuario.setEmail(email);
 		
 		usuario.setStatus(true);
 		usuario.setValido(false);
@@ -124,9 +117,11 @@ public class UsuarioController {
 		Date fechaInicio = new java.util.Date(); //fecha actual
 		Timestamp sqlTimestamp = new Timestamp(fechaInicio.getTime());//en milisegundos
 		fechaInicio = new Date(sqlTimestamp.getTime());
-		
 		usuario.setFechaInicio(fechaInicio);
 		usuarioRepository.save(usuario);
+		
+		Privilegios privilegio = new Privilegios(fechaInicio, 0, true, usuarioRepository.findByUsername(username).getIdUsusario());
+		privilegiosRepository.save(privilegio);
 		
 		model.addAttribute("Msg", "User successfully added");
 		
