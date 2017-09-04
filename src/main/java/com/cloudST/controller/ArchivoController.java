@@ -22,6 +22,7 @@ public class ArchivoController {
 	
 	@Autowired
 	private ArchivoRepository archivoRepository;
+	@Autowired
 	private TransaccionRespository transaccionRepository;
 	
 	@GetMapping("/resources")

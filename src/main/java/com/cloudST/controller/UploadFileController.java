@@ -29,6 +29,7 @@ public class UploadFileController {
 	
 	@Autowired
 	private ArchivoRepository archivoRepository;
+	@Autowired
 	private TransaccionRespository transaccionRepository;
 
     //Save the uploaded file to this folder
@@ -71,7 +72,13 @@ public class UploadFileController {
             archivo.setNombreOri(file.getOriginalFilename());
             archivo.setNombreSys(path.toString());
             archivo.setStatus(true);
-            archivo.setTamanyo(ByteBuffer.wrap(file.getBytes()).getDouble());  
+            
+            //
+            byte[] rno = file.getBytes();
+            int tamanyo = rno[0];
+            double tamanyoMb = tamanyo/1024;
+            
+            archivo.setTamanyo(tamanyoMb);  
             archivo.setString(file.getContentType());
             
             archivoRepository.save(archivo);
@@ -97,16 +104,13 @@ public class UploadFileController {
             
             transaccion.setTipo("upload");
             
-            //error aqui null pointer?
             transaccionRepository.save(transaccion);
             
             
             
         } catch (IOException e) {
             e.printStackTrace();
-        }catch (Exception e){
-        	System.out.println(e);
-        }
+            }
 
         return "upload";
     }
