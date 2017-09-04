@@ -2,7 +2,6 @@ package com.cloudST.controller;
  
 import java.sql.Timestamp;
 import java.util.Date;
-import java.util.Iterator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -32,29 +31,37 @@ public class UsuarioController {
 	@PostMapping("/login")
 	public String login(Model model, HttpServletRequest request){
 		
-		String userName = request.getParameter("userName");
-        String password = request.getParameter("password");
-
-        HttpSession session = request.getSession();
-        
-		Iterable<Usuario> listUsuario = usuarioRepository.findAll(); 
+		HttpSession session = request.getSession();
 		
-		for (Iterator<Usuario> i = listUsuario.iterator(); i.hasNext();) {
-		    Usuario usuario = i.next();
-		    
-		    if(usuario.getUsername().equals(userName)&& usuario.getPassword().equals(password)){
-		    		
-		    	session.setAttribute("idUser", usuario.getIdUsusario());
-		    	
-		    	//
-		    	//privilegiosRepository
-		    	//model.addAttribute("perm",true);
-		    	
-		    	return "welcome";
-		    }
+		String userName = request.getParameter("userName").toString();
+        String password = request.getParameter("password").toString();
+        
+        Usuario usuario = usuarioRepository.findByUser(userName);
+		
+        System.out.println(usuario.getNombre());
+        System.out.println(usuario.getEmail());
+        System.out.println(usuario.getPassword());
+        System.out.println(usuario.getValido());
+        System.out.println(usuario.getStatus());
+        System.out.println(usuario.getFechaInicio());
+        System.out.println(usuario.getIdUsusario());
+        
+		if(!usuario.getPassword().equals(password)){
+			model.addAttribute("Msg", "Password or invalid entered Username");
+			return "index";
 		}
-		model.addAttribute("Msg", "Password or invalid entered Username");
-		return "index";
+		
+		session.setAttribute("idUsuario", usuario.getIdUsusario());
+		
+		Privilegios privilegios = privilegiosRepository.findByIdUser(usuario.getIdUsusario());
+    	
+    	System.out.println(privilegios.getIdUsuario());
+    	
+    		model.addAttribute("permisos", privilegios.getTipo());
+    	
+    	
+    	return "welcome";
+
 	}
 	
 	@GetMapping ("/logout")
@@ -101,7 +108,7 @@ public class UsuarioController {
 			return "addUsuario";
 		}
 		
-		if(usuarioRepository.findByUsername(username)!=null){
+		if(usuarioRepository.findByUser(username)!=null){
 			model.addAttribute("Msg", "The username you entered is currently in use");
 			return "addUsuario";
 		}
@@ -120,7 +127,7 @@ public class UsuarioController {
 		usuario.setFechaInicio(fechaInicio);
 		usuarioRepository.save(usuario);
 		
-		Privilegios privilegio = new Privilegios(fechaInicio, 0, true, usuarioRepository.findByUsername(username).getIdUsusario());
+		Privilegios privilegio = new Privilegios(fechaInicio, 0, true, usuarioRepository.findByUser(username).getIdUsusario());
 		privilegiosRepository.save(privilegio);
 		
 		model.addAttribute("Msg", "User successfully added");
