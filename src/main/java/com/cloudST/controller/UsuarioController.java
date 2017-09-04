@@ -51,7 +51,7 @@ public class UsuarioController {
 			return "index";
 		}
 		
-		session.setAttribute("idUsuario", usuario.getIdUsusario());
+		session.setAttribute("idUser", usuario.getIdUsusario());
 		
 		Privilegios privilegios = privilegiosRepository.findByIdUser(usuario.getIdUsusario());
     	
@@ -68,7 +68,8 @@ public class UsuarioController {
 	public String logOut(Model model, HttpServletRequest request){
 		
 		HttpSession session = request.getSession();
-		session.removeAttribute("id");
+		session.removeAttribute("idUser");
+		session.removeAttribute("permisos");
 		return "index";
 	}
 	
@@ -132,7 +133,7 @@ public class UsuarioController {
 		
 		model.addAttribute("Msg", "User successfully added");
 		
-		if(session.getAttribute("id")==null){return "index";}
+		if(session.getAttribute("idUser")==null){return "index";}
 		
 		return "welcome";
 	}
