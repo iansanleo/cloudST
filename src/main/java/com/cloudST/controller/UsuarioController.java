@@ -95,14 +95,23 @@ public class UsuarioController {
 			return "addUsuario";
 		}
 		//
-		String email = request.getParameter("email");
-		List<Usuario> listUsuario = usuarioRepository.findByEmail(email);
+		//String email = request.getParameter("email");
+		//List<Usuario> listUsuario = usuarioRepository.findByEmail(email);
 		
-		if(!listUsuario.isEmpty()){
+		if(!usuarioRepository.findByEmail(request.getParameter("email")).isEmpty()){
 			model.addAttribute("Msg", "The email you entered is currently in use");
 			return "addUsuario";
 			
 		}
+		
+		if(!usuarioRepository.findByUsername(request.getParameter("userName")).isEmpty()){
+			model.addAttribute("Msg", "The username you entered is currently in use");
+			return "addUsuario";
+			
+		}
+		
+		
+		
 		
 		usuario.setNombre(request.getParameter("name").toLowerCase());
 		usuario.setPassword(password);

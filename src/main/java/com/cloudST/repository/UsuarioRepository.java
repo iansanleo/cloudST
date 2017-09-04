@@ -11,5 +11,6 @@ import com.cloudST.model.Usuario;
 public interface UsuarioRepository extends CrudRepository<Usuario, Integer> {
 
 	public List<Usuario> findByEmail(String email);
+	public List<Usuario> findByUsername(String usuario);
 	
 }
