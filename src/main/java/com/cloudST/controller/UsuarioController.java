@@ -1,6 +1,7 @@
 package com.cloudST.controller;
  
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -46,14 +47,15 @@ public class UsuarioController {
 			return "index";
 		}
 		
-		session.setAttribute("idUser", usuario.getIdUsusario());
-		
-		Privilegios privilegios = privilegiosRepository.findByIdUser(usuario.getIdUsusario());
+		session.setAttribute("idUser", usuario.getIdUsuario());
+
+		Privilegios privilegios = privilegiosRepository.findByIdUser(usuario.getIdUsuario());
     	
     	session.setAttribute("permisos", privilegios.getTipo());
     	
     	return "welcome";
 	}
+	
 	
 	@GetMapping ("/logout")
 	public String logOut(Model model, HttpServletRequest request){
@@ -63,6 +65,7 @@ public class UsuarioController {
 		session.removeAttribute("permisos");
 		return "index";
 	}
+	
 	
 	@GetMapping("/user")
 	public String userProfile(Model model, HttpServletRequest request){
@@ -74,6 +77,7 @@ public class UsuarioController {
 		return "usuario";
 	}
 	
+	
 	@GetMapping("/editUser")
 	public String editProfile(Model model,  HttpServletRequest request){
 		HttpSession session = request.getSession();
@@ -82,6 +86,7 @@ public class UsuarioController {
 		model.addAttribute("usuario", usuario);
 		return "editUsuario";
 	}
+	
 	
 	@PostMapping("/userEdit")
 	public String newValueUser(Model model, HttpServletRequest request){
@@ -92,14 +97,6 @@ public class UsuarioController {
         String email = request.getParameter("email").toString();
         String password = request.getParameter("password").toString();
         String password2 = request.getParameter("password2").toString();
-        
-        System.out.println(nombre);
-        System.out.println(usuario.getNombre());
-        System.out.println(email);
-        System.out.println(usuario.getEmail());
-        System.out.println(password);
-        System.out.println(password2);
-        System.out.println(usuario.getPassword());
         
         if(nombre != usuario.getNombre()){
         	usuario.setNombre(nombre);
@@ -115,8 +112,7 @@ public class UsuarioController {
     		   return "redirect:/editUser";
     	   }
     	   
-    	   usuario.setPassword(password);
-    	   
+    	   usuario.setPassword(password); 
        }
        usuarioRepository.save(usuario);
 	   
@@ -129,6 +125,7 @@ public class UsuarioController {
 	public String newUser(Model model){
 		return "addUsuario";
 	}
+	
 	
 	@PostMapping("/userAdd")
 	public String userAdd(Model model, HttpServletRequest request){
@@ -170,7 +167,7 @@ public class UsuarioController {
 		usuario.setFechaInicio(fechaInicio);
 		usuarioRepository.save(usuario);
 		
-		Privilegios privilegio = new Privilegios(fechaInicio, 0, true, usuarioRepository.findByUser(username).getIdUsusario());
+		Privilegios privilegio = new Privilegios(fechaInicio, 0, true, usuarioRepository.findByUser(username).getIdUsuario());
 		privilegiosRepository.save(privilegio);
 		
 		model.addAttribute("Msg", "User successfully added");
@@ -180,4 +177,16 @@ public class UsuarioController {
 		return "welcome";
 	}
 	
+	
+	@GetMapping("/userList")
+	public String listUsers(Model model, HttpServletRequest request){
+		
+		ArrayList<Usuario> listUsuario = (ArrayList<Usuario>) usuarioRepository.findAll();
+			
+		model.addAttribute("usuarios", listUsuario);	
+		return "listaUser";
+	}
+	
+	//editAdminUser
+	///delAdminUser?idUser
 }

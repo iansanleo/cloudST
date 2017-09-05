@@ -52,7 +52,7 @@ public class Usuario implements Serializable {
 	}
 
 	//Getters
-	public Integer getIdUsusario(){return this.idUsuario;}
+	public Integer getIdUsuario(){return this.idUsuario;}
 	public String getUsername(){return this.username;}
 	public String getPassword(){return this.password;}
 	public String getNombre(){return this.nombre;}

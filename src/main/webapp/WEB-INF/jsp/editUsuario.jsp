@@ -27,7 +27,7 @@
 	<jsp:include page="menuF.jsp"/>
  
  
-	 <h1 style="aligng:center">Edit your user information</h1>
+	 <h1  align="center">Edit your user information</h1>
 	<div class="form">
 		<form action="userEdit" method="post">
 		

@@ -42,6 +42,7 @@ public class ArchivoController {
 		return "archivo";
 	}
 	
+	
 	@GetMapping("/deleteResource")
 	public String deleteFile(Model model, HttpServletRequest request){
 		HttpSession session = request.getSession();
