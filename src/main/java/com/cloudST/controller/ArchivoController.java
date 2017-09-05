@@ -41,6 +41,7 @@ public class ArchivoController {
 		model.addAttribute("archivos", archivos);
 		return "archivo";
 	}
+	
 	@GetMapping("/deleteResource")
 	public String deleteFile(Model model, HttpServletRequest request){
 		HttpSession session = request.getSession();
@@ -65,5 +66,5 @@ public class ArchivoController {
 		
 		return "redirect:/resources";
 	}
-	
+
 }

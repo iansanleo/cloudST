@@ -16,17 +16,17 @@
 </head>
 
 <body>
-<%Integer idUser =(Integer)session.getAttribute("idUser"); %>
-<c:if test="${not empty idUser }">  
+	<%Integer idUser =(Integer)session.getAttribute("idUser"); %>
+	<c:if test="${not empty idUser }">  
 
-			<jsp:include page="menu.jsp"/>
+		<jsp:include page="menu.jsp"/>
 	
-	<%boolean permisos = (boolean)session.getAttribute("permisos");%>
-	<c:if test="${ permisos }">
-		<jsp:include page="menuA.jsp"/>
-	</c:if>
+		<%Integer permisos = (Integer)session.getAttribute("permisos");%>
+		<c:if test="${permisos == 3}">
+			<jsp:include page="menuA.jsp"/>
+		</c:if>
  
-	<jsp:include page="menuF.jsp"/>
+		<jsp:include page="menuF.jsp"/>
 	    
 </c:if> 
 	

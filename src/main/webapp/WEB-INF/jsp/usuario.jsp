@@ -41,10 +41,10 @@
 					<td> ************* </td>
 					<td> ${usuario.nombre} </td>
 					<td> ${usuario.email}  </td>
-					<td> ${usuario.fechaInicio}    </td>
+					<td> ${usuario.fechaInicio}</td>
 					<td> ${usuario.valido}  </td>
 					<td>
-					<a href = "#"><img src="resources/img/iconEditmaterial.png"/></a>
+					<a href = "/editUser"><img src="resources/img/iconEditmaterial.png"/></a>
 					<a href = "#"><img src="resources/img/iconDeletematerial.png"/></a></td>
 
  			</tr>

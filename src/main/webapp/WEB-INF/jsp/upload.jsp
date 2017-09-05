@@ -24,12 +24,6 @@
  
 	<jsp:include page="menuF.jsp"/>
 	
-	<%boolean permisos = (boolean)session.getAttribute("permisos");%>
-	<c:if test="${ permisos }">
-		<jsp:include page="menuA.jsp"/>
-	</c:if>
- 
-	<jsp:include page="menuF.jsp"/>
 	<div class="form">
 
 		<div style="color:red">${Msg}</div>
@@ -40,7 +34,6 @@
     		
 		</form>
 	</div>
-	
 
 </body>
 </html>

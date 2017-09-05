@@ -49,7 +49,6 @@ public class UploadFileController {
 
     	HttpSession session = request.getSession();
     	
-    	
         if (file.isEmpty()) {
             model.addAttribute("Msg", "Please select a file to upload");
             return "upload";
@@ -72,10 +71,15 @@ public class UploadFileController {
             archivo.setNombreSys(path.toString());
             archivo.setStatus(true);
             
-            //
+            //¿¿??
             byte[] rno = file.getBytes();
-            int tamanyo = rno[0];
-            double tamanyoMb = tamanyo/1024;
+            int i= (rno[0]<<24)&0xff000000|
+            	       (rno[1]<<16)&0x00ff0000|
+            	       (rno[2]<< 8)&0x0000ff00|
+            	       (rno[3]<< 0)&0x000000ff;
+            double tamanyoMb = i/1024;
+            
+            tamanyoMb =tamanyoMb/1024;
             
             archivo.setTamanyo(tamanyoMb);  
             archivo.setString(file.getContentType());

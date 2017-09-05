@@ -27,24 +27,19 @@ public class UsuarioController {
 	@Autowired
 	private PrivilegiosRepository privilegiosRepository;
 
-
 	@PostMapping("/login")
 	public String login(Model model, HttpServletRequest request){
 		
 		HttpSession session = request.getSession();
-		
 		String userName = request.getParameter("userName").toString();
         String password = request.getParameter("password").toString();
-        
+
         Usuario usuario = usuarioRepository.findByUser(userName);
-		
-        System.out.println(usuario.getNombre());
-        System.out.println(usuario.getEmail());
-        System.out.println(usuario.getPassword());
-        System.out.println(usuario.getValido());
-        System.out.println(usuario.getStatus());
-        System.out.println(usuario.getFechaInicio());
-        System.out.println(usuario.getIdUsusario());
+	
+        if(usuario.getUsername()==null){
+        	model.addAttribute("Msg","User does not exist, create one.");
+        	return "index";
+        }
         
 		if(!usuario.getPassword().equals(password)){
 			model.addAttribute("Msg", "Password or invalid entered Username");
@@ -55,13 +50,9 @@ public class UsuarioController {
 		
 		Privilegios privilegios = privilegiosRepository.findByIdUser(usuario.getIdUsusario());
     	
-    	System.out.println(privilegios.getIdUsuario());
-    	
-    		model.addAttribute("permisos", privilegios.getTipo());
-    	
+    	session.setAttribute("permisos", privilegios.getTipo());
     	
     	return "welcome";
-
 	}
 	
 	@GetMapping ("/logout")
@@ -74,22 +65,40 @@ public class UsuarioController {
 	}
 	
 	@GetMapping("/user")
-	public String usuarioProfile(Model model, HttpServletRequest request){
+	public String userProfile(Model model, HttpServletRequest request){
 		Usuario usuario = new Usuario();
 		
 		HttpSession session = request.getSession();
-		usuario = usuarioRepository.findOne((Integer) session.getAttribute("id"));
+		usuario = usuarioRepository.findOne((Integer) session.getAttribute("idUser"));
 		model.addAttribute("usuario",usuario);
 		return "usuario";
 	}
 	
+	@GetMapping("/editUser")
+	public String editProfile(Model model,  HttpServletRequest request){
+		HttpSession session = request.getSession();
+		Usuario usuario = new Usuario();
+		
+		usuario = usuarioRepository.findOne((Integer) session.getAttribute("idUser"));
+		
+		model.addAttribute("usuario", usuario);
+		return "editUsuario";
+	}
+	
+	@PostMapping("/userEdit")
+	public String newValueUser(Model model, HttpServletRequest request){
+		//
+		return "redirect:/user" ;
+	}
+	
+	
 	@GetMapping("/newUser")
-	public String newUsuario(Model model){
+	public String newUser(Model model){
 		return "addUsuario";
 	}
 	
 	@PostMapping("/userAdd")
-	public String usuarioAdd(Model model, HttpServletRequest request){
+	public String userAdd(Model model, HttpServletRequest request){
 		Usuario usuario = new Usuario();
 		
 		HttpSession session = request.getSession();
