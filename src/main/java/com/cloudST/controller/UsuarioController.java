@@ -77,9 +77,7 @@ public class UsuarioController {
 	@GetMapping("/editUser")
 	public String editProfile(Model model,  HttpServletRequest request){
 		HttpSession session = request.getSession();
-		Usuario usuario = new Usuario();
-		
-		usuario = usuarioRepository.findOne((Integer) session.getAttribute("idUser"));
+		Usuario usuario = usuarioRepository.findOne((Integer) session.getAttribute("idUser"));
 		
 		model.addAttribute("usuario", usuario);
 		return "editUsuario";
@@ -87,8 +85,43 @@ public class UsuarioController {
 	
 	@PostMapping("/userEdit")
 	public String newValueUser(Model model, HttpServletRequest request){
-		//
-		return "redirect:/user" ;
+		HttpSession session = request.getSession();
+		Usuario usuario = usuarioRepository.findOne((Integer) session.getAttribute("idUser"));
+		
+		String nombre = request.getParameter("name").toString();
+        String email = request.getParameter("email").toString();
+        String password = request.getParameter("password").toString();
+        String password2 = request.getParameter("password2").toString();
+        
+        System.out.println(nombre);
+        System.out.println(usuario.getNombre());
+        System.out.println(email);
+        System.out.println(usuario.getEmail());
+        System.out.println(password);
+        System.out.println(password2);
+        System.out.println(usuario.getPassword());
+        
+        if(nombre != usuario.getNombre()){
+        	usuario.setNombre(nombre);
+        }
+        if(email != usuario.getEmail()){
+        	usuario.setEmail(email);
+        	usuario.setValido(false);
+        }
+        
+       if(password!=""){
+    	   if(!password.equals(password2)){
+    		   model.addAttribute("Msg","Passwords do not match");
+    		   return "redirect:/editUser";
+    	   }
+    	   
+    	   usuario.setPassword(password);
+    	   
+       }
+       usuarioRepository.save(usuario);
+	   
+	   model.addAttribute("Msg","User has been successfully modified");
+	   return "redirect:/user" ;
 	}
 	
 	

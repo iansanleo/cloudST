@@ -26,6 +26,7 @@
 	
 <div align="center">
 	<h2> User Profile</h2>
+	<div style="color:red">${Msg}</div>
 		<table style="border: 1px solid #000;text-align:center ;border: 1px solid #000;border-collapse: separate;
   border-spacing: 10px;">
 			<TR style="color:black;background-color:white;">
