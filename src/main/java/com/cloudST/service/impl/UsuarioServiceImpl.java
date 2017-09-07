@@ -51,19 +51,8 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public Usuario create(String userName, String name, String email, String password, String password2) throws UsuarioException {
+        validateDataToNewUser(userName, email, password, password2);
         Usuario usuario = new Usuario();
-        if(!password.equals(password2)){
-            throw new UsuarioException("Passwords doesn't mach");
-        }
-
-        if(usuarioRepository.findByEmail(email)!=null){
-            throw new UsuarioException("The email you entered is currently in use");
-        }
-
-        if(usuarioRepository.findByUser(userName)!=null){
-            throw new UsuarioException("The username you entered is currently in use");
-        }
-
         usuario.setNombre(name);
         usuario.setPassword(password);
         usuario.setUsername(userName);
@@ -78,6 +67,20 @@ public class UsuarioServiceImpl implements UsuarioService {
         usuario.setFechaInicio(fechaInicio);
         usuarioRepository.save(usuario);
         return usuario;
+    }
+
+    private void validateDataToNewUser(String userName, String email, String password, String password2) throws UsuarioException {
+        if(!password.equals(password2)){
+            throw new UsuarioException("Passwords doesn't mach");
+        }
+
+        if(usuarioRepository.findByEmail(email)!=null){
+            throw new UsuarioException("The email you entered is currently in use");
+        }
+
+        if(usuarioRepository.findByUser(userName)!=null){
+            throw new UsuarioException("The username you entered is currently in use");
+        }
     }
 
     private void validate(String password, Usuario usuario) throws UsuarioException {
