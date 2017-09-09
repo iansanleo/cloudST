@@ -29,22 +29,22 @@
 		<table style="border: 1px solid #000;text-align:center ;border: 1px solid #000;border-collapse: separate; border-spacing: 10px;">
 			<TR style="color:black;background-color:white;">
 			<TH>UserName</TH>
-			<TH>Password</TH>
 			<TH>Complete Name</TH>
 			<TH>Email</TH>
 			<TH>Date </TH>
 			<TH>Email Validated</TH>
+			<TH>Status</TH>
 			</TR>
 			<c:forEach items="${usuarios}" var="usuario">
 				<tr>
 					<td> ${usuario.username} </td>
-					<td> ************* </td>
 					<td> ${usuario.nombre} </td>
 					<td> ${usuario.email}  </td>
 					<td> ${usuario.fechaInicio}</td>
 					<td> ${usuario.valido}  </td>
+					<td> ${usuario.status}</td>
 					<td>
-					<a href = "/editAdminUser?idUser=${usuario.idUsuario}"><img src="resources/img/iconEditmaterial.png"/></a>
+					<a href = "/editUser?idUser=${usuario.idUsuario}"><img src="resources/img/iconEditmaterial.png"/></a>
 					<a href = "/delAdminUser?idUser=${usuario.idUsuario}"><img src="resources/img/iconDeletematerial.png"/></a></td>
 				
  				</tr>

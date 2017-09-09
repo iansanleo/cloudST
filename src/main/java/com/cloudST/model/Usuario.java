@@ -30,6 +30,7 @@ public class Usuario implements Serializable {
 	@Size(min = 1, max = 50)
 	private String nombre;
 	@Email 
+	@NotNull
 	private String email;
 	@NotNull
 	private Date fechaInicio;

@@ -20,6 +20,7 @@
 	<jsp:include page="menu.jsp"/>
 	
 	<%Integer permisos = (Integer)session.getAttribute("permisos");%>
+	<%Integer idSession = (Integer)session.getAttribute("idUser"); %>
 	<c:if test="${permisos == 3}">
 		<jsp:include page="menuA.jsp"/>
 	</c:if>
@@ -27,8 +28,18 @@
 	<jsp:include page="menuF.jsp"/>
  
  
-	 <h1  align="center">Edit your user information</h1>
+	 <h1  align="center">Edit user information</h1>
 	<div class="form">
+	
+	
+		<c:if test="${ empty idUser}">
+			<form action="userEdit" method="post">
+    
+     	</c:if>
+     	<c:if test="${not empty idUser}">
+     	   	<form action="userEdit?idUser=${idUser}" method="post"> 
+     	</c:if>
+     	   
 		<form action="userEdit" method="post">
 		
 			<div style="color:red">${Msg}</div>
@@ -43,21 +54,44 @@
      	    	<td><b>Email:</b></td>
      	    	<td><input type="text" name="email" value="${usuario.email}"/></td>
      	    </tr>
+     	    
+     	    <c:if test="${idUser != null}">
+     	    <tr>
+     	    	<td><b>Username</b></td>
+     	    	<td><input type="text" name="username" value="${usuario.username}"/></td>
+     	    </tr>
+     	    <tr>
+     	    	<td><b>Email Valid</b></td>
+     	    	<td><input type="text" name="valido" value="${usuario.valido}"/></td>
+     	    </tr>
+     	    </c:if>
+     	    
      	    </table> <br><br>
-     	    	For a new Password:<br>
-     	    <table>
-     	    <tr>
-     	    	<td><b>Password:</b></td>
-     	    	<td><input type="password" name="password"/></td>
-     	    	<td></td>
-     	    </tr>
-     	    <tr>
-     	    	<td><b>Repeat Password:</b></td> 
-     	    	<td><input type="password" name="password2"/></td>
-     	    	<td></td>
-     	    </tr>
-     	    </table>
-     	   <input type="submit" value="Edit"/> <a href="/user"> Go Back </a>
+     	    <c:if test="${idUser == null}">
+     	    		For a new Password:<br>
+     	    	<table>
+     	    	<tr>
+     	    		<td><b>Password:</b></td>
+     	    		<td><input type="password" name="password"/></td>
+     	    		<td></td>
+     	   		 </tr>
+     	    	<tr>
+     	    		<td><b>Repeat Password:</b></td> 
+     	    		<td><input type="password" name="password2"/></td>
+     	    		<td></td>
+     	   		</tr>
+     	   		</table>
+     	    </c:if>
+     	    
+     	   <input type="submit" value="Edit"/> 
+     	   <c:if test="${empty idUser }">
+     	   		<a href="/user">Go Back</a> 
+     	   </c:if>
+     	   	<c:if test="${not empty idUser}">
+     	   		<a href="/userList">Go Back</a> 
+     	   </c:if>
+     	  
+     	   
      	 </form>
 
 		

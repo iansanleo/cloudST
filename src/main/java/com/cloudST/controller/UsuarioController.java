@@ -47,7 +47,12 @@ public class UsuarioController {
 			return "index";
 		}
 		
-		session.setAttribute("idUser", usuario.getIdUsuario());
+		if(!usuario.getStatus()){
+			model.addAttribute("Msg", "User removed, contact with us");
+			return "index";
+		}
+		
+		session.setAttribute("idUserSession", usuario.getIdUsuario());
 
 		Privilegios privilegios = privilegiosRepository.findByIdUser(usuario.getIdUsuario());
     	
@@ -61,7 +66,7 @@ public class UsuarioController {
 	public String logOut(Model model, HttpServletRequest request){
 		
 		HttpSession session = request.getSession();
-		session.removeAttribute("idUser");
+		session.removeAttribute("idUserSession");
 		session.removeAttribute("permisos");
 		return "index";
 	}
@@ -72,7 +77,7 @@ public class UsuarioController {
 		Usuario usuario = new Usuario();
 		
 		HttpSession session = request.getSession();
-		usuario = usuarioRepository.findOne((Integer) session.getAttribute("idUser"));
+		usuario = usuarioRepository.findOne((Integer) session.getAttribute("idUserSession"));
 		model.addAttribute("usuario",usuario);
 		return "usuario";
 	}
@@ -81,7 +86,16 @@ public class UsuarioController {
 	@GetMapping("/editUser")
 	public String editProfile(Model model,  HttpServletRequest request){
 		HttpSession session = request.getSession();
-		Usuario usuario = usuarioRepository.findOne((Integer) session.getAttribute("idUser"));
+		
+		Usuario usuario = new Usuario();
+		
+		if(request.getParameter("idUser") == null){
+			usuario = usuarioRepository.findOne((Integer)session.getAttribute("idUserSession"));
+			
+		}else{
+			usuario = usuarioRepository.findOne(Integer.parseInt(request.getParameter("idUser")));
+			model.addAttribute("idUser",request.getParameter("idUser"));
+		}
 		
 		model.addAttribute("usuario", usuario);
 		return "editUsuario";
@@ -91,33 +105,75 @@ public class UsuarioController {
 	@PostMapping("/userEdit")
 	public String newValueUser(Model model, HttpServletRequest request){
 		HttpSession session = request.getSession();
-		Usuario usuario = usuarioRepository.findOne((Integer) session.getAttribute("idUser"));
+		
+		Integer idUser = 0;
+		
+		Usuario usuarioAux = new Usuario();
 		
 		String nombre = request.getParameter("name").toString();
         String email = request.getParameter("email").toString();
-        String password = request.getParameter("password").toString();
-        String password2 = request.getParameter("password2").toString();
+		
+        	usuarioAux.setEmail(email.toLowerCase());
+        	usuarioAux.setNombre(nombre.toLowerCase());
+		
+        	if(request.getParameter("idUser") == null){
+        		String password = request.getParameter("password").toString();
+        		String password2 = request.getParameter("password2").toString();
+        		idUser =(Integer)session.getAttribute("idUserSession");
+	        
+        		if(password!=""){
+        			if(!password.equals(password2)){
+        				model.addAttribute("Msg","Passwords do not match");
+	     		   
+        				return "redirect:/editUser";
+        			}
+        			usuarioAux.setPassword(password2);
+			
+        		}else{
+        			idUser = Integer.parseInt(request.getParameter("idUser"));
+        			model.addAttribute("idUser",request.getParameter("idUser"));
+        			String validoJsp = request.getParameter("valido");
+        			boolean valido = false;
+			
+        			if(validoJsp=="true"){
+        				valido = true;
+        			}
+			
+        			usuarioAux.setUsername(request.getParameter("username"));
+        			usuarioAux.setValido(valido);
+			
+        			model.addAttribute("idUser", idUser);
+        		}
+		
+        	}
+        	Usuario usuarioSave = usuarioRepository.findOne(idUser);
         
-        if(nombre != usuario.getNombre()){
-        	usuario.setNombre(nombre);
-        }
-        if(email != usuario.getEmail()){
-        	usuario.setEmail(email);
-        	usuario.setValido(false);
-        }
         
-       if(password!=""){
-    	   if(!password.equals(password2)){
-    		   model.addAttribute("Msg","Passwords do not match");
-    		   return "redirect:/editUser";
-    	   }
-    	   
-    	   usuario.setPassword(password); 
-       }
-       usuarioRepository.save(usuario);
-	   
-	   model.addAttribute("Msg","User has been successfully modified");
-	   return "redirect:/user" ;
+        	if(!(usuarioAux.getPassword() == null) && usuarioSave.getPassword() != usuarioAux.getPassword()){
+        		usuarioSave.setPassword(usuarioAux.getPassword());
+        	}
+        //
+        	if(!(usuarioAux.getUsername()== null) && usuarioSave.getUsername()!=usuarioAux.getUsername()){
+        		usuarioSave.setUsername(usuarioAux.getUsername());
+        	}
+        	if(usuarioSave.getValido() != usuarioAux.getValido()){
+        		usuarioSave.setValido(usuarioAux.getValido());
+        	}
+        
+        	if(usuarioSave.getEmail() != usuarioAux.getEmail()){
+        		usuarioSave.setEmail(usuarioAux.getEmail());
+        		usuarioSave.setValido(false);
+        	}
+        
+        	if(usuarioSave.getNombre() != usuarioAux.getNombre()){
+        		usuarioSave.setNombre(usuarioAux.getNombre());
+        	}
+       
+        	usuarioRepository.save(usuarioSave);
+       
+        	model.addAttribute("Msg","User has been successfully modified");
+        	return "redirect:/userEdit";
+
 	}
 	
 	
@@ -172,21 +228,28 @@ public class UsuarioController {
 		
 		model.addAttribute("Msg", "User successfully added");
 		
-		if(session.getAttribute("idUser")==null){return "index";}
+		if(session.getAttribute("idUserSession")==null){return "index";}
 		
 		return "welcome";
 	}
 	
 	
 	@GetMapping("/userList")
-	public String listUsers(Model model, HttpServletRequest request){
-		
+	public String listUsers(Model model){
 		ArrayList<Usuario> listUsuario = (ArrayList<Usuario>) usuarioRepository.findAll();
 			
 		model.addAttribute("usuarios", listUsuario);	
 		return "listaUser";
 	}
-	
-	//editAdminUser
-	///delAdminUser?idUser
+
+
+	@GetMapping("/delAdminUser")
+	public String deleteAdminUser(Model model, HttpServletRequest request){
+		Usuario usuario = usuarioRepository.findOne(Integer.parseInt(request.getParameter("idUser")));
+		usuario.setStatus(false);
+		
+		usuarioRepository.save(usuario);
+		
+		return "redirect:/userList";
+	}
 }
