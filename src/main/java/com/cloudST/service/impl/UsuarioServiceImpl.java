@@ -1,20 +1,23 @@
 package com.cloudST.service.impl;
 
+import java.util.ArrayList;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.cloudST.model.Usuario;
 import com.cloudST.repository.UsuarioRepository;
 import com.cloudST.service.UsuarioService;
 import com.cloudST.service.exception.UsuarioException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.sql.Timestamp;
-import java.util.Date;
+import com.cloudST.utiles.Fecha;
 
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+    @Autowired
+    private Fecha fecha;
 
     @Override
     public Usuario authentication(String userName, String password) throws UsuarioException {
@@ -29,16 +32,11 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public Usuario update(Integer id, String nombre, String email, String oldPassword, String newPassword) throws UsuarioException {
-        Usuario usuario = usuarioRepository.findOne(id);
-        if(nombre != usuario.getNombre()){
-            usuario.setNombre(nombre);
-        }
-        if(email != usuario.getEmail()){
-            usuario.setEmail(email);
-            usuario.setValido(false);
-        }
+    public Usuario update(Integer idUser, String nombre, String email, String oldPassword, String newPassword) throws UsuarioException {
+        Usuario usuario = usuarioRepository.findOne(idUser);
 
+        usuario = validateNombreEmail(usuario,nombre,email);
+        
         if(oldPassword!=""){
             if(!oldPassword.equals(newPassword)){
                 throw new UsuarioException("Passwords do not match");
@@ -48,6 +46,22 @@ public class UsuarioServiceImpl implements UsuarioService {
         usuarioRepository.save(usuario);
         return usuario;
     }
+
+    @Override
+	public Usuario updateAdmin(Integer idUser, String nombre, String email, String username, String valido){
+		Usuario usuario = usuarioRepository.findOne(idUser);
+
+    	if(valido.equals(true)){usuario.setValido(true);}
+    	
+    	if(username != usuario.getUsername()){
+            usuario.setUsername(username);
+        }
+    		
+    	usuario = validateNombreEmail(usuario,nombre,email);
+    
+    
+		return usuario;
+	}
 
     @Override
     public Usuario create(String userName, String name, String email, String password, String password2) throws UsuarioException {
@@ -61,21 +75,28 @@ public class UsuarioServiceImpl implements UsuarioService {
         usuario.setStatus(true);
         usuario.setValido(false);
 
-        Date fechaInicio = new java.util.Date(); //fecha actual
-        Timestamp sqlTimestamp = new Timestamp(fechaInicio.getTime());//en milisegundos
-        fechaInicio = new Date(sqlTimestamp.getTime());
-        usuario.setFechaInicio(fechaInicio);
+        usuario.setFechaInicio(fecha.fechaActual());
         usuarioRepository.save(usuario);
         return usuario;
-        
-        /*
-         * 
-         * 
-         */
-        
-        
+    
+    }
+    
+    @Override
+    public Usuario delete(Integer idUsuario){
+    	Usuario usuario = usuarioRepository.findOne(idUsuario);
+    	usuario.setStatus(false);
+    	usuarioRepository.save(usuario);
+    	return usuario;
+    	
+    }
+    
+    @Override
+    public ArrayList<Usuario> listaUsuario(){
+    	return (ArrayList<Usuario>) usuarioRepository.findAll();
     }
 
+   
+    
     private void validateDataToNewUser(String userName, String email, String password, String password2) throws UsuarioException {
         if(!password.equals(password2)){
             throw new UsuarioException("Passwords doesn't mach");
@@ -99,29 +120,16 @@ public class UsuarioServiceImpl implements UsuarioService {
             throw new UsuarioException("Password or invalid entered Username");
         }
     }
-    
-    /**
-     * 
- 
+    private Usuario validateNombreEmail(Usuario usuario, String nombre, String email){
+    	if(nombre != usuario.getNombre()){
+            usuario.setNombre(nombre.toLowerCase());
+        }
+        if(email != usuario.getEmail()){
+            usuario.setEmail(email);
+            usuario.setValido(false);
+        }
+    	return usuario;
+    }
 
- 
-  @GetMapping("/delAdminUser")
- 
-  public String deleteAdminUser(Model model, HttpServletRequest request){
- 
-    Usuario usuario = usuarioRepository.findOne(Integer.parseInt(request.getParameter("idUser")));
- 
-    usuario.setStatus(false);
- 
-    
- 
-    usuarioRepository.save(usuario);
- 
-    
- 
-    return "redirect:/userList";
- 
-  }
-    
-     */
+	
 }
