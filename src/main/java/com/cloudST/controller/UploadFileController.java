@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.sql.Timestamp;
-import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -19,17 +17,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.cloudST.model.Archivos;
-import com.cloudST.model.Transaccion;
-import com.cloudST.repository.ArchivoRepository;
-import com.cloudST.repository.TransaccionRespository;
+import com.cloudST.service.ArchivoService;
+import com.cloudST.service.TransaccionService;
 
 @Controller
 public class UploadFileController {
 	
 	@Autowired
-	private ArchivoRepository archivoRepository;
+	private ArchivoService archivoService;
 	@Autowired
-	private TransaccionRespository transaccionRepository;
+	private TransaccionService transaccionService;
 
     //Save the uploaded file to this folder
     private static String UPLOADED_FOLDER = "C://temp//";
@@ -64,53 +61,18 @@ public class UploadFileController {
             model.addAttribute("Msg",
                     "You successfully uploaded '" + file.getOriginalFilename() + "'");       
             
-            Archivos archivo = new Archivos();
 
-            archivo.setIdUsuario((Integer) session.getAttribute("idUser"));
-            archivo.setNombreOri(file.getOriginalFilename());
-            archivo.setNombreSys(path.toString());
-            archivo.setStatus(true);
+           
+            double bytesA = ((CharSequence) file).length();
+			double kilobytes = (bytesA / 1024);
+			double megabytes = (kilobytes / 1024);
             
-            //¿¿??
-            byte[] rno = file.getBytes();
-            int i= (rno[0]<<24)&0xff000000|
-            	       (rno[1]<<16)&0x00ff0000|
-            	       (rno[2]<< 8)&0x0000ff00|
-            	       (rno[3]<< 0)&0x000000ff;
-            double tamanyoMb = i/1024;
+            Archivos archivo = archivoService.create(file.getOriginalFilename(), path.toString(), megabytes, file.getContentType(), (Integer) session.getAttribute("idUserSession"));
             
-            tamanyoMb =tamanyoMb/1024;
-            
-            archivo.setTamanyo(tamanyoMb);  
-            archivo.setString(file.getContentType());
-            
-            archivoRepository.save(archivo);
-            
-            
-            Integer idArchivo = 0;            
-            for (Archivos archivoElem : archivoRepository.findAll()) {
-    			if (archivoElem.getIdUsuario() == session.getAttribute("idUser")){
-    				idArchivo = archivoElem.getIdArchivo();
-    			}
-    		}
-            
-            //Preparacion transaccion
-            Transaccion transaccion = new Transaccion();
-            
-            Date fechaInicio = new java.util.Date(); //fecha actual
-    		Timestamp sqlTimestamp = new Timestamp(fechaInicio.getTime());//en milisegundos
-    		fechaInicio = new Date(sqlTimestamp.getTime());
-    		
-            transaccion.setFecha(fechaInicio);
-            transaccion.setIdArchivo(idArchivo);
-            transaccion.setidUsuario((Integer)session.getAttribute("idUser"));
-            
-            transaccion.setTipo("upload");
-            
-            transaccionRepository.save(transaccion);
-            
-            
-            
+            transaccionService.createUpload(archivo.getIdArchivo(), (Integer)session.getAttribute("idUserSession"));
+          
+            model.addAttribute("Msg",
+                    "You successfully uploaded '" + file.getOriginalFilename() + "'");
         } catch (IOException e) {
             e.printStackTrace();
             }

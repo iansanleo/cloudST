@@ -10,7 +10,7 @@
  
 <jsp:include page="head.jsp"></jsp:include>	
  
-<title>Upload a File</title>
+<title>Upload a File</title> 
 
 </head>
 
@@ -23,7 +23,10 @@
 	</c:if>
  
 	<jsp:include page="menuF.jsp"/>
-	<h2 align="center">Upload your files</h2>
+	
+	
+	<h2 align="center">Upload your files</h2> 
+	  
 	<div class="form">
 
 		<div style="color:red">${Msg}</div>
