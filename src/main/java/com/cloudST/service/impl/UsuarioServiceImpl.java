@@ -1,16 +1,14 @@
 package com.cloudST.service.impl;
 
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Date;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.cloudST.model.Usuario;
 import com.cloudST.repository.UsuarioRepository;
 import com.cloudST.service.UsuarioService;
 import com.cloudST.service.exception.UsuarioException;
+import com.cloudST.utiles.FechaUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
@@ -18,7 +16,6 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
     
-   // private static Fecha fecha;
 
     @Override
     public Usuario authentication(String userName, String password) throws UsuarioException {
@@ -76,8 +73,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         usuario.setStatus(true);
         usuario.setValido(false);
 
-        //usuario.setFechaInicio(fecha.fechaActual());
-        usuario.setFechaInicio(fechaActual());
+        usuario.setFechaInicio(FechaUtils.fechaActual());
         usuarioRepository.save(usuario);
         return usuario;
     
@@ -132,13 +128,5 @@ public class UsuarioServiceImpl implements UsuarioService {
         }
     	return usuario;
     }
-    //
-    public Date fechaActual(){
-		Date fecha = new java.util.Date(); //fecha actual
-		Timestamp sqlTimestamp = new Timestamp(fecha.getTime());//en milisegundos
-		fecha = new Date(sqlTimestamp.getTime());
-		
-		return fecha;
-	}
 	
 }
