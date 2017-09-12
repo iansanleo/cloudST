@@ -63,10 +63,11 @@ public class UploadFileController {
             
 
            
-            double bytesA = ((CharSequence) file).length();
+            double bytesA =  file.getSize();
 			double kilobytes = (bytesA / 1024);
 			double megabytes = (kilobytes / 1024);
-            
+			megabytes= Math.round(megabytes*100)/100;
+
             Archivos archivo = archivoService.create(file.getOriginalFilename(), path.toString(), megabytes, file.getContentType(), (Integer) session.getAttribute("idUserSession"));
             
             transaccionService.createUpload(archivo.getIdArchivo(), (Integer)session.getAttribute("idUserSession"));

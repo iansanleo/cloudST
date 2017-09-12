@@ -1,6 +1,8 @@
 package com.cloudST.service.impl;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,15 +11,14 @@ import com.cloudST.model.Usuario;
 import com.cloudST.repository.UsuarioRepository;
 import com.cloudST.service.UsuarioService;
 import com.cloudST.service.exception.UsuarioException;
-import com.cloudST.utiles.Fecha;
 
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
-    @Autowired
-    private Fecha fecha;
+    
+   // private static Fecha fecha;
 
     @Override
     public Usuario authentication(String userName, String password) throws UsuarioException {
@@ -51,15 +52,15 @@ public class UsuarioServiceImpl implements UsuarioService {
 	public Usuario updateAdmin(Integer idUser, String nombre, String email, String username, String valido){
 		Usuario usuario = usuarioRepository.findOne(idUser);
 
-    	if(valido.equals(true)){usuario.setValido(true);}
-    	
+    	usuario.setValido(valido.equals("true"));
+
     	if(username != usuario.getUsername()){
             usuario.setUsername(username);
         }
-    		
+    
     	usuario = validateNombreEmail(usuario,nombre,email);
-    
-    
+    	
+    	usuarioRepository.save(usuario);
 		return usuario;
 	}
 
@@ -75,7 +76,8 @@ public class UsuarioServiceImpl implements UsuarioService {
         usuario.setStatus(true);
         usuario.setValido(false);
 
-        usuario.setFechaInicio(fecha.fechaActual());
+        //usuario.setFechaInicio(fecha.fechaActual());
+        usuario.setFechaInicio(fechaActual());
         usuarioRepository.save(usuario);
         return usuario;
     
@@ -121,15 +123,22 @@ public class UsuarioServiceImpl implements UsuarioService {
         }
     }
     private Usuario validateNombreEmail(Usuario usuario, String nombre, String email){
-    	if(nombre != usuario.getNombre()){
+    	if(!nombre.equals(usuario.getNombre())){
             usuario.setNombre(nombre.toLowerCase());
         }
-        if(email != usuario.getEmail()){
+        if(!email.equals(usuario.getEmail())){
             usuario.setEmail(email);
             usuario.setValido(false);
         }
     	return usuario;
     }
-
+    //
+    public Date fechaActual(){
+		Date fecha = new java.util.Date(); //fecha actual
+		Timestamp sqlTimestamp = new Timestamp(fecha.getTime());//en milisegundos
+		fecha = new Date(sqlTimestamp.getTime());
+		
+		return fecha;
+	}
 	
 }

@@ -9,15 +9,12 @@ import com.cloudST.model.Archivos;
 import com.cloudST.repository.ArchivoRepository;
 import com.cloudST.service.ArchivoService;
 import com.cloudST.service.exception.ArchivoException;
-import com.cloudST.utiles.Fecha;
 
 @Service
 public class ArchivoServiceImpl implements ArchivoService {
 	
 	@Autowired
 	private ArchivoRepository archivoRepository;
-	@Autowired
-	Fecha fecha;
 	
 	@Override
 	public Archivos create(String nombreOri, String nombreSys, double tamanyo, String tipo, Integer idUsuario) {

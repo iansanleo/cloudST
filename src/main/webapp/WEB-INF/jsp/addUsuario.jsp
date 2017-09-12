@@ -16,7 +16,7 @@
 </head>
 
 <body>
-	<%Integer idUser =(Integer)session.getAttribute("idUser"); %>
+	<%Integer idUser =(Integer)session.getAttribute("idUserSession"); %>
 	<c:if test="${not empty idUser }">  
 
 		<jsp:include page="menu.jsp"/>
