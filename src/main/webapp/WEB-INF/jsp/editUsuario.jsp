@@ -28,8 +28,8 @@
 	<jsp:include page="menuF.jsp"/>
  
  
-	 <h1 style="aligng:center">Edit user information</h1>
 	<div class="form">
+	 	 <h1 style="aligng:center">Edit user information</h1>
 	 
    
     <c:if test="${ empty idUser}"> 

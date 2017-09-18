@@ -3,7 +3,6 @@
 				<ul>
 					<li><a href="/newUser">Add New User</a></li>
 					 <li><a href="/userList">List of Users</a></li> 
-					<li><a href="#">Statistics</a></li>
-					<li><a href="#">bla bla</a></li>
+					<li><a href="/statistics">Statistics</a></li>
 				</ul>
 			</li>

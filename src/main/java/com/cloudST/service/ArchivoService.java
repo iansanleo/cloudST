@@ -10,5 +10,10 @@ public interface ArchivoService {
 	Archivos create(String nombreOri, String nombreSys, double tamanyo, String tipo, Integer idUsuario);
 	
 	ArrayList<Archivos> allUserFiles(Integer idUsuario);
+	
 	Archivos delete(Integer idUser) throws ArchivoException;
+
+	ArrayList<Archivos> allFiles();
+
+	ArrayList<Archivos> archivosLiberar();
 }

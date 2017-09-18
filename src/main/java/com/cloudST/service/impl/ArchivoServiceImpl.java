@@ -38,5 +38,20 @@ public class ArchivoServiceImpl implements ArchivoService {
 		archivoRepository.save(archivo);
 		return archivo;
 	}
+	
+	@Override
+	public ArrayList<Archivos> allFiles(){
+		return (ArrayList<Archivos>) archivoRepository.findAll();
+	}
 
+	@Override
+	public ArrayList<Archivos> archivosLiberar(){
+		ArrayList<Archivos> listArchivos = allFiles();
+		for(int i=0;i<listArchivos.size();i++){
+			if(!listArchivos.get(i).getStatus()){
+				listArchivos.remove(i);
+			}
+		}
+		return listArchivos;
+	}
 }
