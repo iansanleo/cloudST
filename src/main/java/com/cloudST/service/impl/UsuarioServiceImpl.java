@@ -128,5 +128,20 @@ public class UsuarioServiceImpl implements UsuarioService {
         }
     	return usuario;
     }
+
+	@Override
+	public Usuario findUserByEmail(String email) {
+		return usuarioRepository.findByEmail(email);
+	}
+
+	@Override
+	public Usuario findUserByResetToken(String resetToken) {
+		return usuarioRepository.findByResetToken(resetToken);
+	}
+
+	@Override
+	public Usuario save(Usuario usuario) {
+		return usuarioRepository.save(usuario);
+	}
 	
 }

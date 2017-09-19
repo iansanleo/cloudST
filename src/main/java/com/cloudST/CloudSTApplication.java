@@ -1,11 +1,16 @@
 package com.cloudST;
 
+import java.util.Locale;
+
 import org.apache.coyote.http11.AbstractHttp11Protocol;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.embedded.tomcat.TomcatConnectorCustomizer;
 import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 @SpringBootApplication
 public class CloudSTApplication {
@@ -15,8 +20,8 @@ public class CloudSTApplication {
     public static void main(String[] args){
         SpringApplication.run(CloudSTApplication.class, args);
     }
-  //Tomcat large file upload connection reset
-    //http://www.mkyong.com/spring/spring-file-upload-and-connection-reset-issue/
+    
+    //Tomcat large file upload connection reset
     @Bean
     public TomcatEmbeddedServletContainerFactory tomcatEmbedded() {
 
@@ -30,6 +35,5 @@ public class CloudSTApplication {
         });
 
         return tomcat;
-
     }
 }

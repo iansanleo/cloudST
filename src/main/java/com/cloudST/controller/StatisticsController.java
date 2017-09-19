@@ -16,13 +16,13 @@ import com.cloudST.service.UsuarioService;
 public class StatisticsController {
 	
 	@Autowired
-	ArchivoService archivoService;
+	private ArchivoService archivoService;
 	
 	@Autowired
-	RaspberryService raspberryService;
+	private RaspberryService raspberryService;
 	
 	@Autowired
-	UsuarioService usuarioService;
+	private UsuarioService usuarioService;
 	
 	@GetMapping("/statistics")
 	public String mostrarStats(Model model){ 

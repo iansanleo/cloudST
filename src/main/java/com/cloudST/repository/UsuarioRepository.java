@@ -11,6 +11,7 @@ import com.cloudST.model.Usuario;
 public interface UsuarioRepository extends CrudRepository<Usuario, Integer> {
 
 	public Usuario findByEmail(String email);
+	public Usuario findByResetToken(String resetToken);
 	
 	@Query("SELECT U FROM Usuario U WHERE LOWER(U.username)=:username")
 	public Usuario findByUser(@Param("username")String username);

@@ -31,7 +31,7 @@
      	 	
      	 	<a href="/newUser">Sing up </a><br>
      	 	
-     	 	<a href="#">I forgot my password </a>
+     	 	<a href="/forgot">I forgot my password </a>
 		</div>
 	</div>
 </body>

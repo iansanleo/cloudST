@@ -33,21 +33,25 @@ public class Usuario implements Serializable {
 	@NotNull
 	private String email;
 	@NotNull
-	private Date fechaInicio;
+	private Date creado;
 	@NotNull
 	private boolean status;
+	@NotNull
 	private boolean valido;
+	private Date lastLogin;
+	private String resetToken;
+	
 
 	//protected Usuario(){}
 	public Usuario(){}
 
 	public Usuario(String username, String password, String nombre, String email,
-				   Date fechaInicio, boolean status){
+				   Date creado, boolean status){
 		this.username = username;
 		this.password = password;
 		this.nombre = nombre;
 		this.email = email;
-		this.fechaInicio = fechaInicio;
+		this.creado = creado;
 		this.status = status;
 		this.valido = false;
 	}
@@ -58,9 +62,11 @@ public class Usuario implements Serializable {
 	public String getPassword(){return this.password;}
 	public String getNombre(){return this.nombre;}
 	public String getEmail(){return this.email;}
-	public Date getFechaInicio(){return this.fechaInicio;}
+	public Date getFechaInicio(){return this.creado;}
 	public boolean getStatus(){return this.status;}
 	public boolean getValido(){return this.valido;}
+	public Date getLastLogin(){return this.lastLogin;};
+	public String getResetToken(){return this.resetToken;}
 
 	//Setters
 	public void setIdUsuario(Integer idUsuario){this.idUsuario = idUsuario;}
@@ -68,12 +74,10 @@ public class Usuario implements Serializable {
 	public void setPassword(String password){this.password = password;}
 	public void setNombre(String nombre){this.nombre = nombre;}
 	public void setEmail(String email){this.email = email;}
-	public void setFechaInicio(Date fechaInicio){this.fechaInicio = fechaInicio;}
+	public void setFechaInicio(Date creado){this.creado = creado;}
 	public void setStatus(boolean status){this.status = status;}
 	public void setValido(boolean valido){this.valido = valido;}
-
-
-
-
+	public void setLastLogin(Date lastLogin){this.lastLogin = lastLogin;}
+	public void setResetToken(String resetToken){this.resetToken = resetToken;}
 
 }

@@ -19,7 +19,13 @@ public interface UsuarioService {
     
     Usuario delete(Integer idUsuario);
     
+    Usuario save(Usuario usuario);
+    
     ArrayList<Usuario> listaUsuario();
+    
+    Usuario findUserByEmail(String email);
+   
+    Usuario findUserByResetToken(String resetToken);
     
     
 }

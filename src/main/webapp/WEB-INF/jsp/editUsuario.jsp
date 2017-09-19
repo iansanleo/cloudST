@@ -20,7 +20,6 @@
 	<jsp:include page="menu.jsp"/>
 	
 	<%Integer permisos = (Integer)session.getAttribute("permisos");%>
-	  <%Integer idSession = (Integer)session.getAttribute("idUserSession"); %> 
 	<c:if test="${permisos == 3}">
 		<jsp:include page="menuA.jsp"/>
 	</c:if>
