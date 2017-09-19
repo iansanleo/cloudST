@@ -21,6 +21,8 @@ public class UsuarioServiceImpl implements UsuarioService {
     public Usuario authentication(String userName, String password) throws UsuarioException {
         Usuario usuario = usuarioRepository.findByUser(userName);
         validate(password, usuario);
+        usuario.setLastLogin(FechaUtils.fechaActual());
+        usuarioRepository.save(usuario);
         return usuario;
     }
 
@@ -118,6 +120,7 @@ public class UsuarioServiceImpl implements UsuarioService {
             throw new UsuarioException("Password or invalid entered Username");
         }
     }
+    
     private Usuario validateNombreEmail(Usuario usuario, String nombre, String email){
     	if(!nombre.equals(usuario.getNombre())){
             usuario.setNombre(nombre.toLowerCase());
