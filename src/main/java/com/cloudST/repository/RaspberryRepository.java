@@ -5,10 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import com.cloudST.model.Raspberry;
 
-
 @Repository
-public interface RaspberryRepository extends CrudRepository<Raspberry, Integer> {
-
-	
+public interface RaspberryRepository extends CrudRepository<Raspberry, Integer> {	
 	
 }

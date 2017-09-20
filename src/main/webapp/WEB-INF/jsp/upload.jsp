@@ -17,8 +17,8 @@
 <body>
 	<jsp:include page="menu.jsp"/>
 	
-	<%Integer permisos = (Integer)session.getAttribute("permisos");%>
-	<c:if test="${permisos == 3}">
+	<%Integer permissions = (Integer)session.getAttribute("permissions");%>
+	<c:if test="${permissions == 3}">
 		<jsp:include page="menuA.jsp"/>
 	</c:if>
  

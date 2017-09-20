@@ -8,14 +8,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class CommonController {
 
 	@GetMapping("/")
-	public String getIndex (Model model){
-		
+	public String getIndex(Model model){
 		return "index";
 	}
 	
 	@GetMapping("/welcome")
-	public String getInicio(Model model){
-		
+	public String getWelcome(Model model){
 		return "welcome";
 	}
 }

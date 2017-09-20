@@ -17,8 +17,8 @@
 <body>
 	<jsp:include page="menu.jsp"/>
 	
-	<%Integer permisos = (Integer)session.getAttribute("permisos");%>
-	<c:if test="${permisos == 3}">
+	<%Integer permissions = (Integer)session.getAttribute("permissions");%>
+	<c:if test="${permissions == 3}">
 		<jsp:include page="menuA.jsp"/>
 	</c:if>
  
@@ -34,18 +34,21 @@
 			<TH>Date </TH>
 			<TH>Email Validated</TH>
 			<TH>Status</TH>
+			<TH>Last login</TH>
+			<TH>Status</TH>
 			</TR>
-			<c:forEach items="${usuarios}" var="usuario">
+			<c:forEach items="${users}" var="user">
 				<tr>
-					<td> ${usuario.username} </td>
-					<td> ${usuario.nombre} </td>
-					<td> ${usuario.email}  </td>
-					<td> ${usuario.fechaInicio}</td>
-					<td> ${usuario.valido}  </td>
-					<td> ${usuario.status}</td>
+					<td> ${user.username} </td>
+					<td> ${user.name} </td>
+					<td> ${user.email}  </td>
+					<td> ${user.dateCreated}</td>
+					<td> ${user.valid}  </td>
+					<td> ${user.status}</td>
+					<td> ${user.lastLogin} </td>
 					<td>
-					<a href = "/editUser?idUser=${usuario.idUsuario}"><img src="resources/img/iconEditmaterial.png"/></a>
-					<a href = "/delAdminUser?idUser=${usuario.idUsuario}"><img src="resources/img/iconDeletematerial.png"/></a></td>
+					<a href = "/editUser?idUser=${user.idUser}"><img src="resources/img/iconEditmaterial.png"/></a>
+					<a href = "/delAdminUser?idUser=${user.idUser}"><img src="resources/img/iconDeletematerial.png"/></a></td>
 				
  				</tr>
  			</c:forEach>

@@ -10,27 +10,27 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.cloudST.model.Archivos;
-import com.cloudST.service.ArchivoService;
-import com.cloudST.service.TransaccionService;
-import com.cloudST.service.exception.ArchivoException;
+import com.cloudST.model.File;
+import com.cloudST.service.FileService;
+import com.cloudST.service.TransactionService;
+import com.cloudST.service.exception.FileException;
 
 @Controller
-public class ArchivoController {
+public class FileController {
 	
 	@Autowired
-	private ArchivoService archivoService;
+	private FileService fileService;
 	@Autowired
-	private TransaccionService transaccionService;
+	private TransactionService transactionService;
 	
 	@GetMapping("/resources")
 	public String listResources(Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 
-		ArrayList<Archivos> listArchivos = archivoService.allUserFiles((Integer)session.getAttribute("idUserSession"));
+		ArrayList<File> listFiles = fileService.allUserFiles((Integer)session.getAttribute("idUserSession"));
 
-		model.addAttribute("archivos", listArchivos);
-		return "archivo";
+		model.addAttribute("files", listFiles);
+		return "file";
 	}
 	
 	@GetMapping("/deleteResource")
@@ -38,13 +38,13 @@ public class ArchivoController {
 		HttpSession session = request.getSession();
 		
 		try{
-			archivoService.delete(Integer.parseInt(request.getParameter("idArchivo")));
-			transaccionService.createDelete(Integer.parseInt(request.getParameter("idArchivo")), (Integer)session.getAttribute("idUserSession"));
+			fileService.delete(Integer.parseInt(request.getParameter("idFile")));
+			transactionService.createDelete(Integer.parseInt(request.getParameter("idFile")), (Integer)session.getAttribute("idUserSession"));
 			return "redirect:/resources";
-		} catch (ArchivoException e) {
+		} catch (FileException e) {
 			model.addAttribute(e.getMessage());
 			return "redirect:/resources";
-			}
+		}
 	}
 
 }

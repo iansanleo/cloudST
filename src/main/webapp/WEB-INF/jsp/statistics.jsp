@@ -27,9 +27,8 @@
 	
 	<jsp:include page="menu.jsp"/>
 	
-	<%Integer permisos = (Integer)session.getAttribute("permisos");%>
-	  <%Integer idSession = (Integer)session.getAttribute("idUserSession"); %> 
-	<c:if test="${permisos == 3}">
+	<%Integer permissions = (Integer)session.getAttribute("permissions");%>
+	<c:if test="${permissions == 3}">
 		<jsp:include page="menuA.jsp"/>
 	</c:if>
  
@@ -53,7 +52,7 @@
 		${mediaArchivo}
 		<br/>
 		//espacio a liberar pendiente
-		${liberar}
+		${liberate}
 	
 	<a href="#">List of devices</a>
 <section class="container">

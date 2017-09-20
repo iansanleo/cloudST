@@ -19,8 +19,8 @@
 	
 	<jsp:include page="menu.jsp"/>
 	
-	<%Integer permisos = (Integer)session.getAttribute("permisos");%>
-	<c:if test="${permisos == 3}">
+	<%Integer permissions = (Integer)session.getAttribute("permissions");%>
+	<c:if test="${permissions == 3}">
 		<jsp:include page="menuA.jsp"/>
 	</c:if>
  
@@ -46,37 +46,37 @@
 			<table>  	    
      	    <tr>
      	    	<td><b>Complete Name:</b></td>
-     	    	<td> <input type="text" name="name" value="${usuario.nombre}"/></td>
+     	    	<td> <input type="text" name="name" value="${user.name}"/></td>
      	    </tr>
      	    <tr>
      	    	<td><b>Email:</b></td>
-     	    	<td><input type="text" name="email" value="${usuario.email}"/></td>
+     	    	<td><input type="text" name="email" value="${user.email}"/></td>
      	    </tr>
      	    
      	     <c:if test="${idUser != null}"> 
      	     <tr>
      	        <td><b>Username</b></td> 
-             	<td><input type="text" name="username" value="${usuario.username}"/></td> 
+             	<td><input type="text" name="username" value="${user.username}"/></td> 
      	    </tr>
      	    <tr>
      	        <td><b>Email Valid</b></td> 
-                <td><input type="text" name="valido" value="${usuario.valido}"/></td> 
+                <td><input type="text" name="valid" value="${user.valid}"/></td> 
      	    </tr>
      	    </c:if> 
             
            </table> <br><br> 
            <c:if test="${idUser == null}"> 
                For a new Password:<br> 
-             <table> 
-             <tr> 
-               <td><b>Password:</b></td> 
-               <td><input type="password" name="password"/></td> 
-               <td></td> 
+             	<table> 
+             	<tr> 
+               		<td><b>Password:</b></td> 
+               		<td><input type="password" name="password"/></td> 
+               		<td></td> 
                </tr> 
-             <tr> 
-               <td><b>Repeat Password:</b></td>  
-               <td><input type="password" name="password2"/></td> 
-               <td></td> 
+               <tr> 
+               		<td><b>Repeat Password:</b></td>  
+               		<td><input type="password" name="password2"/></td> 
+               		<td></td> 
               </tr> 
               </table> 
            </c:if> 

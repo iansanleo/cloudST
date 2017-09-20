@@ -20,25 +20,23 @@ public class Raspberry {
 	private String mac;
 	//MB
 	@NotNull
-	private double tamanyoTotal;
+	private double totalSize;
 	//MB
 	@NotNull
-	private double tamanyoUso;
-	private Date fechaConexion;
+	private double useSize;
+	private Date conexionDate;
 	@NotNull
 	private boolean status;
 
-	//protected Raspberry(){}
 	public Raspberry(){}
-	
-	public Raspberry(String ip, String mac, double tamanyoTotal, double tamanyoUso,
-			Date fechaConexion, boolean status){
+	public Raspberry(String ip, String mac, double totalSize, double useSize,
+			Date conexionDate, boolean status){
 		
 		this.ip = ip;
 		this.mac = mac;
-		this.tamanyoTotal = tamanyoTotal;
-		this.tamanyoUso = tamanyoUso;
-		this.fechaConexion = fechaConexion;
+		this.totalSize = totalSize;
+		this.useSize = useSize;
+		this.conexionDate = conexionDate;
 		this.status = status;
 		
 	}
@@ -47,17 +45,17 @@ public class Raspberry {
 	public Integer getIdRaspberry(){return this.idRaspberry;}
 	public String getIp(){return this.ip;}
 	public String getMac(){return this.mac;}
-	public double getTamanyoTotal(){return this.tamanyoTotal;}
-	public double getTamanyoUso(){return this.tamanyoUso;}
-	public Date getFechaConexion(){return this.fechaConexion;}
+	public double getTotalSize(){return this.totalSize;}
+	public double getUseSize(){return this.useSize;}
+	public Date getConexionDate(){return this.conexionDate;}
 	public boolean getStatus(){return this.status;}
 
 	//Setters
 	public void setIdRaspberry(Integer idRaspberry){this.idRaspberry = idRaspberry;}
 	public void setIp(String ip){this.ip = ip;}
 	public void setMac(String mac){this.mac = mac;}
-	public void setTamanyoTotal(double tamanyoTotal){this.tamanyoTotal = tamanyoTotal;}
-	public void setTamanyoUso (double tamanyoUso){this.tamanyoUso = tamanyoUso;}
-	public void setFechaConexion(Date fechaConexion){this.fechaConexion = fechaConexion;}
+	public void setTotalSize(double totalSize){this.totalSize = totalSize;}
+	public void setUseSize (double useSize){this.useSize = useSize;}
+	public void setConexionDate(Date conexionDate){this.conexionDate = conexionDate;}
 	public void sertStatus (boolean status){this.status = status;}
 }

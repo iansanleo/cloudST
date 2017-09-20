@@ -18,8 +18,8 @@
 <body>
 	<jsp:include page="menu.jsp"/>
 	
-	<%Integer permisos = (Integer)session.getAttribute("permisos");%>
-	<c:if test="${permisos == 3}">
+	<%Integer permissions = (Integer)session.getAttribute("permissions");%>
+	<c:if test="${permissions == 3}">
 		<jsp:include page="menuA.jsp"/>
 	</c:if>
  
@@ -30,7 +30,7 @@
 		<table style="border: 1px solid #000;text-align:center ;border: 1px solid #000;border-collapse: separate;
   border-spacing: 10px;">
 			
-				<c:if test="${empty archivos }">
+				<c:if test="${empty files }">
 					<div style="color:blue">No resources stored</div>
 				</c:if>
 				
@@ -41,13 +41,13 @@
 			<TH>Size</TH>
 			<TH>Type</TH>
 			<TR>
-    			<c:forEach items="${archivos}" var="archivo">
+    			<c:forEach items="${files}" var="file">
           			  <tr>
-					<td> <a href ="#" >${archivo.nombreOri}</a> </td>
-					<td> <c:out value="${archivo.tamanyo}"/> MB</td>
-					<td> <c:out value="${archivo.tipo}" /></td>
+					<td> <a href ="#" >${file.oriName}</a> </td>
+					<td> <c:out value="${file.size}"/> MB</td>
+					<td> <c:out value="${file.type}" /></td>
 					<td>
-					<a href = "/deleteResource?idArchivo=${archivo.idArchivo}"><img src="resources/img/iconDeletematerial.png"/></a></td>
+					<a href = "/deleteResource?idFile=${file.idFile}"><img src="resources/img/iconDeletematerial.png"/></a></td>
    			   </c:forEach>
 
  			</tr>

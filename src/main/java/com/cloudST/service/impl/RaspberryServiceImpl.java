@@ -16,25 +16,24 @@ public class RaspberryServiceImpl implements RaspberryService {
 	RaspberryRepository raspberryRepository;
 	
 	@Override
-	public double espacioTotalRasps() {
+	public double totalSizeRasps() {
 		ArrayList<Raspberry> listRaspberry = (ArrayList<Raspberry>) raspberryRepository.findAll();
-		double tamanyoTotal=1;
+		double totalSize=1;
 		
 		for(int i=0; i<listRaspberry.size();i++){
-			tamanyoTotal=+listRaspberry.get(i).getTamanyoTotal();
+			totalSize=+listRaspberry.get(i).getTotalSize();
 			
 		}
-		return tamanyoTotal;
+		return totalSize;
 	}
 
 	@Override
-	public double espacioTotalUso() {
+	public double totalSizeUsed() {
 		ArrayList<Raspberry> listRaspberry = (ArrayList<Raspberry>) raspberryRepository.findAll();
-		double tamanyoTotal=1;
+		double totalSize=1;
 		for(int i=0; i<listRaspberry.size();i++){
-			tamanyoTotal=+listRaspberry.get(i).getTamanyoUso();
-			
+			totalSize=+listRaspberry.get(i).getUseSize();
 		}
-		return tamanyoTotal;
+		return totalSize;
 	}
 }

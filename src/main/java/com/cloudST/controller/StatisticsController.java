@@ -7,22 +7,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.cloudST.model.Archivos;
-import com.cloudST.service.ArchivoService;
+import com.cloudST.model.File;
+import com.cloudST.service.FileService;
 import com.cloudST.service.RaspberryService;
-import com.cloudST.service.UsuarioService;
+import com.cloudST.service.UserService;
 
 @Controller
 public class StatisticsController {
 	
 	@Autowired
-	private ArchivoService archivoService;
+	private FileService fileService;
 	
 	@Autowired
 	private RaspberryService raspberryService;
 	
 	@Autowired
-	private UsuarioService usuarioService;
+	private UserService userService;
 	
 	@GetMapping("/statistics")
 	public String mostrarStats(Model model){ 
@@ -34,69 +34,63 @@ public class StatisticsController {
 		model.addAttribute("libre",espacioLibre());
 		
 		//numero total de archivos
-		model.addAttribute("numArch",numArchivos());
+		model.addAttribute("numArch",numFiles());
 		
 		//media de archivos por usuario
 		model.addAttribute("mediaUsuario",mediaUsuario());
 		
 		//media de Mb por archivo
-		model.addAttribute("mediaArchivo",mbArchivo());
+		model.addAttribute("mediaArchivo",mbFile());
 		
 		//espacio a liberar pendiente
-		model.addAttribute("liberar", pendienteLiberar());
+		model.addAttribute("liberate", forLiberate());
 		
 		
-		return "estadisticas";
+		return "statistics";
 	}
 	
 	private double mediaUsuario(){
-		
-		return numArchivos()/usuarioService.listaUsuario().size();
+		return numFiles()/userService.listUser().size();
 	}
 	
-	private double pendienteLiberar(){
-		double liberar= 0.0;
+	private double forLiberate(){
+		double liberate= 0.0;
 		
-		ArrayList<Archivos> listArchivos = archivoService.archivosLiberar();
-		for(int i = 0;i<listArchivos.size();i++){
-			liberar =+listArchivos.get(i).getTamanyo();
+		ArrayList<File> listFile = fileService.filesLiberate();
+		for(int i = 0;i<listFile.size();i++){
+			liberate =+listFile.get(i).getSize();
 		}
 
-		return liberar;
+		return liberate;
 	}
 	
 	private double espacioLibre(){
 		
-		return raspberryService.espacioTotalRasps()-raspberryService.espacioTotalUso();
+		return raspberryService.totalSizeRasps()-raspberryService.totalSizeUsed();
 	}
 	
 	private double porcUsado() {
 
-		return (raspberryService.espacioTotalUso()/raspberryService.espacioTotalRasps())*100;
+		return (raspberryService.totalSizeUsed()/raspberryService.totalSizeRasps())*100;
 	}
 
-	private double mbArchivo(){
-		double tamanyoTotalArchivos=totalEspacioArchivos()/numArchivos();
-		
-		return tamanyoTotalArchivos;
-		
+	private double mbFile(){
+		return totalSizeFiles()/numFiles();
 	}
 	
-	private double totalEspacioArchivos(){
-		double tamanyoTotal=0.0;
-		ArrayList<Archivos> listArchivos = archivoService.allFiles();
+	private double totalSizeFiles(){
+		double totalSize=0.0;
+		ArrayList<File> listFile =fileService.allFiles();
 		
-		for(int i=0;i<listArchivos.size();i++){
-			if(listArchivos.get(i).getStatus()){
-				tamanyoTotal=+listArchivos.get(i).getTamanyo();
+		for(int i=0;i<listFile.size();i++){
+			if(listFile.get(i).getStatus()){
+				totalSize=+listFile.get(i).getSize();
 				}
 		}
-		return tamanyoTotal;
+		return totalSize;
 	}
 	
-	private Integer numArchivos(){
-		ArrayList<Archivos> listArchivos = archivoService.allFiles();
-		Integer numArchivos = listArchivos.size();
-		return  numArchivos;
+	private Integer numFiles(){
+		return  fileService.allFiles().size();
 	}
 }

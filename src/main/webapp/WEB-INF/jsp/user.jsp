@@ -17,8 +17,8 @@
 <body>
 	<jsp:include page="menu.jsp"/>
 	
-	<%Integer permisos = (Integer)session.getAttribute("permisos");%>
-	<c:if test="${permisos == 3}">
+	<%Integer permissions = (Integer)session.getAttribute("permissions");%>
+	<c:if test="${permissions == 3}">
 		<jsp:include page="menuA.jsp"/>
 	</c:if>
  
@@ -36,14 +36,16 @@
 			<TH>Email</TH>
 			<TH>Date </TH>
 			<TH>Email Validated</TH>
+			<TH>Last login </TH>
 			<TR>
 					<tr>
-					<td> ${usuario.username} </td>
+					<td> ${user.username} </td>
 					<td> ************* </td>
-					<td> ${usuario.nombre} </td>
-					<td> ${usuario.email}  </td>
-					<td> ${usuario.fechaInicio}</td>
-					<td> ${usuario.valido}  </td>
+					<td> ${user.name} </td>
+					<td> ${user.email}  </td>
+					<td> ${user.dateCreated}</td>
+					<td> ${user.valid}  </td>
+					<td> ${user.lastLogin}  </td>
 					<td>
 					<a href = "/editUser"><img src="resources/img/iconEditmaterial.png"/></a>
 					<a href = "#"><img src="resources/img/iconDeletematerial.png"/></a></td>

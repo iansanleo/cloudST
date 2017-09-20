@@ -16,29 +16,26 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.cloudST.model.Archivos;
-import com.cloudST.service.ArchivoService;
-import com.cloudST.service.TransaccionService;
+import com.cloudST.model.File;
+import com.cloudST.service.FileService;
+import com.cloudST.service.TransactionService;
 
 @Controller
 public class UploadFileController {
 	
 	@Autowired
-	private ArchivoService archivoService;
+	private FileService fileService;
 	@Autowired
-	private TransaccionService transaccionService;
+	private TransactionService transactionService;
 
-    //Save the uploaded file to this folder
     private static String UPLOADED_FOLDER = "C://temp//";
     /*
-       If you are using windows here is an example for you:
+       windows 
+       new File("d:/yourApplicationName/" + name + "-uploaded")
 
-    	new File("d:/yourApplicationName/" + name + "-uploaded")
-
-    	If you are using linux here is an example for you:
-
+        linux
     	new File("/home/yourApplicationName/" + name + "-uploaded")
-*/
+     */
 
     @PostMapping("/uploadFile")
     public String singleFileUpload(Model model, @RequestParam("file") MultipartFile file,
@@ -53,9 +50,8 @@ public class UploadFileController {
 
         try {
 
-            // Get the file and save it somewhere
             byte[] bytes = file.getBytes();
-            Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
+            Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename()+"-uploaded-"+ session.getAttribute("idUserSession"));
             Files.write(path, bytes);
 
             model.addAttribute("Msg",
@@ -68,15 +64,14 @@ public class UploadFileController {
 			double megabytes = (kilobytes / 1024);
 			megabytes= Math.round(megabytes*100)/100;
 
-            Archivos archivo = archivoService.create(file.getOriginalFilename(), path.toString(), megabytes, file.getContentType(), (Integer) session.getAttribute("idUserSession"));
+            File fileCreate = fileService.create(file.getOriginalFilename(), path.toString(), megabytes, file.getContentType(), (Integer) session.getAttribute("idUserSession"));
             
-            transaccionService.createUpload(archivo.getIdArchivo(), (Integer)session.getAttribute("idUserSession"));
+            transactionService.createUpload(fileCreate.getIdFile(), (Integer)session.getAttribute("idUserSession"));
           
-            model.addAttribute("Msg",
-                    "You successfully uploaded '" + file.getOriginalFilename() + "'");
+            model.addAttribute("Msg","You successfully uploaded '" + file.getOriginalFilename() + "'");
         } catch (IOException e) {
             e.printStackTrace();
-            }
+        }
 
         return "upload";
     }
