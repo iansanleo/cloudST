@@ -19,7 +19,7 @@
 	
 	<div class="form">
 		<div style="color:red">${Msg}</div>
-		<form action="reset" method="post">
+		<form action="reset?token=${resetToken}" method="post">
 			 Password:  <input type="text" name="password"/><br/>
 			 Confirm:  <input type="text" name="password2"/><br/>
 			 <input type="submit" value="Reset!"/><br/>

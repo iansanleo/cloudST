@@ -49,13 +49,13 @@ public class PasswordController {
 			passwordResetEmail.setTo(usuario.getEmail());
 			passwordResetEmail.setSubject("Password Reset Request");
 			passwordResetEmail.setText("To reset your password, click the link below:\n" + appUrl
-					+ "/reset?token=" + usuario.getResetToken());
+					+ ":8080/reset?token=" + usuario.getResetToken());
 			
 			emailService.sendEmail(passwordResetEmail);
 
 			model.addAttribute("Msg", "A password reset link has been sent to " + request.getParameter("userEmail"));
 		}
-		return "forgotPassword";
+		return "redirect:/";
 	}
 
 	@GetMapping(value = "/reset")
@@ -75,8 +75,10 @@ public class PasswordController {
 	@PostMapping(value = "/reset")
 	public String setNewPassword(Model model, HttpServletRequest request) {
 
-		User user= userService.findUserByResetToken(request.getParameter("token"));
+		System.out.println(request.getParameter("token"));
+		User user = userService.findUserByResetToken(request.getParameter("token"));
 
+		System.out.println("pero que mierda!");
 		if (!user.getName().isEmpty()) { 
              
 			if(!request.getParameter("password").equals(request.getParameter("password2"))) {
@@ -94,7 +96,7 @@ public class PasswordController {
 			
 		} else {
 			model.addAttribute("Msg", "Oops!  This is an invalid password reset link.");
-			return "";	
+			return "redirect:/";	
 		}
    }
    
