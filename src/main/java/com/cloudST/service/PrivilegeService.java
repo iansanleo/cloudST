@@ -9,4 +9,6 @@ public interface PrivilegeService {
 	
 	Privilege create(Integer type, Integer idUser);
 
+	Privilege update(Integer idUser, Integer type);
+
 }

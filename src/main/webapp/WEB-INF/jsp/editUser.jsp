@@ -20,6 +20,7 @@
 	<jsp:include page="menu.jsp"/>
 	
 	<%Integer permissions = (Integer)session.getAttribute("permissions");%>
+	<%Integer typeUser = (Integer)session.getAttribute("typeUser");%>
 	<c:if test="${permissions == 3}">
 		<jsp:include page="menuA.jsp"/>
 	</c:if>
@@ -61,6 +62,17 @@
      	    <tr>
      	        <td><b>Email Valid</b></td> 
                 <td><input type="text" name="valid" value="${user.valid}"/></td> 
+     	    </tr>
+     	    <tr>
+    			<td><b>Type User</b></td>
+    			<td> 
+    			<select name="type">
+    				<option value="0" <c:if test="${typeUser==0}"> selected </c:if>>Free User</option>
+    				<option value="1" <c:if test="${typeUser==1}"> selected </c:if>>Payment User</option>
+    				<option value="3" <c:if test="${typeUser==3}"> selected </c:if>>Administrator</option>
+   
+  				</select>
+  				</td>
      	    </tr>
      	    </c:if> 
             

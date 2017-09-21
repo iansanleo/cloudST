@@ -56,12 +56,12 @@ public class UserController {
 	
 	@GetMapping("/user")
 	public String userProfile(Model model, HttpServletRequest request){
-		User user = new User();
 		
 		HttpSession session = request.getSession();
 		Integer idUser = (Integer) session.getAttribute("idUserSession");
-		user = userService.findById(idUser);
-		model.addAttribute("user",user);
+		
+		model.addAttribute("user",userService.findById(idUser));
+		
 		return "user";
 	}
 	
@@ -76,8 +76,9 @@ public class UserController {
 			idUser = Integer.parseInt(request.getParameter("idUser"));
 			model.addAttribute("idUser",idUser);
 		}
-		User user = userService.findById(idUser);
-		model.addAttribute("user", user);
+		
+		model.addAttribute("user", userService.findById(idUser));
+		model.addAttribute("typeUser",privilegeService.findByIdUser(idUser).getType());
 		return "editUser";
 	}
 	
@@ -87,17 +88,18 @@ public class UserController {
 		
 		String name = request.getParameter("name").toString();
 		String email = request.getParameter("email").toString();
+		Integer type = Integer.parseInt(request.getParameter("type"));
 
 		try {
 			if(request.getParameter("idUser") == null){
 				Integer idUser = (Integer) session.getAttribute("idUserSession"); 
 				userService.update(idUser, name, email, request.getParameter("password").toString(),
 						request.getParameter("password2").toString());
-				
 			}else{
 				Integer idUser = Integer.parseInt(request.getParameter("idUser"));
 				userService.updateAdmin(idUser,name, email, request.getParameter("username").toString(),
-						request.getParameter("valid").toString());		
+						request.getParameter("valid").toString());	
+				privilegeService.update(idUser,type);
 			}
 		} catch (UserException e) {
 			model.addAttribute("Msg",e.getMessage());
@@ -154,7 +156,6 @@ public class UserController {
 	  public String deleteAdminUser(Model model, HttpServletRequest request){
 		  
 		  userService.delete(Integer.parseInt(request.getParameter("idUser")));
-		  		
 		  return "redirect:/userList";
 	  }
 }
