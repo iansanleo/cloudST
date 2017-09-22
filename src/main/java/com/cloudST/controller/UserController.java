@@ -4,12 +4,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.cloudST.model.User;
+import com.cloudST.service.EmailService;
 import com.cloudST.service.PrivilegeService;
 import com.cloudST.service.UserService;
 import com.cloudST.service.exception.UserException;
@@ -23,6 +25,9 @@ public class UserController {
 	
 	@Autowired
 	private PrivilegeService privilegeService;
+	
+	@Autowired
+	private EmailService emailService;
 
 	@PostMapping("/login")
 	public String login(Model model, HttpServletRequest request){
@@ -121,7 +126,6 @@ public class UserController {
 	
 	@PostMapping("/userAdd")
 	public String userAdd(Model model, HttpServletRequest request){
-		HttpSession session = request.getSession();
 		
 		String password = request.getParameter("password");
 		String password2 = request.getParameter("password2");
@@ -130,14 +134,13 @@ public class UserController {
 		String name = request.getParameter("name").toLowerCase();
 
 		try {
-			User usuario = userService.create(username, name, email, password, password2);
-		    privilegeService.create(0, usuario.getIdUser());
+			
+			User user = userService.create(username, name, email, password, password2);
+		    privilegeService.create(0, user.getIdUser());
 
 			model.addAttribute("Msg", "User successfully added");
 
-			if(session.getAttribute("idUserSession")==null){return "index";}
-
-			return "welcome";
+			return "redirect:/valid?idUser="+user.getIdUser();
 		} catch (UserException e) {
 			model.addAttribute("Msg", e.getMessage());
 			return "addUser";
@@ -157,5 +160,33 @@ public class UserController {
 		  
 		  userService.delete(Integer.parseInt(request.getParameter("idUser")));
 		  return "redirect:/userList";
+	  }
+	  
+	  @GetMapping("/validate")
+	  public String validate(Model model, HttpServletRequest request){
+		  Integer idUser =(Integer.parseInt(request.getParameter("valid")));
+		  
+		  User user = userService.findById(idUser);
+		  
+		  user.setValid(true);
+		  userService.save(user);
+		  
+		  return "redirect:/";
+	  }
+	  
+	  @GetMapping("/valid")
+	  public String validateMail(Model model, HttpServletRequest request){
+		User user  = userService.findById(Integer.parseInt(request.getParameter("idUser")));
+		String appUrl = request.getScheme() + "://" + request.getServerName();
+		
+		SimpleMailMessage validEmail = new SimpleMailMessage();
+		validEmail.setFrom("support@cloudST.com");
+		validEmail.setTo(user.getEmail());
+		validEmail.setSubject("Validate Mail");
+		validEmail.setText("To validate your mail, click the link below:\n" + appUrl
+				+ ":8080/validate?valid=" + user.getIdUser());
+		
+		emailService.sendEmail(validEmail);
+	  return "redirect:/";
 	  }
 }

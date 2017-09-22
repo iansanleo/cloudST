@@ -34,22 +34,22 @@ public class PasswordController {
 	@PostMapping(value = "/forgot")
 	public String processForgotPasswordForm(Model model, HttpServletRequest request) {
 
-		User usuario = userService.findUserByEmail(request.getParameter("userEmail"));
+		User user = userService.findUserByEmail(request.getParameter("userEmail"));
 
-		if (!usuario.getName().isEmpty()) {
+		if (!user.getName().isEmpty()) {
 						 
-			usuario.setResetToken(UUID.randomUUID().toString());
+			user.setResetToken(UUID.randomUUID().toString());
 
-			userService.save(usuario);
+			userService.save(user);
 
 			String appUrl = request.getScheme() + "://" + request.getServerName();
 			
 			SimpleMailMessage passwordResetEmail = new SimpleMailMessage();
 			passwordResetEmail.setFrom("support@cloudST.com");
-			passwordResetEmail.setTo(usuario.getEmail());
+			passwordResetEmail.setTo(user.getEmail());
 			passwordResetEmail.setSubject("Password Reset Request");
 			passwordResetEmail.setText("To reset your password, click the link below:\n" + appUrl
-					+ ":8080/reset?token=" + usuario.getResetToken());
+					+ ":8080/reset?token=" + user.getResetToken());
 			
 			emailService.sendEmail(passwordResetEmail);
 
