@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.cloudST.model.File;
 import com.cloudST.service.FileService;
 import com.cloudST.service.TransactionService;
+import com.cloudST.service.UserService;
 
 @Controller
 public class UploadFileController {
@@ -27,6 +28,8 @@ public class UploadFileController {
 	private FileService fileService;
 	@Autowired
 	private TransactionService transactionService;
+	@Autowired
+	private UserService userService;
 
     private static String UPLOADED_FOLDER = "C://temp//";
     /*
@@ -49,15 +52,17 @@ public class UploadFileController {
         }
 
         try {
-
+        	if(!userService.findById((Integer) session.getAttribute("idUserSession")).getValid()){
+        	 model.addAttribute("Msg","You must validate your email before uploading a file");
+        	 return "upload";
+        	}
+        	
             byte[] bytes = file.getBytes();
             Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename()+"-uploaded-"+ session.getAttribute("idUserSession"));
             Files.write(path, bytes);
 
             model.addAttribute("Msg",
                     "You successfully uploaded '" + file.getOriginalFilename() + "'");       
-            
-
            
             double bytesA =  file.getSize();
 			double kilobytes = (bytesA / 1024);
