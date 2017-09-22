@@ -43,14 +43,19 @@
 					<td> ************* </td>
 					<td> ${user.name} </td>
 					<td> ${user.email}  </td>
-					<td> ${user.dateCreated}</td>
-					<td> ${user.valid}  </td>
+					<td> ${user.dateCreated} </td>
+					<td>  
+							<c:if test="${user.valid==false}">
+								<a href ="/valid?idUser=${user.idUser}"><img src="resources/img/iconmail.png"/></a>
+							</c:if>
+							<c:if test="${user.valid}">
+								<img src="resources/img/iconcheck.png"/>
+							</c:if>
+					</td>
 					<td> ${user.lastLogin}  </td>
 					<td>
 					<a href = "/editUser"><img src="resources/img/iconEditmaterial.png"/></a>
-					<a href = "#"><img src="resources/img/iconDeletematerial.png"/></a></td>
-
- 			</tr>
+					</tr>
  		</table><BR>
  	</div>
 </body>
