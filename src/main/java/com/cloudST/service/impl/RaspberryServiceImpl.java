@@ -22,7 +22,6 @@ public class RaspberryServiceImpl implements RaspberryService {
 		
 		for(int i=0; i<listRaspberry.size();i++){
 			totalSize=+listRaspberry.get(i).getTotalSize();
-			
 		}
 		return totalSize;
 	}
@@ -35,5 +34,25 @@ public class RaspberryServiceImpl implements RaspberryService {
 			totalSize=+listRaspberry.get(i).getUseSize();
 		}
 		return totalSize;
+	}
+	
+	@Override
+	public ArrayList<Raspberry> listDevicesOn(){
+		ArrayList<Raspberry> listRaspberry = (ArrayList<Raspberry>)raspberryRepository.findAll();
+		System.out.println("dentro impl");
+		for(int i=0;i<listRaspberry.size();i++){
+			if(!listRaspberry.get(i).getStatus()){
+				listRaspberry.remove(i);
+			}
+		}
+		return listRaspberry;
+	}
+
+	@Override
+	public Raspberry delete(Integer idRaspberry) {
+		Raspberry raspberry = raspberryRepository.findOne(idRaspberry);
+		raspberry.setStatus(false);
+		raspberryRepository.save(raspberry);
+		return raspberry;
 	}
 }

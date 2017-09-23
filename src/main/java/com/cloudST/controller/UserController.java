@@ -31,7 +31,6 @@ public class UserController {
 
 	@PostMapping("/login")
 	public String login(Model model, HttpServletRequest request){
-		
 		HttpSession session = request.getSession();
 		String userName = request.getParameter("userName").toString();
         String password = request.getParameter("password").toString();
@@ -52,7 +51,6 @@ public class UserController {
 	
 	@GetMapping ("/logout")
 	public String logOut(Model model, HttpServletRequest request){
-		
 		HttpSession session = request.getSession();
 		session.removeAttribute("idUserSession");
 		session.removeAttribute("permissions");
@@ -61,7 +59,6 @@ public class UserController {
 	
 	@GetMapping("/user")
 	public String userProfile(Model model, HttpServletRequest request){
-		
 		HttpSession session = request.getSession();
 		Integer idUser = (Integer) session.getAttribute("idUserSession");
 		
@@ -126,7 +123,6 @@ public class UserController {
 	
 	@PostMapping("/userAdd")
 	public String userAdd(Model model, HttpServletRequest request){
-		
 		String password = request.getParameter("password");
 		String password2 = request.getParameter("password2");
 		String username = request.getParameter("userName");
@@ -150,14 +146,12 @@ public class UserController {
 	 
 	@GetMapping("/userList")
 	public String listUsers(Model model, HttpServletRequest request){
-		
 		 model.addAttribute("users", userService.listUser());
 		 return "listUser";
 	}
 	  
 	  @GetMapping("/delAdminUser")
-	  public String deleteAdminUser(Model model, HttpServletRequest request){
-		  
+	  public String deleteAdminUser(Model model, HttpServletRequest request){ 
 		  userService.delete(Integer.parseInt(request.getParameter("idUser")));
 		  return "redirect:/userList";
 	  }

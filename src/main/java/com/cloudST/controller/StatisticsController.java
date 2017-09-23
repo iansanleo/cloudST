@@ -28,19 +28,19 @@ public class StatisticsController {
 	public String mostrarStats(Model model){ 
 		
 		//espacio utilizado respecto al espacio total %
-		model.addAttribute("usedPercent",porcUsado());
+		model.addAttribute("usedPercent",percUsed());
 		
 		//cantidad espacio libre
-		model.addAttribute("libre",espacioLibre());
+		model.addAttribute("freeSpace",freeSpace());
 		
 		//numero total de archivos
-		model.addAttribute("numArch",numFiles());
+		model.addAttribute("numFiles",numFiles());
 		
 		//media de archivos por usuario
-		model.addAttribute("mediaUsuario",mediaUsuario());
+		model.addAttribute("meanUser",meanUser());
 		
 		//media de Mb por archivo
-		model.addAttribute("mediaArchivo",mbFile());
+		model.addAttribute("meanFile",mbFile());
 		
 		//espacio a liberar pendiente
 		model.addAttribute("liberate", forLiberate());
@@ -49,7 +49,7 @@ public class StatisticsController {
 		return "statistics";
 	}
 	
-	private double mediaUsuario(){
+	private double meanUser(){
 		return numFiles()/userService.listUser().size();
 	}
 	
@@ -60,17 +60,14 @@ public class StatisticsController {
 		for(int i = 0;i<listFile.size();i++){
 			liberate =+listFile.get(i).getSize();
 		}
-
 		return liberate;
 	}
 	
-	private double espacioLibre(){
-		
+	private double freeSpace(){
 		return raspberryService.totalSizeRasps()-raspberryService.totalSizeUsed();
 	}
 	
-	private double porcUsado() {
-
+	private double percUsed() {
 		return (raspberryService.totalSizeUsed()/raspberryService.totalSizeRasps())*100;
 	}
 

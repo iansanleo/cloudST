@@ -57,5 +57,5 @@ public class Raspberry {
 	public void setTotalSize(double totalSize){this.totalSize = totalSize;}
 	public void setUseSize (double useSize){this.useSize = useSize;}
 	public void setConexionDate(Date conexionDate){this.conexionDate = conexionDate;}
-	public void sertStatus (boolean status){this.status = status;}
+	public void setStatus (boolean status){this.status = status;}
 }

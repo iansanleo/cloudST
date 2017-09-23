@@ -54,8 +54,9 @@
 		//espacio a liberar pendiente
 		${liberate}
 	
-	<a href="#">List of devices</a>
-<section class="container">
+	<a href="/devicesList">List of devices</a>
+	
+	<section class="container">
 
     <h3>Circliful</h3>
 
