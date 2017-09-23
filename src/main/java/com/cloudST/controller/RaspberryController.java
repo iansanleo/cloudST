@@ -25,9 +25,8 @@ public class RaspberryController {
 	
 	@GetMapping("/deleteDevice")
 	public String deleteDevice(Model model, HttpServletRequest request){
-		
 		raspberryService.delete(Integer.parseInt(request.getParameter("deviceId")));
-		model.addAttribute("Msg",""+ request.getParameter("deviceId").toString());
+		model.addAttribute("Msg","Device: "+ raspberryService.findById(Integer.parseInt(request.getParameter("deviceId"))).getIp()+" deleted.");
 		return "listRasp";
 	} 
 }

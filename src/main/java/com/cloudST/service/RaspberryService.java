@@ -10,5 +10,6 @@ public interface RaspberryService {
 	double totalSizeUsed();
 	ArrayList<Raspberry> listDevicesOn();
 	Raspberry delete(Integer idRaspberry);
+	Raspberry findById(Integer idRaspberry);
 
 }

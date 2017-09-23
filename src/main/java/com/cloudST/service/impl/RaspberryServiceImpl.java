@@ -55,4 +55,9 @@ public class RaspberryServiceImpl implements RaspberryService {
 		raspberryRepository.save(raspberry);
 		return raspberry;
 	}
+
+	@Override
+	public Raspberry findById(Integer idRaspberry) {
+		return raspberryRepository.findOne(idRaspberry);
+	}
 }
