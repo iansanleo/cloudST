@@ -17,13 +17,15 @@
 
 <body>
 	
-	<jsp:include page="menu.jsp"/>
-	
 	<%Integer permissions = (Integer)session.getAttribute("permissions");%>
 	<%Integer typeUser = (Integer)session.getAttribute("typeUser");%>
 	<c:if test="${permissions == 3}">
 		<jsp:include page="menuA.jsp"/>
 	</c:if>
+	<c:if test="${permissions != 3}">
+		<jsp:include page="menu.jsp"/>
+	</c:if>
+	
  
 	<jsp:include page="menuF.jsp"/>
  
@@ -39,10 +41,8 @@
        <c:if test="${not empty idUser}"> 
             <form action="userEdit?idUser=${idUser}" method="post">  
        </c:if> 
-           
-		
+
 			<div style="color:red">${Msg}</div>
-			
 			
 			<table>  	    
      	    <tr>
@@ -104,5 +104,7 @@
 
 		
 	</div>
+	<jsp:include page="end.jsp"/>
+
 </body>
 </html>

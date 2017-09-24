@@ -17,9 +17,7 @@ public class RaspberryController {
 	
 	@GetMapping("/devicesList")
 	public String listDevices(Model model){
-		System.out.println("entra");
 		model.addAttribute("devices", raspberryService.listDevicesOn());
-		System.out.println("dev pag");
 		return "listRasp";
 	}
 	

@@ -12,12 +12,14 @@
 
 </head>
 <body>
-	<jsp:include page="menu.jsp"/>
-	
 	<%Integer permissions = (Integer)session.getAttribute("permissions");%>
 	<c:if test="${permissions == 3}">
 		<jsp:include page="menuA.jsp"/>
 	</c:if>
+	<c:if test="${permissions != 3}">
+		<jsp:include page="menu.jsp"/>
+	</c:if>
+	
  
 	<jsp:include page="menuF.jsp"/>
 	
@@ -25,6 +27,6 @@
 		<h1 style="color:black;align-text:center;"> WELCOME </h1><br>
 		<h2>${Msg}</h2>
 	</div>
-	
+	<jsp:include page="end.jsp"/>
 </body>
 </html>

@@ -1,11 +1,16 @@
-			<li><a href="/resources"><span class="iconic map-pin"></span> Resources</a></li>
-			<li><a href="#"><span class="iconic mail"></span> User</a>
-				<ul>
-					<li><a href="/user">Me</a></li>
-					<li><a href="/logout">Log out</a></li>
-				</ul>
-			</li>
-		</ul>
-		<div class="clearfix"></div>
-	</nav>
-</div>
+
+		  <li class="nav-item">
+            <a class="nav-link" href="/resources">Resources</a>
+          </li>
+		  <li class="nav-item">
+            <a class="nav-link" href="/user">Profile</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Help</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/logout">Log out</a>
+          </li>
+        </ul>
+      </div>
+    </nav>

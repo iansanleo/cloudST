@@ -16,43 +16,51 @@
 </head>
 
 <body>
-	<jsp:include page="menu.jsp"/>
-	
 	<%Integer permissions = (Integer)session.getAttribute("permissions");%>
 	<c:if test="${permissions == 3}">
 		<jsp:include page="menuA.jsp"/>
 	</c:if>
+	<c:if test="${permissions != 3}">
+		<jsp:include page="menu.jsp"/>
+	</c:if>
+	
  
 	<jsp:include page="menuF.jsp"/>
 
 <div align="center">
 	<h2> User Resources</h2>
-		<table style="border: 1px solid #000;text-align:center ;border: 1px solid #000;border-collapse: separate;
-  border-spacing: 10px;">
-			
-				<c:if test="${empty files }">
+	
+	<c:if test="${empty files }">
 					<div style="color:blue">No resources stored</div>
 				</c:if>
 				
 				<div style="color:blue">${Msg}</div>
-			
-			<TR style="color:black;background-color:white;">
-			<TH>Name</TH>
-			<TH>Size</TH>
-			<TH>Type</TH>
+				
+		<table class="table table-striped">
+			<thead>
 			<TR>
+				<TH>Name</TH>
+				<TH>Size</TH>
+				<TH>Type</TH>
+			</TR>
+			</thead>
+			<tbody>
     			<c:forEach items="${files}" var="file">
-          			  <tr>
+          		<tr>
 					<td> <a href ="#" >${file.oriName}</a> </td>
 					<td> <c:out value="${file.size}"/> MB</td>
 					<td> <c:out value="${file.type}" /></td>
 					<td>
-					<a href = "/deleteResource?idFile=${file.idFile}"><img src="resources/img/iconDeletematerial.png"/></a></td>
+						<a href = "/deleteResource?idFile=${file.idFile}"><img src="resources/img/iconDeletematerial.png"/></a>
+					</td>
+   			   </tr>
    			   </c:forEach>
-
- 			</tr>
- 		</table><BR>
+ 			</tbody>
+ 		</table>
  	</div>
+ 	
+ 	<jsp:include page="end.jsp"/>
+
 </body>
  
 </html>

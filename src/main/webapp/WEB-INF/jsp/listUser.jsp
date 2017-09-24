@@ -15,46 +15,84 @@
 </head>
 
 <body>
-	<jsp:include page="menu.jsp"/>
-	
 	<%Integer permissions = (Integer)session.getAttribute("permissions");%>
 	<c:if test="${permissions == 3}">
 		<jsp:include page="menuA.jsp"/>
 	</c:if>
- 
+	<c:if test="${permissions != 3}">
+		<jsp:include page="menu.jsp"/>
+	</c:if>
 	<jsp:include page="menuF.jsp"/>
 
-<div align="center">
-	<h2> List Users</h2>
-		<table style="border: 1px solid #000;text-align:center ;border: 1px solid #000;border-collapse: separate; border-spacing: 10px;">
-			<TR style="color:black;background-color:white;">
-			<TH>UserName</TH>
-			<TH>Complete Name</TH>
-			<TH>Email</TH>
-			<TH>Date </TH>
-			<TH>Email Validated</TH>
-			<TH>Status</TH>
-			<TH>Last login</TH>
-			<TH>Status</TH>
-			</TR>
-			<c:forEach items="${users}" var="user">
-				<tr>
-					<td> ${user.username} </td>
-					<td> ${user.name} </td>
-					<td> ${user.email}  </td>
-					<td> ${user.dateCreated}</td>
-					<td> ${user.valid}  </td>
-					<td> ${user.status}</td>
-					<td> ${user.lastLogin} </td>
-					<td>
-					<a href = "/editUser?idUser=${user.idUser}"><img src="resources/img/iconEditmaterial.png"/></a>
-					<a href = "/delAdminUser?idUser=${user.idUser}"><img src="resources/img/iconDeletematerial.png"/></a></td>
-				
- 				</tr>
- 			</c:forEach>
- 		</table>
+      <div class="container-fluid">
+      <div class="row">
+        <nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
+          <ul class="nav nav-pills flex-column">
+            <li class="nav-item">
+              <a class="nav-link" href="/statistics">Overview </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Reports</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Analytics</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Export</a>
+            </li>
+          </ul>
 
- 	</div>
+          <ul class="nav nav-pills flex-column">
+            <li class="nav-item">
+              <a class="nav-link active" href="/userList">List of Users <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/devicesList">List of devices</a>
+            </li>
+          </ul>
+          </nav>  
+		
+        <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
+          <h2>List Users</h2>
+			<div class="table-responsive">
+        	<table class="table table-striped">
+        	<thead>
+				<TR>
+				
+					<TH>UserName</TH>
+					<TH>Complete Name</TH>
+					<TH>Email</TH>
+					<TH>Date </TH>
+					<TH>Email Validated</TH>
+					<TH>Status</TH>
+					<TH>Last login</TH>
+					<TH>Status</TH>
+				</TR>
+				</thead>
+				<tbody>
+				<c:forEach items="${users}" var="user">
+					<tr>
+						<td> ${user.username} </td>
+						<td> ${user.name} </td>
+						<td> ${user.email}  </td>
+						<td> ${user.dateCreated}</td>
+						<td> ${user.valid}  </td>
+						<td> ${user.status}</td>
+						<td> ${user.lastLogin} </td>
+						<td>
+							<a href = "/editUser?idUser=${user.idUser}"><img src="resources/img/iconEditmaterial.png"/></a>
+							<a href = "/delAdminUser?idUser=${user.idUser}"><img src="resources/img/iconDeletematerial.png"/></a>
+						</td>
+ 					</tr>
+ 				</c:forEach>
+ 				</tbody>
+ 			</table>
+ 			</div>
+ 		</main>
+ 		</div>
+		</div>
+ 	
+
 </body>
  
 </html>

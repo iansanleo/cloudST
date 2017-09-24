@@ -34,5 +34,6 @@
      	 	<a href="/forgot">I forgot my password </a>
 		</div>
 	</div>
+	<jsp:include page="end.jsp"/>
 </body>
 </html>
