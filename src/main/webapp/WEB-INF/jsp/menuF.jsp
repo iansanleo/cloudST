@@ -1,4 +1,6 @@
-
+ 		  <li class="nav-item">
+            <a class="nav-link" href="/uploadForm">Upload File</a>
+          </li>   
 		  <li class="nav-item">
             <a class="nav-link" href="/resources">Resources</a>
           </li>

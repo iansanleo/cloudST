@@ -12,7 +12,4 @@
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
             <a class="nav-link" href="welcome">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/uploadForm">Upload File</a>
-          </li>       
+          </li>    
