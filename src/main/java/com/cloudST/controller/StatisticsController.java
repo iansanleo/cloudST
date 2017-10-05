@@ -45,6 +45,9 @@ public class StatisticsController {
 		//espacio a liberar pendiente
 		model.addAttribute("liberate", forLiberate());
 		
+		//usuarios no validados
+		
+		
 		
 		return "statistics";
 	}
@@ -68,7 +71,7 @@ public class StatisticsController {
 	}
 	
 	private double percUsed() {
-		return (raspberryService.totalSizeUsed()/raspberryService.totalSizeRasps())*100;
+		return ((raspberryService.totalSizeUsed()/raspberryService.totalSizeRasps())*100);
 	}
 
 	private double mbFile(){

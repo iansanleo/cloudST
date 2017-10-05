@@ -16,4 +16,9 @@ public class CommonController {
 	public String getWelcome(Model model){
 		return "welcome";
 	}
+	
+	@GetMapping("/prueba")
+	public String pruebaBorrar(Model model){
+		return "NewFile";
+	}
 }

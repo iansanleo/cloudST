@@ -16,4 +16,6 @@ public interface FileService {
 	ArrayList<File> allFiles();
 
 	ArrayList<File> filesLiberate();
+
+	File findByIdFile(int idFile);
 }
