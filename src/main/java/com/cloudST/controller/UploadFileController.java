@@ -16,8 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.cloudST.model.File;
-import com.cloudST.service.FileService;
+import com.cloudST.service.ArchiveService;
 import com.cloudST.service.TransactionService;
 import com.cloudST.service.UserService;
 
@@ -25,7 +24,7 @@ import com.cloudST.service.UserService;
 public class UploadFileController {
 	
 	@Autowired
-	private FileService fileService;
+	private ArchiveService fileService;
 	@Autowired
 	private TransactionService transactionService;
 	@Autowired
@@ -69,7 +68,7 @@ public class UploadFileController {
 			double megabytes = (kilobytes / 1024);
 			megabytes= Math.round(megabytes*100)/100;
 
-            File fileCreate = fileService.create(file.getOriginalFilename(), path.toString(), megabytes, file.getContentType(), (Integer) session.getAttribute("idUserSession"));
+            com.cloudST.model.Archive fileCreate = fileService.create(file.getOriginalFilename(), path.toString(), megabytes, file.getContentType(), (Integer) session.getAttribute("idUserSession"));
             
             transactionService.createUpload(fileCreate.getIdFile(), (Integer)session.getAttribute("idUserSession"));
           

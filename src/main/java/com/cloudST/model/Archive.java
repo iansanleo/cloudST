@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 
 
 @Entity
-public class File {
+public class Archive {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -23,9 +23,9 @@ public class File {
 	@NotNull
 	private Integer idUser;
 	
-	public File(){}
+	public Archive(){}
 
-	public File(String oriName, String sysName, boolean status, double size,
+	public Archive(String oriName, String sysName, boolean status, double size,
 			String type, Integer idUser){
 		
 		this.oriName = oriName;

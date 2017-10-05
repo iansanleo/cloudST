@@ -7,8 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.cloudST.model.File;
-import com.cloudST.service.FileService;
+import com.cloudST.model.Archive;
+import com.cloudST.service.ArchiveService;
 import com.cloudST.service.RaspberryService;
 import com.cloudST.service.UserService;
 
@@ -16,7 +16,7 @@ import com.cloudST.service.UserService;
 public class StatisticsController {
 	
 	@Autowired
-	private FileService fileService;
+	private ArchiveService fileService;
 	
 	@Autowired
 	private RaspberryService raspberryService;
@@ -56,7 +56,7 @@ public class StatisticsController {
 	private double forLiberate(){
 		double liberate= 0.0;
 		
-		ArrayList<File> listFile = fileService.filesLiberate();
+		ArrayList<Archive> listFile = fileService.filesLiberate();
 		for(int i = 0;i<listFile.size();i++){
 			liberate =+listFile.get(i).getSize();
 		}
@@ -77,7 +77,7 @@ public class StatisticsController {
 	
 	private double totalSizeFiles(){
 		double totalSize=0.0;
-		ArrayList<File> listFile =fileService.allFiles();
+		ArrayList<Archive> listFile =fileService.allFiles();
 		
 		for(int i=0;i<listFile.size();i++){
 			if(listFile.get(i).getStatus()){

@@ -26,6 +26,8 @@ public interface UserService {
     User findUserByEmail(String email);
    
     User findUserByResetToken(String resetToken);
+
+	User findByUsername(String username);
     
     
 }

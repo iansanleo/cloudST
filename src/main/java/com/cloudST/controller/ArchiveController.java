@@ -10,16 +10,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.cloudST.model.File;
-import com.cloudST.service.FileService;
+import com.cloudST.model.Archive;
+import com.cloudST.service.ArchiveService;
 import com.cloudST.service.TransactionService;
-import com.cloudST.service.exception.FileException;
+import com.cloudST.service.exception.ArchiveException;
 
 @Controller
-public class FileController {
+public class ArchiveController {
 	
 	@Autowired
-	private FileService fileService;
+	private ArchiveService fileService;
 	@Autowired
 	private TransactionService transactionService;
 	
@@ -27,7 +27,7 @@ public class FileController {
 	public String listResources(Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 
-		ArrayList<File> listFiles = fileService.allUserFiles((Integer)session.getAttribute("idUserSession"));
+		ArrayList<Archive> listFiles = fileService.allUserFiles((Integer)session.getAttribute("idUserSession"));
 
 		model.addAttribute("files", listFiles);
 		return "file";
@@ -41,7 +41,7 @@ public class FileController {
 			fileService.delete(Integer.parseInt(request.getParameter("idFile")));
 			transactionService.createDelete(Integer.parseInt(request.getParameter("idFile")), (Integer)session.getAttribute("idUserSession"));
 			return "redirect:/resources";
-		} catch (FileException e) {
+		} catch (ArchiveException e) {
 			model.addAttribute(e.getMessage());
 			return "redirect:/resources";
 		}
