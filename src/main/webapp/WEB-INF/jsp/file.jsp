@@ -47,7 +47,7 @@
 			<tbody>
     			<c:forEach items="${files}" var="file">
           		<tr>
-					<td> <a href ="/download?idFile=${file.idFile}" >${file.oriName}</a> </td>
+					<td> <a href ="#" >${file.oriName}</a> </td>
 					<td> <c:out value="${file.size}"/> MB</td>
 					<td> <c:out value="${file.type}" /></td>
 					<td>

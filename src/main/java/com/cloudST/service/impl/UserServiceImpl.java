@@ -30,11 +30,6 @@ public class UserServiceImpl implements UserService {
     public User findById(Integer idUser) {
         return userRepository.findOne(idUser);
     }
-    
-    @Override
-    public User findByUsername(String username){
-    	return userRepository.findByUser(username);
-    }
 
     @Override
     public User update(Integer idUser, String name, String email, String oldPassword, String newPassword) throws UserException {

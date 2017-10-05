@@ -34,8 +34,9 @@
 	 	 <h1 style="aligng:center">Edit user information</h1>
 	 
    
-       <c:if test="${ empty idUser}"> 
-            <form action="userEdit" method="post"> 
+    <c:if test="${ empty idUser}"> 
+      <form action="userEdit" method="post"> 
+     
        </c:if> 
        <c:if test="${not empty idUser}"> 
             <form action="userEdit?idUser=${idUser}" method="post">  
