@@ -57,7 +57,7 @@
             animationStep: 5,
             foregroundBorderWidth: 15,
             backgroundBorderWidth: 15,
-            percent: 38,
+            percent: ${usedPercent},
             textSize: 28,
             textStyle: 'font-size: 12px;',
             textColor: '#666',

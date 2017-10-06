@@ -45,4 +45,16 @@ public class PrivilegeServiceImpl implements PrivilegeService {
 		}
 	return null;
 	}
+	
+	@Override
+	public Integer actualType(Integer idUser){
+		ArrayList<Privilege> listPrivilege = (ArrayList<Privilege>)privilegeRepository.findAll();
+		
+		for(int i=0;i<listPrivilege.size();i++){
+			if(listPrivilege.get(i).getStatus()== true && listPrivilege.get(i).getIdUsuario()==idUser){
+				return listPrivilege.get(i).getType();
+			}
+		}
+		return 2;
+	}
 }

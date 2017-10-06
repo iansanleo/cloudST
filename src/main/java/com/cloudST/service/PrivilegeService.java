@@ -11,4 +11,6 @@ public interface PrivilegeService {
 
 	Privilege update(Integer idUser, Integer type);
 
+	Integer actualType(Integer idUser);
+
 }

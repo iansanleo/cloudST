@@ -8,15 +8,13 @@
 <html>
  
 <head>
+
 	<jsp:include page="head.jsp"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	
     <link rel="stylesheet" href="/resources/css/material-design-iconic-font.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/resources/css/jquery.circliful.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-	<script src="/resources/js/jquery.circliful.js"></script>
-	
+
 	<title>Statistics</title>
 
   </head>
@@ -40,10 +38,10 @@
               <a class="nav-link active" href="#">Overview <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Reports</a>
+              <a class="nav-link" href="/statFiles">Storage/Files</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Analytics</a>
+              <a class="nav-link" href="/statUser">Users </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Export</a>
@@ -61,108 +59,44 @@
         </nav>
 
 
-		
-        <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
-          <h1>Dashboard</h1>
-		
-				<section class="container">
-			<div class="row">
+        <main role="main" style="width:80%">
+          <h1 align=center>Dashboard</h1>
+          	<br>
+           <div class="row">
         		<div class="col-lg-2">
-           		 	<div id="test-circle5"></div>
+           		 	<div id="test-circle"></div>
         		</div>
-    		</div>
-		</section>
-		
-          <section class="row text-center placeholders">
-          	
-            <div class="col-6 col-sm-3 placeholder">
-              	<div id="test-circle5"></div>
-              	<h4>Used Space</h4>
-             	<div class="text-muted">Used</div>
-            </div>
-            
-            <div class="col-6 col-sm-3 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIABAADcgwAAACwAAAAAAQABAAACAkQBADs=" width="200" height="200" class="img-fluid rounded-circle" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-6 col-sm-3 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIABAAJ12AAAACwAAAAAAQABAAACAkQBADs=" width="200" height="200" class="img-fluid rounded-circle" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-6 col-sm-3 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIABAADcgwAAACwAAAAAAQABAAACAkQBADs=" width="200" height="200" class="img-fluid rounded-circle" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-          </section>
-
-          <h2>Section title</h2>
-          
-          
-        </main>
-      </div>
-    </div>
-
+        		<div class="col-lg-2">
+           		 	<div id="test-circle1"></div>
+        		</div>
+        		<div class="col-lg-2">
+            		<div id="test-circle6"></div>
+       			</div>
+    </div> 
+    
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="/resources/js/bootstrap.min.js"></script>
+<script src="/resources/js/jquery.circliful.js"></script>
 <script>
 $( document ).ready(function() { // 6,32 5,38 2,34
     $("#test-circle").circliful({
-        animation: 1,
-        animationStep: 5,
-        foregroundBorderWidth: 15,
-        backgroundBorderWidth: 15,
-        percent: 38,
-        textSize: 28,
-        textStyle: 'font-size: 12px;',
-        textColor: '#666',
-    });
-    $("#test-circle2").circliful({
-        animation: 0,
-        animationStep: 6,
-        foregroundBorderWidth: 5,
-        backgroundColor: "none",
-        fillColor: '#eee',
-        percent: 50,
-        iconColor: '#3498DB',
-        icon: 'f206',
-        iconSize: '40',
-        iconPosition: 'middle'
-    });
-    $("#test-circle3").circliful({
-        animation: 1,
-        animationStep: 6,
-        foregroundBorderWidth: 5,
-        backgroundBorderWidth: 1,
-        percent: 88,
-        iconColor: '#3498DB',
-        icon: 'f004',
-        iconSize: '40',
-        iconPosition: 'middle'
-    });
-    $("#test-circle4").circliful({
-        animation: 1,
-        animationStep: 1,
-        target: 10,
-        start: 2,
-        showPercent: 1,
-        backgroundColor: '#000',
-        foregroundColor: '#A8C64A',
-        fontColor: '#000',
-        iconColor: '#000',
-        icon: 'f0a0',
-        iconSize: '40',
-        iconPosition: 'middle',
-        text: 'No Kids'
-    });
-    $("#test-circle5").circliful({
         animationStep: 5,
         foregroundBorderWidth: 5,
         backgroundBorderWidth: 15,
-        percent: 80,
+        percent: ${usedPercent},
         icon: 'f0a0',
         iconPosition: 'middle',
-        text: 'Space Left',
+        text: 'Used Space',
+        textBelow: true
+    });
+    $("#test-circle1").circliful({
+        animationStep: 5,
+        foregroundBorderWidth: 5,
+        backgroundBorderWidth: 15,
+        percent: ${percentNoValid},
+        icon: 'f0a0',
+        iconPosition: 'middle',
+        text: 'No valid Users',
         textBelow: true
     });
     $("#test-circle6").circliful({
@@ -175,10 +109,9 @@ $( document ).ready(function() { // 6,32 5,38 2,34
         textColor: '#666',
         multiPercentage: 1,
         percentages: [
-            {'percent': 10, 'color': '#3180B8', 'title': 'Gryffindor' },
-            {'percent': 30, 'color': '#4ADBEA', 'title': 'Ravenclaw' },
-            {'percent': 50, 'color': '#49EBA8', 'title': 'Hufflepuff' },
-            {'percent': 70, 'color': '#FFCA35', 'title': 'Slytherin' }
+            {'percent': ${percentAdminUser}, 'color': '#FFCA35', 'title': 'Free User' },
+            {'percent': ${percentPaidUser}, 'color': '#4ADBEA', 'title': 'Paid User' },
+            {'percent': ${percentFreeUser}, 'color': '#49EBA8', 'title': 'Admin User' },
         ],
         multiPercentageLegend: 1,
         replacePercentageByText: '',
@@ -189,7 +122,8 @@ $( document ).ready(function() { // 6,32 5,38 2,34
     });
 });
 </script>
-
-  <jsp:include page="end.jsp"/>
+ </main>
+      </div>
+    </div>
   </body>
 </html>
