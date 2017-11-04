@@ -55,7 +55,7 @@ public class FileServiceImpl implements FileService {
 	}
 
 	@Override
-	public File findByIdFile(int idFile) {
+	public File findByIdFile(Integer idFile) {
 		return fileRepository.findOne(idFile);
 	}
 }

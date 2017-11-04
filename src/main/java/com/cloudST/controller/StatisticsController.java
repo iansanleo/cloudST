@@ -94,25 +94,26 @@ public class StatisticsController {
 		return "statSys";
 	}
 	
-	private double percentPaidUser(){
-		return ((countTypeUser(1)/totalUser())*100);
-	}
+	
 	private double percentFreeUser(){
-		return ((countTypeUser(0)/totalUser())*100);
+		return (double)(countTypeUser(0)*100)/totalUser();
+	}
+	private double percentPaidUser(){
+		return (double)(countTypeUser(1)*100)/totalUser();
 	}
 	private double percentAdminUser(){
-		return ((countTypeUser(3)/totalUser())*100);
+		return (double)(countTypeUser(3)*100)/totalUser();
 	}
 	
 	private Integer countTypeUser(Integer type){
-		
+		int count=0;
 		ArrayList<User> listUser = userService.listUser();
 		for(int i=0;i<listUser.size();i++){
-			if(privilegeService.actualType(listUser.get(i).getIdUser())!=type){
-				listUser.remove(i);	
+			if(privilegeService.actualType(listUser.get(i).getIdUser()).equals(type)){
+				count++;
 			}
 		}
-		return listUser.size();
+		return count;
 	}
 	
 	private int totalUser(){
@@ -120,17 +121,16 @@ public class StatisticsController {
 	}
 	
 	private double percentNoValid(){
-		double percent = userNoValid()/totalUser();
-		percent =percent*100;
-		return percent;
+		return (double)(userNoValid()*100)/totalUser();
 	}
 	
 	private int userNoValid(){
+		int count=0;
 		ArrayList<User> userList = userService.listUser();
 		for(int i=0;i<userList.size();i++){
-			if(userList.get(i).getValid()){userList.remove(i);}
+			if(!userList.get(i).getValid()){count++;}
 		}
-		return userList.size();
+		return count;
 	}
 	
 	private double meanUser(){

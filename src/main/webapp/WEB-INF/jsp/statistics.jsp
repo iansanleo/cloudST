@@ -35,7 +35,7 @@
         <nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
           <ul class="nav nav-pills flex-column">
             <li class="nav-item">
-              <a class="nav-link active" href="#">Overview <span class="sr-only">(current)</span></a>
+              <a class="nav-link active" href="/statistics">Overview <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/statFiles">Storage/Files</a>
@@ -109,9 +109,9 @@ $( document ).ready(function() { // 6,32 5,38 2,34
         textColor: '#666',
         multiPercentage: 1,
         percentages: [
-            {'percent': ${percentAdminUser}, 'color': '#FFCA35', 'title': 'Free User' },
+            {'percent': ${percentAdminUser}, 'color': '#FFCA35', 'title': 'Admin User' },
             {'percent': ${percentPaidUser}, 'color': '#4ADBEA', 'title': 'Paid User' },
-            {'percent': ${percentFreeUser}, 'color': '#49EBA8', 'title': 'Admin User' },
+            {'percent': ${percentFreeUser}, 'color': '#49EBA8', 'title': 'Free User' },
         ],
         multiPercentageLegend: 1,
         replacePercentageByText: '',

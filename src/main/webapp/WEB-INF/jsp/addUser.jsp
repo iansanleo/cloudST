@@ -17,7 +17,7 @@
 
 <body>
 	
-	<div class="form">
+	<div class="form" align="center">
 		<form action="userAdd" method="post">
 
 			<div style="color:red">${Msg}</div>

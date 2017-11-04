@@ -24,16 +24,16 @@ public class DownloadFileController {
    
   
   @GetMapping("/download") 
-    public String downloadPDFResource( Model model, HttpServletRequest request, 
+    public void downloadPDFResource( Model model, HttpServletRequest request, 
                                      HttpServletResponse response) 
-    {   int idFile = Integer.parseInt(request.getParameter("idFile")); 
-        File archive = fileService.findByIdFile(idFile); 
-        String dataDirectory = archive.getSysName(); 
-        Path file = Paths.get(dataDirectory, archive.getOriName()); 
+    {
+        int idFile = Integer.parseInt(request.getParameter("idFile"));
+        File archive = fileService.findByIdFile(idFile);
+        Path file = Paths.get("", preparePath(archive.getSysName()));
         if (Files.exists(file)) 
         { 
             response.setContentType(archive.getType()); 
-            response.addHeader("Content-Disposition", "attachment; filename="+archive.getOriName()); 
+            response.addHeader("Content-Disposition", "attachment; filename="+ preparePath(archive.getSysName()));
             try 
             { 
                 Files.copy(file, response.getOutputStream()); 
@@ -43,6 +43,12 @@ public class DownloadFileController {
                  ex.printStackTrace(); 
             } 
         } 
-        return "redirect:/resources";
-    } 
+        //return " ";
+    }
+
+
+  	private String preparePath(String path) {
+	
+  		return path.replace("/", "//");
+  	}
 } 
