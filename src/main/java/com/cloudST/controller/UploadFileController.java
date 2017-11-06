@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.cloudST.utiles.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -62,8 +63,9 @@ public class UploadFileController {
         	}
         	
             byte[] bytes = file.getBytes();
-            //Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename()+"-uploaded-"+ session.getAttribute("idUserSession"));
-			Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
+            //filename con id
+			DateUtils date = new DateUtils();
+            Path path = Paths.get(UPLOADED_FOLDER + date.toString() +"-"+file.getOriginalFilename());
 			Files.write(path, bytes);
 
             model.addAttribute("Msg",
@@ -80,6 +82,7 @@ public class UploadFileController {
 				model.addAttribute("Msg","All the space corresponding to your plan is in use, delete resources or upgrade to the payment plan");
 				return "file";
 			}
+			//path.toString()
 			
             File fileCreate = fileService.create(file.getOriginalFilename(), path.toString(), megabytes, file.getContentType(), (Integer) session.getAttribute("idUserSession"));
             

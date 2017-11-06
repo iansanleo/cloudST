@@ -70,12 +70,6 @@
             <artifactId>spring-boot-starter-mail</artifactId>
             <version>1.5.6.RELEASE</version>
         </dependency>
-        <!-- /EMAIL -->
-		<!--<dependency>-->
-		<!--<groupId>org.springframework.data</groupId>-->
-		<!--<artifactId>spring-data-commons</artifactId>-->
-		<!--<version>1.12.3.RELEASE</version>-->
-		<!--</dependency>-->
 	</dependencies>
 
 	<build>

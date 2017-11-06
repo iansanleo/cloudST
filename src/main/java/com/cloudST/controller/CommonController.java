@@ -17,8 +17,8 @@ public class CommonController {
 		return "welcome";
 	}
 	
-	@GetMapping("/prueba")
-	public String pruebaBorrar(Model model){
-		return "NewFile";
+	@GetMapping("/noPermit")
+	public String withOutSession(Model model){
+		return "index";
 	}
 }
