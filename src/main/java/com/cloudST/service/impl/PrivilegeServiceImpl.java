@@ -1,7 +1,5 @@
 package com.cloudST.service.impl;
 
-import com.cloudST.utiles.DateUtils;
-
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.cloudST.model.Privilege;
 import com.cloudST.repository.PrivilegeRepository;
 import com.cloudST.service.PrivilegeService;
+import com.cloudST.utiles.DateUtils;
 
 @Service
 public class PrivilegeServiceImpl implements PrivilegeService {
@@ -44,5 +43,10 @@ public class PrivilegeServiceImpl implements PrivilegeService {
 			}
 		}
 	return null;
+	}
+	
+	@Override
+	public Integer actualType(Integer idUser){
+		return privilegeRepository.findByIdUser(idUser).getType();
 	}
 }

@@ -12,6 +12,9 @@ public class Privilege {
 	@Id
 	private Date date;
 	@NotNull
+	//3admin
+	//0free
+	//1pay
 	private Integer type;
 	private boolean status;
 	@NotNull

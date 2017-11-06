@@ -74,13 +74,15 @@ public class UserController {
 		
 		if(request.getParameter("idUser") == null){
 			idUser = (Integer) session.getAttribute("idUserSession");
+			
 		}else{
 			idUser = Integer.parseInt(request.getParameter("idUser"));
 			model.addAttribute("idUser",idUser);
+			model.addAttribute("typeUser",privilegeService.findByIdUser(idUser).getType());
+
 		}
 		
 		model.addAttribute("user", userService.findById(idUser));
-		model.addAttribute("typeUser",privilegeService.findByIdUser(idUser).getType());
 		return "editUser";
 	}
 	
@@ -90,7 +92,10 @@ public class UserController {
 		
 		String name = request.getParameter("name").toString();
 		String email = request.getParameter("email").toString();
-		Integer type = Integer.parseInt(request.getParameter("type"));
+		Integer type=0;
+		if(request.getParameter("type")!=null){
+		   type = Integer.parseInt(request.getParameter("type"));
+		}
 
 		try {
 			if(request.getParameter("idUser") == null){

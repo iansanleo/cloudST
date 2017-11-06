@@ -10,7 +10,7 @@ import com.cloudST.model.Privilege;
 @Repository
 public interface PrivilegeRepository extends CrudRepository<Privilege, Integer> {
 
-	@Query("SELECT P FROM Privilege P WHERE LOWER(P.idUser)=:idUser AND P.status=true")
+	@Query("SELECT P FROM Privilege P WHERE (P.idUser)=:idUser AND P.status=true")
 	public Privilege findByIdUser(@Param("idUser")Integer idUser);
 	
 }

@@ -32,10 +32,10 @@
               <a class="nav-link" href="/statistics">Overview </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Reports</a>
+              <a class="nav-link" href="/statFiles">Storage/Files</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Analytics</a>
+              <a class="nav-link" href="/statUser">Users</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Export</a>
@@ -72,7 +72,8 @@
 				<tbody>
 				<c:forEach items="${users}" var="user">
 					<tr>
-						<td> ${user.username} </td>
+						<td> ${user.username} </td>.
+
 						<td> ${user.name} </td>
 						<td> ${user.email}  </td>
 						<td> ${user.dateCreated}</td>

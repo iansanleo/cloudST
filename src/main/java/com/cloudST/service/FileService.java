@@ -7,13 +7,16 @@ import com.cloudST.service.exception.FileException;
 
 public interface FileService {
 	
-	File create(String nombreOri, String nombreSys, double tamanyo, String tipo, Integer idUsuario);
+	File create(String oriName, String sysName, double size, String type, Integer idUser);
 	
-	ArrayList<File> allUserFiles(Integer idUsuario);
+	ArrayList<File> allUserFiles(Integer idUser);
 	
 	File delete(Integer idUser) throws FileException;
 
 	ArrayList<File> allFiles();
 
 	ArrayList<File> filesLiberate();
+
+	File findByIdFile(Integer idFile);
+
 }

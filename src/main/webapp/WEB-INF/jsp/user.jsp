@@ -27,7 +27,7 @@
  
 	<jsp:include page="menuF.jsp"/>
 	
-<div align="center">
+	<div align="center">
 
 	<h2> User Profile</h2>
 	<div style="color:red">${Msg}</div>

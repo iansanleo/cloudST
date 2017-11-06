@@ -16,4 +16,9 @@ public class CommonController {
 	public String getWelcome(Model model){
 		return "welcome";
 	}
+	
+	@GetMapping("/noPermit")
+	public String withOutSession(Model model){
+		return "index";
+	}
 }

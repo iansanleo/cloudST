@@ -9,7 +9,7 @@
 <head>
  
 	<jsp:include page="head.jsp"></jsp:include>	
-	<title>Devices Conected</title>
+	<title>Statistics Users</title>
 
 </head>
 
@@ -35,10 +35,10 @@
               <a class="nav-link" href="/statistics">Overview </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/statFiles">Storage/Files</a>
+              <a class="nav-link" href="/statFiles">Storage/Files </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/statUser">Users </a>
+              <a class="nav-link active" href="/statUser">Users<span class="sr-only">(current) </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Export</a>
@@ -50,42 +50,36 @@
               <a class="nav-link" href="/userList">List of Users </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="/devicesList">List of devices <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="/devicesList">List of devices <span class="sr-only">(current)</span></a>
             </li>
              </ul>
           </nav>
           
     <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
-          <h2>List Devices</h2> 
-          
+          <h2 align=center>Statistics Users</h2> 
+          <br>
+		
 	<div style="color:red">${Msg}</div>
 	
 	<div class="table-responsive">
     <table class="table table-striped">
-    <thead>
+    <thead>		
 		<TR>
-			<TH>IP</TH>
-			<TH>MAC</TH>
-			<TH>totalSize</TH>
-			<TH>useSize </TH>
-			<TH>conexionDate</TH>
+			<TH>Number of Users</TH>
+			<TH>Users with Email no Valid</TH>
+			<TH>Mean Files per User</TH>
+			<TH>Number of Free User</TH>
+			<TH>Number of Paid User</TH>
 		</TR>
 		</thead>
 		<tbody>
-		<c:forEach items="${devices}" var="dev">
 			<tr>
-				<td> ${dev.ip} </td>
-				<td> ${dev.mac} </td>
-				<td> ${dev.totalSize}  </td>
-				<td> ${dev.useSize}</td>
-				<td> ${dev.conexionDate}  </td>
-
-				<td>
-					<a href = "#"><img src="resources/img/iconEditmaterial.png"/></a>
-					<a href = "/deleteDevice?deviceId=${dev.idRaspberry}"><img src="resources/img/iconDeletematerial.png"/></a>
-				</td>
+				<td> ${totalUser} </td>
+				<td> ${numUserNoValid}</td>
+				<td> ${meanUser}  </td>
+				<td> ${numFreeUser}  </td>
+				<td> ${numPaidUser}  </td>
  			</tr>
- 		</c:forEach>
  		</tbody>
  	</table>
  	</div>
