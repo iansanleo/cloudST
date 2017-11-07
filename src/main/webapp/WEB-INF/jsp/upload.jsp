@@ -29,7 +29,7 @@
 	
 	<h2 align="center">Upload your files</h2> 
 	  
-	<div class="form">
+	<div class="form" align="center" style="margin: 0 auto; margin-top: 10%">
 
 		<div style="color:red">${Msg}</div>
 		

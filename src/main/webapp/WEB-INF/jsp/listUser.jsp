@@ -58,7 +58,6 @@
         	<table class="table table-striped">
         	<thead>
 				<TR>
-				
 					<TH>UserName</TH>
 					<TH>Complete Name</TH>
 					<TH>Email</TH>

@@ -24,7 +24,7 @@
 	<jsp:include page="menuF.jsp"/>
 	
 	<div class="form">
-		<h1 style="color:black;align-text:center;"> WELCOME </h1><br>
+		<h1 style="color:black;align-text:center;"align="center" style="margin: 0 auto; margin-top: 10%"> WELCOME </h1><br>
 		<h2>${Msg}</h2>
 	</div>
 	<jsp:include page="end.jsp"/>
