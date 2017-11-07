@@ -17,7 +17,7 @@
 
 <body>
 	
-	<div class="form" align="center" style="margin: 0 auto; margin-top: 10%">
+	<div class="form">
 		<div style="color:red">${Msg}</div>
 		<form action="forgot" method="post">
 			 Email:  <input type="text" name="userEmail"/><br/>
