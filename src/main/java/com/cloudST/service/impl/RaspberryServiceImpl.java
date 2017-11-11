@@ -1,6 +1,7 @@
 package com.cloudST.service.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.cloudST.model.Raspberry;
 import com.cloudST.repository.RaspberryRepository;
 import com.cloudST.service.RaspberryService;
+import com.cloudST.utiles.DateUtils;
 
 @Service
 public class RaspberryServiceImpl implements RaspberryService {
@@ -27,6 +29,11 @@ public class RaspberryServiceImpl implements RaspberryService {
 	}
 
 	@Override
+	public Raspberry findByMac(String mac){
+		return raspberryRepository.findRaspberryMac(mac);
+	}
+	
+	@Override
 	public double totalSizeUsed() {
 		ArrayList<Raspberry> listRaspberry = (ArrayList<Raspberry>) raspberryRepository.findAll();
 		double totalSize=1;
@@ -45,6 +52,27 @@ public class RaspberryServiceImpl implements RaspberryService {
 			}
 		}
 		return listRaspberry;
+	}
+	@Override
+	public Raspberry create(String ip, String mac, double totalSize, double useSize){
+		Raspberry raspberry = new Raspberry( ip, mac, totalSize, useSize, DateUtils.actualDate(), true);
+		raspberryRepository.save(raspberry);
+		return raspberry;
+	}
+	
+	@Override
+	public Raspberry update(Integer idRaspberry,String ip, String mac, double totalSize, double useSize,
+			Date conexionDate, boolean status){
+		Raspberry raspberry = raspberryRepository.findOne(idRaspberry);
+		raspberry.setIp(ip);
+		raspberry.setMac(mac);
+		raspberry.setTotalSize(totalSize);
+		raspberry.setConexionDate(conexionDate);
+		raspberry.setStatus(status);
+		
+		raspberryRepository.save(raspberry);
+		
+		return raspberry;
 	}
 
 	@Override

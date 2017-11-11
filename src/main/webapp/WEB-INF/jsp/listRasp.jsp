@@ -81,7 +81,6 @@
 				<td> ${dev.conexionDate}  </td>
 
 				<td>
-					<a href = "#"><img src="resources/img/iconEditmaterial.png"/></a>
 					<a href = "/deleteDevice?deviceId=${dev.idRaspberry}"><img src="resources/img/iconDeletematerial.png"/></a>
 				</td>
  			</tr>
@@ -89,6 +88,10 @@
  		</tbody>
  	</table>
  	</div>
+ 	<form action="addDevices" method="post">
+ 	
+ 	<input type="submit" value="AddDevices"/>
+     	 </form>
  	</main>
  	</div>
 	</div>
