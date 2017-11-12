@@ -53,7 +53,7 @@
               <a class="nav-link" href="/userList">List of Users</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/devicesList">List of devices</a>
+              <a class="nav-link" href="/devicesList">List of Devices</a>
             </li>
           </ul>
         </nav>

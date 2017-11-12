@@ -47,7 +47,7 @@
               <a class="nav-link active" href="/userList">List of Users <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/devicesList">List of devices</a>
+              <a class="nav-link" href="/devicesList">List of Devices</a>
             </li>
           </ul>
           </nav>  
