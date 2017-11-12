@@ -45,7 +45,7 @@ public class RaspberryServiceImpl implements RaspberryService {
 	
 	@Override
 	public ArrayList<Raspberry> listDevicesOn(){
-		ArrayList<Raspberry> listRaspberry = (ArrayList<Raspberry>)raspberryRepository.findAll();
+		ArrayList<Raspberry> listRaspberry = (ArrayList<Raspberry>)raspberryRepository.findAllOn();
 		for(int i=0;i<listRaspberry.size();i++){
 			if(!listRaspberry.get(i).getStatus()){
 				listRaspberry.remove(i);

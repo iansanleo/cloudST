@@ -35,16 +35,19 @@ public class RaspberryController {
 	@PostMapping("/addDevices")
 	public String addLocalDevice(Model model){
 		Raspberry device = raspberryService.findByMac(getMac());
-		if(device==null){
-			 File f = new File(path);
+		
+		if(device!=null && device.getStatus() && device.getIp().equals(getIp())){
+		return "redirect:/devicesList";
+		}
+		if(device!=null && device.getStatus()){
+			device.setStatus(false);
+			raspberryService.delete(device.getIdRaspberry());
+		}
+			File f = new File(path);
 			 //GB
 			raspberryService.create(getIp(), getMac(), f.getTotalSpace()/1000000000.00 , f.getFreeSpace()/1000000000.00);
-		}else{
-			device.setStatus(false);
-			raspberryService.update(device.getIdRaspberry(),device.getIp(),device.getMac(),device.getTotalSize(),
-					device.getUseSize(),device.getConexionDate(),false);
-			
-		}
+		
+		
 		//add others
 		
 		return "redirect:/devicesList";
@@ -59,10 +62,11 @@ public class RaspberryController {
 	
 	@GetMapping("/deleteDevice")
 	public String deleteDevice(Model model, HttpServletRequest request){
+
 		raspberryService.delete(Integer.parseInt(request.getParameter("deviceId")));
 		model.addAttribute("Msg","Device: "+ raspberryService.findById(Integer.parseInt(request.getParameter("deviceId"))).getIp()+" deleted.");
 		return "listRasp";
-	} 
+	} /**/
 	
 	
 	private InetAddress getInetIp(){

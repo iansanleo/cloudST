@@ -10,6 +10,9 @@ import com.cloudST.model.Raspberry;
 @Repository
 public interface RaspberryRepository extends CrudRepository<Raspberry, Integer> {	
 	
-	@Query("SELECT R FROM Raspberry R WHERE mac=:mac")
+	@Query("SELECT R FROM Raspberry R WHERE R.mac=:mac AND R.status=true")
 	public Raspberry findRaspberryMac(@Param("mac")String mac);
+
+	@Query("SELECT R FROM Raspberry R WHERE  R.status=true")
+	public Iterable<Raspberry> findAllOn();
 }
