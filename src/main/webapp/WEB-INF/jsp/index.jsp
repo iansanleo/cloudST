@@ -17,21 +17,24 @@
 		</div>
 	</div>
 
-	<div id="login" align="center" style="margin: 0 auto; margin-top: 10%">
+	<div id="login" align="left" style="margin: 0 auto; margin-top: 10%">
 		<form action="login" method="post">
 
-      	   Username: <input type="text" name="userName" value="christian"/><br/>
+      	   Username: <br/>
+      	   <input type="text" name="userName" value="christian"/><br/>
 
-     	    Password : <input type="password" name="password" value="123456"/><br/>
+     	    Password :<br/>
+     	    <input type="password" name="password" value="123456"/><br/>
 
 			<div style="color:red">${Msg}</div>
-     	   <input type="submit" value="Submit"/>
+     	   <input type="submit" value="Access!"/>
      	 </form>
      	 <div id="url">
+     	 	<a href="/forgot">Forgot your password? </a><br/>
+     	 	Not a member yet?
+     	 	<a href="/newUser">Create a account! </a><br>
      	 	
-     	 	<a href="/newUser">Sing up </a><br>
      	 	
-     	 	<a href="/forgot">I forgot my password </a>
 		</div>
 	</div>
 	<jsp:include page="end.jsp"/>

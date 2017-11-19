@@ -63,9 +63,11 @@ public class UploadFileController {
         	}
         	
             byte[] bytes = file.getBytes();
-            //filename con id
-			DateUtils date = new DateUtils();
-            Path path = Paths.get(UPLOADED_FOLDER + date.toString() +"-"+file.getOriginalFilename());
+            String date =DateUtils.actualDate().toString();
+            date=date.replaceAll(":", ".");
+            date=date.replaceAll(" ","");
+            
+            Path path = Paths.get(UPLOADED_FOLDER + date +"@"+file.getOriginalFilename());
 			Files.write(path, bytes);
 
             model.addAttribute("Msg",
@@ -82,8 +84,7 @@ public class UploadFileController {
 				model.addAttribute("Msg","All the space corresponding to your plan is in use, delete resources or upgrade to the payment plan");
 				return "file";
 			}
-			//path.toString()
-			
+
             File fileCreate = fileService.create(file.getOriginalFilename(), path.toString(), megabytes, file.getContentType(), (Integer) session.getAttribute("idUserSession"));
             
             transactionService.createUpload(fileCreate.getIdFile(), (Integer)session.getAttribute("idUserSession"));

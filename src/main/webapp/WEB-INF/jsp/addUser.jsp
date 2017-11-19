@@ -17,7 +17,7 @@
 
 <body>
 	
-	<div class="form" align="center" style="margin: 0 auto; margin-top: 10%">
+	<div class="form" align="left" style="margin: 0 auto; margin-top: 10%">
 		<form action="userAdd" method="post">
 
 			<div style="color:red">${Msg}</div>

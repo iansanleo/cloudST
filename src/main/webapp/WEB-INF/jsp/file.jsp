@@ -12,7 +12,6 @@
 <jsp:include page="head.jsp"></jsp:include>	
  
 <title>Resources</title>
-
 </head>
 
 <body>
@@ -27,7 +26,6 @@
  
 	<jsp:include page="menuF.jsp"/>
 
-<div align="center">
 	<h2> User Resources</h2>
 	
 	<c:if test="${empty files }">
@@ -36,7 +34,7 @@
 				
 				<div style="color:blue">${Msg}</div>
 				
-		<table class="table table-striped">
+		<table class="tableM table table-striped ">
 			<thead>
 			<TR>
 				<TH>Name</TH>
@@ -57,7 +55,6 @@
    			   </c:forEach>
  			</tbody>
  		</table>
- 	</div>
  	
  	<jsp:include page="end.jsp"/>
 
