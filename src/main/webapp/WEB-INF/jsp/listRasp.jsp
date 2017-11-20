@@ -90,10 +90,18 @@
  	</table>
  	</div>
  	<form action="addDevices" method="post">
- 	
- 	<input type="submit" value="AddDevices"/>
-     	 </form>
- 	</main>
+ 		<input type="submit" value="Add Local Network Devices"/>
+     </form>
+     <br><br>
+     
+     <form action="addDeviceManually" method="post">
+     	Write the Ip of the remote device:
+     	<input type="text" name="ip"/><br/>
+     	Write the port of the remote device:
+     	<imput type="text" name="port" value="8080"/>
+     	<input type="submit" value="Add Remote Device"/>
+     </form> 	
+     </main>
  	</div>
 	</div>
 
