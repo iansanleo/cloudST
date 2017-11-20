@@ -15,6 +15,7 @@
 </head>
 
 <body>
+
 	<%Integer permissions = (Integer)session.getAttribute("permissions");%>
 	<c:if test="${permissions == 3}">
 		<jsp:include page="menuA.jsp"/>
@@ -49,7 +50,7 @@
 					<td> <c:out value="${file.size}"/> MB</td>
 					<td> <c:out value="${file.type}" /></td>
 					<td>
-						<a href = "/deleteResource?idFile=${file.idFile}"><img src="resources/img/iconDeletematerial.png"/></a>
+						<a href = "/deleteResource?idFile=${file.idFile}" onclick="return confirma()"><img src="resources/img/iconDeletematerial.png"/></a>
 					</td>
    			   </tr>
    			   </c:forEach>

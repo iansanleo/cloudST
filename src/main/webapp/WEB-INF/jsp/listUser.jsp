@@ -15,6 +15,7 @@
 </head>
 
 <body>
+	
 	<%Integer permissions = (Integer)session.getAttribute("permissions");%>
 	<c:if test="${permissions == 3}">
 		<jsp:include page="menuA.jsp"/>
@@ -80,7 +81,7 @@
 						<td> ${user.lastLogin} </td>
 						<td>
 							<a href = "/editUser?idUser=${user.idUser}"><img src="resources/img/iconEditmaterial.png"/></a>
-							<a href = "/delAdminUser?idUser=${user.idUser}"><img src="resources/img/iconDeletematerial.png"/></a>
+							<a href = "/delAdminUser?idUser=${user.idUser}" onclick="return confirma()"><img src="resources/img/iconDeletematerial.png"/></a>
 						</td>
  					</tr>
  				</c:forEach>

@@ -188,4 +188,6 @@ public class UserController {
 		emailService.sendEmail(validEmail);
 	  return "redirect:/";
 	  }
+	  
+	 
 }

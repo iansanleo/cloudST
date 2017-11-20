@@ -14,6 +14,7 @@
 </head>
 
 <body>
+	
 	<%Integer permissions = (Integer)session.getAttribute("permissions");%>
 
 	<c:if test="${permissions == 3}">
@@ -81,7 +82,7 @@
 				<td> ${dev.conexionDate}  </td>
 
 				<td>
-					<a href = "/deleteDevice?deviceId=${dev.idRaspberry}"><img src="resources/img/iconDeletematerial.png"/></a>
+					<a href = "/deleteDevice?deviceId=${dev.idRaspberry}" onclick="return confirma()"><img src="resources/img/iconDeletematerial.png"/></a>
 				</td>
  			</tr>
  		</c:forEach>

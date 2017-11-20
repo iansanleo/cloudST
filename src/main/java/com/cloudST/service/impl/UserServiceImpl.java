@@ -1,18 +1,20 @@
 package com.cloudST.service.impl;
 
+import java.util.ArrayList;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.cloudST.model.User;
 import com.cloudST.repository.UserRepository;
 import com.cloudST.service.UserService;
 import com.cloudST.service.exception.UserException;
 import com.cloudST.utiles.DateUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 
 @Service
 public class UserServiceImpl implements UserService {
 
+	
     @Autowired
     private UserRepository userRepository;
     
@@ -144,4 +146,5 @@ public class UserServiceImpl implements UserService {
         }
     	return user;
     }	
+    
 }
