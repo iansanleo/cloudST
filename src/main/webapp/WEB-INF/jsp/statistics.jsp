@@ -60,7 +60,7 @@
 
 
         <main role="main" style="width:80%">
-          <h1 align=center>Dashboard</h1>
+          <h1 align=center style="color:black;align-text:center; margin: 0 auto; margin-top: 5%">Dashboard</h1>
           	<br>
            <div class="row">
         		<div class="col-lg-2">

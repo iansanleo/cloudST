@@ -16,17 +16,17 @@
 </head>
 
 <body>
-	
-	<div class="form" align="left" style="margin: 0 auto; margin-top: 10%">
+	<h2 align="center" style="color:#ec6d1e; align-text:center; margin: 0 auto; margin-top: 5%">Be a new member of CloudST!</h2>
+	<div class="form" align="left" style="margin-left: 30%; margin-top=20%;">
 		<form action="userAdd" method="post">
-
+			
 			<div style="color:red">${Msg}</div>
 			
-      	    Username:        <input type="text" name="userName"/><br/>
-     	    Password:        <input type="password" name="password"/><br/>
-     	    Repeat Password: <input type="password" name="password2"/><br/>     	    
-     	    Complete Name:   <input type="text" name="name"/><br/>
-     	    Email:           <input type="text" name="email"/><br/>
+      	    Username:       <br/> <input type="text" name="userName"/><br/>
+     	    Password:       <br/> <input type="password" name="password"/><br/>
+     	    Repeat Password:<br/> <input type="password" name="password2"/><br/>     	    
+     	    Complete Name:  <br/> <input type="text" name="name"/><br/>
+     	    Email:          <br/> <input type="text" name="email"/><br/>
      	   
      	   <input type="submit" value="Add User"/><br/>
      	 </form>

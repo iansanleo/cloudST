@@ -26,8 +26,8 @@
 	
  
 	<jsp:include page="menuF.jsp"/>
-
-	<h2> User Resources</h2>
+<div align ="center" style="color:black;align-text:center; margin: 0 auto; margin-top: 5%">
+	<h2 > User Resources</h2>
 	
 	<c:if test="${empty files }">
 					<div style="color:blue">No resources stored</div>
@@ -56,7 +56,7 @@
    			   </c:forEach>
  			</tbody>
  		</table>
- 	
+ 	</div>
  	<jsp:include page="end.jsp"/>
 
 </body>

@@ -57,11 +57,11 @@
           </nav>
           
     <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
-          <h2>List Devices</h2> 
+          <h2 style="color:black;align-text:center; margin: 0 auto; margin-top: 5%"align="center">List Devices</h2> 
           
 	<div style="color:red">${Msg}</div>
 	
-	<div class="table-responsive">
+	<div class="table-responsive" align="center">
     <table class="table table-striped">
     <thead>
 		<TR>
@@ -95,10 +95,10 @@
      <br><br>
      
      <form action="addDeviceManually" method="post">
-     	Write the Ip of the remote device:
-     	<input type="text" name="ip"/><br/>
-     	Write the port of the remote device:
-     	<imput type="text" name="port" value="8080"/>
+     	Write the Ip of the remote device:<br/>
+     	<input type="text" name="ip" value="000.000.000.000"/><br/>
+     	Write the port of the remote device:<br/>
+     	<input type="text" name="port" value="8080"/><br/>
      	<input type="submit" value="Add Remote Device"/>
      </form> 	
      </main>

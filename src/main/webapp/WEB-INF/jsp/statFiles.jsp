@@ -56,7 +56,7 @@
           </nav>
           
     <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
-          <h2 align=center>Statistics Files and Storage</h2> 
+          <h2 align=center style="color:black;align-text:center; margin: 0 auto; margin-top: 5%">Statistics Files and Storage</h2> 
           <br>
 	<div style="color:red">${Msg}</div>
 	

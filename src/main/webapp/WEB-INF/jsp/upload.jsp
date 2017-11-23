@@ -27,7 +27,7 @@
 	<jsp:include page="menuF.jsp"/>
 	
 	
-	<h2 align="center">Upload your files</h2> 
+	<h2 align="center" style="color:black;align-text:center; margin: 0 auto; margin-top: 5%">Upload your files</h2> 
 	  
 	<div class="form" align="center" style="margin: 0 auto; margin-top: 10%">
 

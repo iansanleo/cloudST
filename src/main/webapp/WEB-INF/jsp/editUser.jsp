@@ -30,8 +30,8 @@
 	<jsp:include page="menuF.jsp"/>
  
  
-	<div class="form">
-	 	 <h1 style="aligng:center">Edit user information</h1>
+	<div class="form" align="center" style="margin: 0 auto; margin-top: 10%">
+	 	 <h1 style="aligng:center" color:black; align-text:center; margin: 0 auto; margin-top: 5%">Edit user information</h1>
 	 
    
     <c:if test="${empty idUser}"> 

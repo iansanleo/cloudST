@@ -54,8 +54,8 @@
           </nav>  
 		
         <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
-          <h2>List Users</h2>
-			<div class="table-responsive">
+          <h2 style="color:black;align-text:center; margin: 0 auto; margin-top: 5%" align="center">List Users</h2>
+			<div class="table-responsive" align="center">
         	<table class="table table-striped">
         	<thead>
 				<TR>
