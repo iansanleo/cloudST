@@ -61,6 +61,8 @@ public class RaspberryController {
 		String ip = request.getParameter("ip").toString();
 		String port = request.getParameter("port").toString();
 		
+		
+		
 		model.addAttribute("Msg","Remote Device added succefully!");
 		return "listRasp";
 	}
