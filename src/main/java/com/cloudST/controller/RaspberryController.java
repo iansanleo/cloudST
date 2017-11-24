@@ -1,13 +1,22 @@
 package com.cloudST.controller;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
+import java.net.URL;
 import java.net.UnknownHostException;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -40,28 +49,60 @@ public class RaspberryController {
 	
 	@PostMapping("/addDevices")
 	public String addLocalDevice(Model model){
-		Raspberry device = raspberryService.findByMac(getMac());
-		
-		if(device!=null && device.getStatus() && device.getIp().equals(getIp())){
-		return "redirect:/devicesList";
-		}
-		if(device!=null && device.getStatus()){
-			device.setStatus(false);
-			raspberryService.delete(device.getIdRaspberry());
-		}
-			raspberryService.create(getIp(), getMac(), getTotalSize() ,getUsedSize());
-		
-		
+			Raspberry newDevice= new Raspberry();
+			Raspberry oldDevice= new Raspberry();
+			String response;
+		//Supose 192.168.0.X
+		//		 192.168.0.1 gateway
+		//		 255.255.255.0
 		//add others searching ip
+			for(int i=1;i<254;i++){
+				try {
+					response=sendGET("192.168.0."+i+":8080/identify");
+					if(response==null){continue;}
+					
+					newDevice=createRaspJson(response);
+					oldDevice=raspberryService.findByMac(newDevice.getMac());
+					
+					if(oldDevice==null){
+						raspberryService.create(newDevice);
+						continue;
+					}
+					if(!oldDevice.getStatus()){
+						raspberryService.create(newDevice);
+						continue;
+					}
+					if(!oldDevice.getIp().equals(newDevice.getIp())){
+						raspberryService.delete(oldDevice.getIdRaspberry());
+						raspberryService.create(newDevice);
+						continue;
+						}
+					
+				} catch (IOException e) {
+					continue;
+				}
+				
+			}
 		
 		return "redirect:/devicesList";
 	}
+	
 	@PostMapping("/addDeviceManually")
 	public String addManualDevice(Model model, HttpServletRequest request){
 		String ip = request.getParameter("ip").toString();
 		String port = request.getParameter("port").toString();
+		String response ="";
 		
-		
+		try {
+			response=sendGET("http://"+ip+":"+port+"/identify");
+			if(response!=null){
+				raspberryService.create(createRaspJson(response));
+			}else {
+				model.addAttribute("Msg","We were unable to connect, review the data enteredor the remote device configuration, please");
+			}
+		} catch (IOException e) {
+			model.addAttribute("Msg","We were unable to connect, review the data enteredor the remote device configuration, please");
+		}
 		
 		model.addAttribute("Msg","Remote Device added succefully!");
 		return "listRasp";
@@ -98,7 +139,6 @@ public class RaspberryController {
       
         return response;
     }
-	
 	
 	private InetAddress getInetIp(){
 		try {
@@ -141,4 +181,53 @@ public class RaspberryController {
 		File f = new File(path);
 	return (getTotalSize()-(f.getFreeSpace()/10000000.00));
 	}
+	
+	private String sendGET(String url) throws IOException {
+		URL obj = new URL(url);
+		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+		con.setRequestMethod("GET");
+		int responseCode = con.getResponseCode();
+		System.out.println("GET Response Code :: " + responseCode);
+		if (responseCode == HttpURLConnection.HTTP_OK) { // success
+			BufferedReader in = new BufferedReader(new InputStreamReader(
+					con.getInputStream()));
+			String inputLine;
+			StringBuffer response = new StringBuffer();
+
+			while ((inputLine = in.readLine()) != null) {
+				response.append(inputLine);
+			}
+			in.close();
+			return inputLine;
+		} 
+		System.out.println("GET request not worked");
+		return null;
+	}
+	
+	private Raspberry createRaspJson(String response){
+		JSONParser parser = new JSONParser();
+		JSONObject jsonObject = null;
+		Raspberry raspberry = new Raspberry();
+		
+		try {
+			jsonObject = (JSONObject) parser.parse(response);
+		} catch (ParseException e1) {
+	
+			e1.printStackTrace();
+		}
+		try {
+			raspberry.setIp((String) jsonObject.get("ip"));
+			raspberry.setMac((String) jsonObject.get("mac"));
+			raspberry.setTotalSize((double)jsonObject.get("totalSize"));
+			raspberry.setUseSize((double) jsonObject.get("useSize"));
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return raspberry;
+	}
+
 }
+

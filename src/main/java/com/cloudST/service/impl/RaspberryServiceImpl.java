@@ -61,6 +61,10 @@ public class RaspberryServiceImpl implements RaspberryService {
 	}
 	
 	@Override
+	public Raspberry create(Raspberry raspberry){
+		return create(raspberry.getIp(),raspberry.getMac(),raspberry.getTotalSize(),raspberry.getUseSize());
+	}
+	@Override
 	public Raspberry update(Integer idRaspberry,String ip, String mac, double totalSize, double useSize,
 			Date conexionDate, boolean status){
 		Raspberry raspberry = raspberryRepository.findOne(idRaspberry);

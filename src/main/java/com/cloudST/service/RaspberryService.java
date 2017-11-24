@@ -16,5 +16,6 @@ public interface RaspberryService {
 	Raspberry findByMac(String mac);
 	Raspberry update(Integer idRaspberry, String ip, String mac, double totalSize, double useSize, Date conexionDate,
 			boolean status);
+	Raspberry create(Raspberry raspberry);
 
 }
