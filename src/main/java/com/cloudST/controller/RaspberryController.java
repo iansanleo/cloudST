@@ -221,8 +221,7 @@ public class RaspberryController {
 			raspberry.setMac((String) jsonObject.get("mac"));
 			raspberry.setTotalSize((double)jsonObject.get("totalSize"));
 			raspberry.setUseSize((double) jsonObject.get("useSize"));
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
