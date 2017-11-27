@@ -53,13 +53,13 @@ public class RaspberryController {
 			Raspberry newDevice= new Raspberry();
 			Raspberry oldDevice= new Raspberry();
 			String response;
-		//Supose 192.168.0.X
-		//		 192.168.0.1 gateway
+		//Supose 192.168.168.X
+		//		 192.168.168.1 gateway
 		//		 255.255.255.0
 		//add others searching ip
-			for(int i=1;i<254;i++){
+			for(int i=100;i<254;i++){
 				try {
-					response=sendGET("192.168.0."+i+":8080/identify");
+					response=sendGET("192.168.168."+i+":8080/identify");
 					if(response==null){continue;}
 					
 					newDevice=createRaspJson(response);
