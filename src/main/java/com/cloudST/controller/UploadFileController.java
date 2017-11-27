@@ -36,13 +36,15 @@ public class UploadFileController {
 	@Autowired
 	private PrivilegeService privilegeService;
 
-    private static String UPLOADED_FOLDER = "C://temp//";
+	private static String UPLOADED_FOLDER="//home//pi//CloudSTtemp//";
+    //private static String UPLOADED_FOLDER = "C://temp//";
+	
     /*
        windows 
        new File("d:/yourApplicationName/" + name + "-uploaded")
 
         linux
-    	new File("/home/yourApplicationName/" + name + "-uploaded")
+    	new File("/home/pi/CloudSTtemp/" + name + "-uploaded")
      */
 
     @PostMapping("/uploadFile")

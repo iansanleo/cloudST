@@ -38,7 +38,8 @@ public class RaspberryController {
 	@Autowired
 	RaspberryService raspberryService;
 	
-	private static String path ="C:\\";
+	private static String path ="//home//";
+	//private static String path ="C:\\";
     /*
        windows 
        new File("d:/yourApplicationName/" + name + "-uploaded")
