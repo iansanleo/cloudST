@@ -1,15 +1,19 @@
 package com.cloudST.service.impl;
 
-import java.util.ArrayList;
-import java.util.Date;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.cloudST.model.Raspberry;
 import com.cloudST.repository.RaspberryRepository;
 import com.cloudST.service.RaspberryService;
 import com.cloudST.utiles.DateUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Date;
 
 @Service
 public class RaspberryServiceImpl implements RaspberryService {
@@ -45,6 +49,31 @@ public class RaspberryServiceImpl implements RaspberryService {
 	
 	@Override
 	public ArrayList<Raspberry> listDevicesOn(){
+		ArrayList<Raspberry> devicesInRepository = getDevicesOnInRepository();
+		ArrayList<Raspberry> devicesOn = removeDevicesNotConnected(devicesInRepository);
+		return devicesOn;
+	}
+
+	private ArrayList<Raspberry> removeDevicesNotConnected(ArrayList<Raspberry> devicesInRepository) {
+		ArrayList<Raspberry> devicesOn = new ArrayList<>();
+		for(Raspberry device : devicesInRepository){
+			try {
+				String response = sendGET("http://" + device.getIp()+ ":8080/identify");
+				if(response==null){
+					delete(device.getIdRaspberry());
+				}else{
+					devicesOn.add(device);
+				}
+
+			} catch (IOException e) {
+				delete(device.getIdRaspberry());
+				continue;
+			}
+		}
+		return devicesOn;
+	}
+
+	private ArrayList<Raspberry> getDevicesOnInRepository() {
 		ArrayList<Raspberry> listRaspberry = (ArrayList<Raspberry>)raspberryRepository.findAllOn();
 		for(int i=0;i<listRaspberry.size();i++){
 			if(!listRaspberry.get(i).getStatus()){
@@ -53,6 +82,7 @@ public class RaspberryServiceImpl implements RaspberryService {
 		}
 		return listRaspberry;
 	}
+
 	@Override
 	public Raspberry create(String ip, String mac, double totalSize, double useSize){
 		Raspberry raspberry = new Raspberry( ip, mac, totalSize, useSize, DateUtils.actualDate(), true);
@@ -61,8 +91,15 @@ public class RaspberryServiceImpl implements RaspberryService {
 	}
 	
 	@Override
-	public Raspberry create(Raspberry raspberry){
-		return create(raspberry.getIp(),raspberry.getMac(),raspberry.getTotalSize(),raspberry.getUseSize());
+	public Raspberry create(Raspberry newDevice){
+		Raspberry result = null;
+		Raspberry possibleOldDevice = findByMac(newDevice.getMac());
+		if(possibleOldDevice == null){
+			result = create(newDevice.getIp(),newDevice.getMac(),newDevice.getTotalSize(),newDevice.getUseSize());
+		}else{
+			result = update(possibleOldDevice.getIdRaspberry(), newDevice.getIp(),newDevice.getMac(),newDevice.getTotalSize(),newDevice.getUseSize(), DateUtils.actualDate(), true);
+		}
+		return result;
 	}
 	@Override
 	public Raspberry update(Integer idRaspberry,String ip, String mac, double totalSize, double useSize,
@@ -90,5 +127,27 @@ public class RaspberryServiceImpl implements RaspberryService {
 	@Override
 	public Raspberry findById(Integer idRaspberry) {
 		return raspberryRepository.findOne(idRaspberry);
+	}
+
+	private String sendGET(String url) throws IOException {
+		URL obj = new URL(url);
+		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+		con.setRequestMethod("GET");
+		int responseCode = con.getResponseCode();
+		System.out.println("GET Response Code :: " + responseCode);
+		if (responseCode == HttpURLConnection.HTTP_OK) { // success
+			BufferedReader in = new BufferedReader(new InputStreamReader(
+					con.getInputStream()));
+			String inputLine;
+			StringBuffer response = new StringBuffer();
+
+			while ((inputLine = in.readLine()) != null) {
+				response.append(inputLine);
+			}
+			in.close();
+			return response.toString();
+		}
+		System.out.println("GET request not worked");
+		return null;
 	}
 }
