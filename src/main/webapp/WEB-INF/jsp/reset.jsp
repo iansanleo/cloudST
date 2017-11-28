@@ -16,7 +16,7 @@
 </head>
 
 <body>
-	
+	<h2 align="center" style="color:#ec6d1e; align-text:center; margin: 0 auto; margin-top: 5%">Click in the button for Reset your password!</h2>
 	<div class="form" align="center" style="margin: 0 auto; margin-top: 10%">
 		<div style="color:red">${Msg}</div>
 		<form action="reset" method="post">

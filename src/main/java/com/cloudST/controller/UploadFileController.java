@@ -94,6 +94,9 @@ public class UploadFileController {
             model.addAttribute("Msg","You successfully uploaded '" + file.getOriginalFilename() + "'");
         } catch (IOException e) {
             e.printStackTrace();
+        }catch (IllegalStateException e){
+        	
+        	model.addAttribute("Msg","The file is too big! Remember smaller than 2 MB");
         }
         return "upload";
     }

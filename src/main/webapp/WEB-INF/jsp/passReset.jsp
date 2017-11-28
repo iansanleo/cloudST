@@ -16,6 +16,7 @@
 </head>
 
 <body>
+<h2 align="center" style="color:#ec6d1e; align-text:center; margin: 0 auto; margin-top: 5%">Write your new password here</h2>
 	
 	<div class="form" align="center" style="margin: 0 auto; margin-top: 10%">
 		<div style="color:red">${Msg}</div>

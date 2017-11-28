@@ -75,10 +75,8 @@ public class PasswordController {
 	@PostMapping(value = "/reset")
 	public String setNewPassword(Model model, HttpServletRequest request) {
 
-		System.out.println(request.getParameter("token"));
 		User user = userService.findUserByResetToken(request.getParameter("token"));
 
-		System.out.println("pero que mierda!");
 		if (!user.getName().isEmpty()) { 
              
 			if(!request.getParameter("password").equals(request.getParameter("password2"))) {
