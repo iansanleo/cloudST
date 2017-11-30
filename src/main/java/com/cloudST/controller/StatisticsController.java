@@ -152,7 +152,7 @@ public class StatisticsController {
 	}
 	
 	private double percUsed() {
-		return ((raspberryService.totalSizeUsed()/raspberryService.totalSizeRasps())*100);
+		return ((raspberryService.totalSizeUsed()*100)/raspberryService.totalSizeRasps());
 	}
 
 	private double mbFile(){

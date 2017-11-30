@@ -31,6 +31,7 @@ public class RaspberryController {
 	RaspberryService raspberryService;
 	
 	private static String path ="//home//";
+	
 	//private static String path ="C:\\";
     /*
        windows 
@@ -146,7 +147,8 @@ public class RaspberryController {
 	}
 	
 	private double getTotalSize(){
-		File f = new File(path);	
+		File f = new File(path);
+		
 	return  f.getTotalSpace()/10000000.00;
 	}
 	

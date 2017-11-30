@@ -23,7 +23,7 @@ public class RaspberryServiceImpl implements RaspberryService {
 	
 	@Override
 	public double totalSizeRasps() {
-		ArrayList<Raspberry> listRaspberry = (ArrayList<Raspberry>) raspberryRepository.findAll();
+		ArrayList<Raspberry> listRaspberry = (ArrayList<Raspberry>) raspberryRepository.findAllOn();
 		double totalSize=1;
 		
 		for(int i=0; i<listRaspberry.size();i++){
@@ -39,7 +39,7 @@ public class RaspberryServiceImpl implements RaspberryService {
 	
 	@Override
 	public double totalSizeUsed() {
-		ArrayList<Raspberry> listRaspberry = (ArrayList<Raspberry>) raspberryRepository.findAll();
+		ArrayList<Raspberry> listRaspberry = (ArrayList<Raspberry>) raspberryRepository.findAllOn();
 		double totalSize=1;
 		for(int i=0; i<listRaspberry.size();i++){
 			totalSize=+listRaspberry.get(i).getUseSize();
