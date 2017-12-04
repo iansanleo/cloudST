@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.cloudST.model.User;
 import com.cloudST.service.EmailService;
+import com.cloudST.service.FileService;
 import com.cloudST.service.PrivilegeService;
 import com.cloudST.service.UserService;
 import com.cloudST.service.exception.UserException;
@@ -28,6 +29,9 @@ public class UserController {
 	
 	@Autowired
 	private EmailService emailService;
+	
+	@Autowired
+	private FileService fileService;
 
 	@PostMapping("/login")
 	public String login(Model model, HttpServletRequest request){
@@ -158,6 +162,8 @@ public class UserController {
 	  @GetMapping("/delAdminUser")
 	  public String deleteAdminUser(Model model, HttpServletRequest request){ 
 		  userService.delete(Integer.parseInt(request.getParameter("idUser")));
+		  fileService.deleteAllFilesUser(Integer.parseInt(request.getParameter("idUser")));
+		  privilegeService.deleteUser(Integer.parseInt(request.getParameter("idUser")));
 		  return "redirect:/userList";
 	  }
 	  

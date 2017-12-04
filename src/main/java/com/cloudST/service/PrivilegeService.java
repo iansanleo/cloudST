@@ -13,4 +13,6 @@ public interface PrivilegeService {
 
 	Integer actualType(Integer idUser);
 
+	Privilege deleteUser(Integer idUser);
+
 }

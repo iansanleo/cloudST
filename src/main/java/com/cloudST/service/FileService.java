@@ -19,4 +19,6 @@ public interface FileService {
 
 	File findByIdFile(Integer idFile);
 
+	void deleteAllFilesUser(Integer idUser);
+
 }

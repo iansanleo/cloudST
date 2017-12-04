@@ -12,5 +12,8 @@ public interface FileRepository extends CrudRepository<File, Integer> {
 
 	@Query("SELECT F FROM File F WHERE F.idUser=:idUser AND F.status=true")
 	public Iterable<File> findByIdUser(@Param("idUser")Integer idUser);
+	
+	@Query("SELECT F FROM File F WHERE F.status=true")
+	public Iterable<File> allTrueFiles();
 
 }

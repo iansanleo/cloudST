@@ -21,4 +21,10 @@ public class CommonController {
 	public String withOutSession(Model model){
 		return "index";
 	}
+	
+	@GetMapping("/help")
+	public String help(Model model){
+		return "help";
+		
+	}
 }

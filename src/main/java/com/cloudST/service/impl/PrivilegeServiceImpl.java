@@ -1,7 +1,5 @@
 package com.cloudST.service.impl;
 
-import java.util.ArrayList;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,23 +28,23 @@ public class PrivilegeServiceImpl implements PrivilegeService {
 
 	@Override
 	public Privilege update(Integer idUser, Integer type) {
-		ArrayList<Privilege> listPrivilege = (ArrayList<Privilege>)privilegeRepository.findAll();
-		
-		for(int i=0;i<listPrivilege.size();i++){
-			if(listPrivilege.get(i).getIdUsuario()==idUser && listPrivilege.get(i).getStatus()== true){
-				if(listPrivilege.get(i).getType()==type){
-					return listPrivilege.get(i);
-				}else{
-					listPrivilege.get(i).setStatus(false);
-					return create(type,idUser);
-				}
-			}
+		Privilege privilege =privilegeRepository.findByIdUser(idUser);
+		if(privilege.getType()==type){
+			return privilege;
+		}else{
+			return create(type,idUser);
 		}
-	return null;
 	}
 	
 	@Override
 	public Integer actualType(Integer idUser){
 		return privilegeRepository.findByIdUser(idUser).getType();
+	}
+	
+	@Override
+	public Privilege deleteUser(Integer idUser){
+		Privilege privilege = privilegeRepository.findByIdUser(idUser);
+		privilege.setStatus(false);
+		return privilegeRepository.save(privilege);
 	}
 }

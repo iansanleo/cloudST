@@ -31,8 +31,8 @@ public class FileServiceImpl implements FileService {
 	}
 
 	@Override
-	public File delete(Integer idUser)throws FileException {
-		File file = fileRepository.findOne(idUser);
+	public File delete(Integer idFile)throws FileException {
+		File file = fileRepository.findOne(idFile);
 		file.setStatus(false);
 		fileRepository.save(file);
 		return file;
@@ -45,17 +45,23 @@ public class FileServiceImpl implements FileService {
 
 	@Override
 	public ArrayList<File> filesLiberate(){
-		ArrayList<File> listFile = allFiles();
-		for(int i=0;i<listFile.size();i++){
-			if(!listFile.get(i).getStatus()){
-				listFile.remove(i);
-			}
-		}
-		return listFile;
+		return (ArrayList<File>) fileRepository.allTrueFiles();
 	}
 
 	@Override
 	public File findByIdFile(Integer idFile) {
 		return fileRepository.findOne(idFile);
+	}
+	
+	@Override
+	public void deleteAllFilesUser(Integer idUser){
+		
+		ArrayList<File> allFiles= allUserFiles(idUser);
+		for (int i=0;i<allFiles.size();i++){
+			fileRepository.delete(allFiles.get(i));
+			
+			
+		}
+		
 	}
 }
