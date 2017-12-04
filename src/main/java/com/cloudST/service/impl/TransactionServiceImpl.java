@@ -24,4 +24,11 @@ public class TransactionServiceImpl implements TransactionService {
 		Transaction transaction = new Transaction(DateUtils.actualDate(),"delete",idFile,idUser);
 		return transactionRepository.save(transaction);
 	}
+	
+	@Override
+	public Transaction createDownload(Integer idFile, Integer idUser){
+		Transaction transaction = new Transaction(DateUtils.actualDate(),"download",idFile,idUser);
+		return transactionRepository.save(transaction);
+		
+	}
 }

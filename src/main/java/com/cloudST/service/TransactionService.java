@@ -8,4 +8,6 @@ public interface TransactionService {
 	
 	Transaction createDelete(Integer idFile, Integer idUser);
 
+	Transaction createDownload(Integer idFile, Integer idUser);
+
 }

@@ -63,6 +63,10 @@ public class UploadFileController {
         	 model.addAttribute("Msg","You must validate your email before uploading a file");
         	 return "upload";
         	}
+        	if(fullMaxStorageUser((Integer)session.getAttribute("idUserSession"))){
+				model.addAttribute("Msg","All the space corresponding to your plan is in use, delete resources or upgrade to the payment plan");
+				return "file";
+			}
         	
             byte[] bytes = file.getBytes();
             String date =DateUtils.actualDate().toString();
@@ -82,10 +86,7 @@ public class UploadFileController {
 			
 			if(megabytes<0.1){megabytes=0.1;}
 
-			if(fullMaxStorageUser((Integer)session.getAttribute("idUserSession"))){
-				model.addAttribute("Msg","All the space corresponding to your plan is in use, delete resources or upgrade to the payment plan");
-				return "file";
-			}
+			
 
             File fileCreate = fileService.create(file.getOriginalFilename(), path.toString(), megabytes, file.getContentType(), (Integer) session.getAttribute("idUserSession"));
             
