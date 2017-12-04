@@ -3,6 +3,8 @@ package com.cloudST.controller;
 import com.cloudST.model.Raspberry;
 import com.cloudST.service.RaspberryService;
 import com.cloudST.utiles.DateUtils;
+import com.cloudST.utiles.SystemInfo;
+
 import org.json.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -29,17 +31,6 @@ public class RaspberryController {
 	
 	@Autowired
 	RaspberryService raspberryService;
-	
-	private static String path ="//home//";
-	
-	//private static String path ="C:\\";
-    /*
-       windows 
-       new File("d:/yourApplicationName/" + name + "-uploaded")
-
-        linux
-    	new File("/home/yourApplicationName/" + name + "-uploaded")
-     */
 	
 	@PostMapping("/addDevices")
 	public String addLocalDevice(Model model){
@@ -69,6 +60,7 @@ public class RaspberryController {
 	
 	@GetMapping("/devicesList")
 	public String listDevices(Model model){
+		//nuevos
 		model.addAttribute("devices", raspberryService.listDevicesOn());
 		return "listRasp";
 	}
@@ -147,13 +139,13 @@ public class RaspberryController {
 	}
 	
 	private double getTotalSize(){
-		File f = new File(path);
+		File f = new File(SystemInfo.path());
 		
 	return  f.getTotalSpace()/10000000.00;
 	}
 	
 	private double getUsedSize(){
-		File f = new File(path);
+		File f = new File(SystemInfo.path());
 	return (getTotalSize()-(f.getFreeSpace()/10000000.00));
 	}
 	
@@ -198,7 +190,6 @@ public class RaspberryController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 		
 		return raspberry;
 	}

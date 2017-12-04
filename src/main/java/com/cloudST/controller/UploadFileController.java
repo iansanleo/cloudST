@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import com.cloudST.utiles.DateUtils;
+import com.cloudST.utiles.SystemInfo;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,17 +37,6 @@ public class UploadFileController {
 	private UserService userService;
 	@Autowired
 	private PrivilegeService privilegeService;
-
-	private static String UPLOADED_FOLDER="//home//pi//CloudSTtemp//";
-    //private static String UPLOADED_FOLDER = "C://temp//";
-	
-    /*
-       windows 
-       new File("d:/yourApplicationName/" + name + "-uploaded")
-
-        linux
-    	new File("/home/pi/CloudSTtemp/" + name + "-uploaded")
-     */
 
     @PostMapping("/uploadFile")
     public String singleFileUpload(Model model, @RequestParam("file") MultipartFile file,
@@ -73,7 +64,7 @@ public class UploadFileController {
             date=date.replaceAll(":", ".");
             date=date.replaceAll(" ","");
             
-            Path path = Paths.get(UPLOADED_FOLDER + date +"@"+file.getOriginalFilename());
+            Path path = Paths.get(SystemInfo.pathStore() + date +"@"+file.getOriginalFilename());
 			Files.write(path, bytes);
 
             model.addAttribute("Msg",

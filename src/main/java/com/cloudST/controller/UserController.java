@@ -40,6 +40,7 @@ public class UserController {
         String password = request.getParameter("password").toString();
 
 		User user = null;
+	  
 		try {
 			user = userService.authentication(userName, password);
 		} catch (UserException e) {
