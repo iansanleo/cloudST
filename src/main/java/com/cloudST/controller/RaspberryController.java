@@ -34,6 +34,7 @@ public class RaspberryController {
 	
 	@PostMapping("/addDevices")
 	public String addLocalDevice(Model model){
+		raspberryService.scan();
 		return "redirect:/devicesList";
 	}
 	

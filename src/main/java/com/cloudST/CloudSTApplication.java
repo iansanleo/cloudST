@@ -9,8 +9,13 @@ import org.springframework.boot.context.embedded.tomcat.TomcatConnectorCustomize
 import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+
+import java.util.concurrent.Executor;
 
 @SpringBootApplication
+@EnableAsync
 public class CloudSTApplication {
 
 	private int maxUploadSizeInMb = 10 * 1024 * 1024; // 10 MB
@@ -35,5 +40,10 @@ public class CloudSTApplication {
         });
 
         return tomcat;
+    }
+
+    @Bean
+    public Executor asyncExecutor(){
+        return new ThreadPoolTaskExecutor();
     }
 }

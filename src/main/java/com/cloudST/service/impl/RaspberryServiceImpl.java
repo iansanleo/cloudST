@@ -4,7 +4,9 @@ import com.cloudST.model.Raspberry;
 import com.cloudST.repository.RaspberryRepository;
 import com.cloudST.service.RaspberryService;
 import com.cloudST.utiles.DateUtils;
+import com.cloudST.utiles.NetworkDevicesScanner;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
@@ -20,6 +22,9 @@ public class RaspberryServiceImpl implements RaspberryService {
 	
 	@Autowired
 	RaspberryRepository raspberryRepository;
+
+	@Autowired
+	NetworkDevicesScanner networkDevicesScanner;
 	
 	@Override
 	public double totalSizeRasps() {
@@ -58,7 +63,7 @@ public class RaspberryServiceImpl implements RaspberryService {
 		ArrayList<Raspberry> devicesOn = new ArrayList<>();
 		for(Raspberry device : devicesInRepository){
 			try {
-				String response = sendGET("http://" + device.getIp()+ ":8080/identify");
+				String response = networkDevicesScanner.sendGET("http://" + device.getIp()+ ":8080/identify");
 				if(response==null){
 					delete(device.getIdRaspberry());
 				}else{
@@ -101,6 +106,13 @@ public class RaspberryServiceImpl implements RaspberryService {
 		}
 		return result;
 	}
+
+	@Async
+	@Override
+	public void scan() {
+		networkDevicesScanner.scanNetwork();
+	}
+
 	@Override
 	public Raspberry update(Integer idRaspberry,String ip, String mac, double totalSize, double useSize,
 			Date conexionDate, boolean status){
@@ -128,27 +140,5 @@ public class RaspberryServiceImpl implements RaspberryService {
 	@Override
 	public Raspberry findById(Integer idRaspberry) {
 		return raspberryRepository.findOne(idRaspberry);
-	}
-
-	private String sendGET(String url) throws IOException {
-		URL obj = new URL(url);
-		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-		con.setRequestMethod("GET");
-		int responseCode = con.getResponseCode();
-		System.out.println("GET Response Code :: " + responseCode);
-		if (responseCode == HttpURLConnection.HTTP_OK) { // success
-			BufferedReader in = new BufferedReader(new InputStreamReader(
-					con.getInputStream()));
-			String inputLine;
-			StringBuffer response = new StringBuffer();
-
-			while ((inputLine = in.readLine()) != null) {
-				response.append(inputLine);
-			}
-			in.close();
-			return response.toString();
-		}
-		System.out.println("GET request not worked");
-		return null;
 	}
 }

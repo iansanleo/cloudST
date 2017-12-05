@@ -18,4 +18,6 @@ public interface RaspberryService {
 			boolean status);
 	Raspberry create(Raspberry raspberry);
 
+	void scan();
+
 }
