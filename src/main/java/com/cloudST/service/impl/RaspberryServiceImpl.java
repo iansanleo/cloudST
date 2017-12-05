@@ -110,6 +110,7 @@ public class RaspberryServiceImpl implements RaspberryService {
 		raspberry.setTotalSize(totalSize);
 		raspberry.setConexionDate(conexionDate);
 		raspberry.setStatus(status);
+		raspberry.setMount(status);
 		
 		raspberryRepository.save(raspberry);
 		

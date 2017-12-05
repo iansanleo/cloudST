@@ -27,6 +27,8 @@ public class Raspberry {
 	private Date conexionDate;
 	@NotNull
 	private boolean status;
+	
+	private boolean mount;
 
 	public Raspberry(){}
 	public Raspberry(String ip, String mac, double totalSize, double useSize,
@@ -38,6 +40,7 @@ public class Raspberry {
 		this.useSize = useSize;
 		this.conexionDate = conexionDate;
 		this.status = status;
+		this.mount = status;
 		
 	}
 	
@@ -49,6 +52,7 @@ public class Raspberry {
 	public double getUseSize(){return this.useSize;}
 	public Date getConexionDate(){return this.conexionDate;}
 	public boolean getStatus(){return this.status;}
+	public boolean getMount(){return this.mount;}
 
 	//Setters
 	public void setIdRaspberry(Integer idRaspberry){this.idRaspberry = idRaspberry;}
@@ -58,4 +62,5 @@ public class Raspberry {
 	public void setUseSize (double useSize){this.useSize = useSize;}
 	public void setConexionDate(Date conexionDate){this.conexionDate = conexionDate;}
 	public void setStatus (boolean status){this.status = status;}
+	public void setMount (boolean mount){this.mount = mount;}
 }
