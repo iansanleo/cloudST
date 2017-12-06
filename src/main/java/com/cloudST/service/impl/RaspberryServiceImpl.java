@@ -1,21 +1,18 @@
 package com.cloudST.service.impl;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.stereotype.Service;
+
 import com.cloudST.model.Raspberry;
 import com.cloudST.repository.RaspberryRepository;
 import com.cloudST.service.RaspberryService;
 import com.cloudST.utiles.DateUtils;
 import com.cloudST.utiles.NetworkDevicesScanner;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.stereotype.Service;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Date;
 
 @Service
 public class RaspberryServiceImpl implements RaspberryService {

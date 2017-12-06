@@ -16,6 +16,7 @@ public class File {
 	private String oriName;
 	@NotNull
 	private String sysName;
+	private String server;
 	private boolean status;
 	//MB
 	private double size;
@@ -26,7 +27,7 @@ public class File {
 	public File(){}
 
 	public File(String oriName, String sysName, boolean status, double size,
-			String type, Integer idUser){
+			String type, Integer idUser, String server){
 		
 		this.oriName = oriName;
 		this.sysName = sysName;
@@ -34,6 +35,7 @@ public class File {
 		this.size = size;
 		this.type = type;
 		this.idUser = idUser;
+		this.server = server;
 	}
 
 	//Getters
@@ -44,6 +46,7 @@ public class File {
 	public double getSize(){return this.size;}
 	public String getType(){return this.type;}
 	public Integer getIdUser(){return this.idUser;}
+	public String getServer(){return this.server;}
 
 	//Setters
 	public void setIdFile(Integer idFile){this.idFile = idFile;}
@@ -53,4 +56,5 @@ public class File {
 	public void setSize(double size){this.size = size;}
 	public void setType(String type){this.type = type;}
 	public void setIdUser(Integer idUser){this.idUser = idUser;}
+	public void setServer (String server){this.server = server;}
 }
