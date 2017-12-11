@@ -32,6 +32,7 @@ public class PrivilegeServiceImpl implements PrivilegeService {
 		if(privilege.getType()==type){
 			return privilege;
 		}else{
+			deleteUser(idUser);
 			return create(type,idUser);
 		}
 	}
