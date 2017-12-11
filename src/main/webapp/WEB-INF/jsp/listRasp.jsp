@@ -86,7 +86,8 @@
  		</tbody>
  	</table>
  	</div>
- 	<form action="addDevices" method="post">
+ 	<form align="center" action="addDevices" method="post">
+ 	The operation may take a few minutes to get results.
  		<input type="submit" value="Add Local Network Devices"/>
      </form>
      <br><br>
